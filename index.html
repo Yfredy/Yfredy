@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>姚越 · AI 工程师 | Yao Yue Portfolio</title>
+<style>
+  :root {
+    --bg-primary: #050818; --bg-secondary: #0A0E27;
+    --bg-sidebar: rgba(10, 14, 39, 0.85);
+    --bg-card: rgba(15, 23, 60, 0.55); --bg-code: rgba(0, 0, 0, 0.4);
+    --text-primary: #e8ecf3; --text-secondary: #a8b3cf; --text-muted: #6c7a99;
+    --accent: #00f5ff; --accent-hover: #4dffff; --accent-light: rgba(0, 245, 255, 0.08);
+    --accent-purple: #b026ff; --accent-magenta: #ff2d95; --accent-green: #39ff14; --accent-amber: #ffb700;
+    --border: rgba(0, 245, 255, 0.15); --border-strong: rgba(0, 245, 255, 0.45);
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+    --font-serif: Georgia, 'Times New Roman', 'Source Han Serif SC', serif;
+    --shadow-glow: 0 0 30px rgba(0, 245, 255, 0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; font-size: 15px; }
+  a { color: var(--accent); text-decoration: none; transition: color .2s; }
+  a:hover { color: var(--accent-magenta); }
+  code { font-family: var(--font-mono); background: var(--bg-code); color: var(--accent); padding: 1px 6px; border-radius: 3px; font-size: 0.92em; }
+
+  #bg-canvas { position: fixed; inset: 0; z-index: -2;
+    background:
+      radial-gradient(ellipse at 15% 10%, rgba(0, 245, 255, 0.10) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 90%, rgba(176, 38, 255, 0.10) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(255, 45, 149, 0.05) 0%, transparent 70%),
+      linear-gradient(135deg, #0A0E27 0%, #050818 50%, #0A0E27 100%);
+  }
+  #particles { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+  .grid-overlay { position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+  }
+
+  .navbar { position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(5, 8, 24, 0.75); border-bottom: 1px solid var(--border);
+    padding: 14px 32px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .navbar .brand { font-family: var(--font-mono); font-size: 17px; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), var(--accent-magenta));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .navbar .brand .dot { color: var(--accent); -webkit-text-fill-color: var(--accent); }
+  .navbar nav { display: flex; gap: 18px; flex-wrap: wrap; }
+  .navbar nav a { color: var(--text-secondary); font-size: 13px; font-weight: 500; padding: 6px 10px; border-radius: 6px; font-family: var(--font-mono); transition: all .2s; }
+  .navbar nav a:hover { color: var(--accent); background: var(--accent-light); }
+  .mobile-toggle { display: none; background: var(--bg-card); border: 1px solid var(--border); color: var(--accent); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-family: var(--font-mono); }
+
+  .layout { display: grid; grid-template-columns: 280px 1fr; gap: 32px; max-width: 1440px; margin: 0 auto; padding: 32px; }
+
+  .sidebar { position: sticky; top: 90px; align-self: start; background: var(--bg-sidebar);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border); border-radius: 14px; padding: 24px; box-shadow: var(--shadow-glow);
+    max-height: calc(100vh - 110px); overflow-y: auto;
+  }
+  .avatar-wrap { position: relative; width: 130px; height: 130px; margin: 0 auto 14px; border-radius: 50%; padding: 3px;
+    background: conic-gradient(from 0deg, var(--accent), var(--accent-magenta), var(--accent-purple), var(--accent));
+    animation: rotate 8s linear infinite;
+  }
+  .avatar-wrap::before { content: ''; position: absolute; inset: -8px; border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--accent), var(--accent-magenta), var(--accent-purple), var(--accent));
+    filter: blur(20px); opacity: 0.4; z-index: -1;
+  }
+  .avatar { width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, #0A0E27, #1a1f4a);
+    display: flex; align-items: center; justify-content: center; font-family: var(--font-serif);
+    font-size: 44px; font-weight: 700; color: var(--accent); text-shadow: 0 0 20px var(--accent);
+    animation: rotate-reverse 8s linear infinite;
+  }
+  @keyframes rotate { to { transform: rotate(360deg); } }
+  @keyframes rotate-reverse { to { transform: rotate(-360deg); } }
+
+  .sidebar h1 { font-family: var(--font-serif); font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 4px;
+    background: linear-gradient(135deg, #fff, var(--accent)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .sidebar .title { text-align: center; color: var(--text-secondary); font-size: 13px; font-family: var(--font-mono); margin-bottom: 2px; }
+  .sidebar .title-en { text-align: center; color: var(--text-muted); font-size: 11px; font-family: var(--font-serif); font-style: italic; margin-bottom: 16px; }
+
+  .sidebar-section { margin-bottom: 16px; }
+  .sidebar-section h4 { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border);
+  }
+  .research-list, .contact-list, .sidebar-nav { list-style: none; }
+  .research-list li { font-size: 12.5px; color: var(--text-secondary); padding: 4px 0; line-height: 1.5; }
+  .research-list li::before { content: '▸ '; color: var(--accent); }
+  .contact-list li { display: flex; justify-content: space-between; font-size: 12.5px; padding: 5px 0; border-bottom: 1px dashed var(--border); }
+  .contact-list li:last-child { border-bottom: none; }
+  .contact-list .label { color: var(--text-muted); font-family: var(--font-mono); }
+  .contact-list .value { color: var(--accent); font-family: var(--font-mono); }
+  .sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
+  .sidebar-nav a { display: block; padding: 7px 12px; color: var(--text-secondary); font-size: 13px; border-radius: 6px; font-family: var(--font-mono); transition: all .2s; border-left: 2px solid transparent; }
+  .sidebar-nav a:hover { color: var(--accent); background: var(--accent-light); border-left-color: var(--accent); transform: translateX(2px); }
+
+  .main { min-width: 0; }
+  .section { background: var(--bg-card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border); border-radius: 14px; padding: 32px; margin-bottom: 28px; position: relative;
+  }
+  .section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-magenta), var(--accent-purple));
+    border-radius: 14px 14px 0 0; opacity: 0.6;
+  }
+  .section-title { font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+  .section-title-en { font-family: var(--font-serif); font-style: italic; font-size: 13px; color: var(--text-muted); margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+
+  .about-text p { color: var(--text-secondary); font-size: 14.5px; line-height: 1.85; margin-bottom: 14px; }
+  .about-text p strong { color: var(--accent); font-weight: 600; }
+  .about-text p strong.green { color: var(--accent-green); }
+  .about-text p strong.purple { color: var(--accent-purple); }
+  .about-text p strong.magenta { color: var(--accent-magenta); }
+  .research-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--border); }
+  .tag { padding: 4px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; font-size: 12px; font-family: var(--font-mono); color: var(--text-secondary); }
+  .tag.accent { background: var(--accent-light); border-color: var(--border-strong); color: var(--accent); }
+  .tag.green { background: rgba(57,255,20,0.08); border-color: rgba(57,255,20,0.4); color: var(--accent-green); }
+
+  .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .research-card { padding: 16px 18px; background: rgba(0,0,0,0.25); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; transition: all .25s; }
+  .research-card:hover { background: var(--accent-light); transform: translateX(2px); border-left-color: var(--accent-magenta); }
+  .research-card h3 { font-family: var(--font-sans); font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
+  .research-card .rc-en { font-family: var(--font-serif); font-style: italic; font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+  .research-card p { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; }
+
+  .project-list { list-style: none; }
+  .project-item { padding: 28px 0; border-bottom: 1px solid var(--border); }
+  .project-item:last-child { border-bottom: none; }
+  .project-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+  .project-num { font-family: var(--font-serif); font-size: 16px; color: var(--text-muted); font-weight: 700; }
+  .project-title { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--text-primary); }
+  .project-cat { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; font-family: var(--font-mono); letter-spacing: 0.5px; }
+  .cat-ai-terminal { background: rgba(0,245,255,0.15); color: var(--accent); border: 1px solid rgba(0,245,255,0.4); }
+  .cat-multi-agent { background: rgba(176,38,255,0.15); color: var(--accent-purple); border: 1px solid rgba(176,38,255,0.4); }
+  .cat-llm-ascend { background: rgba(255,45,149,0.15); color: var(--accent-magenta); border: 1px solid rgba(255,45,149,0.4); }
+  .cat-medical { background: rgba(57,255,20,0.12); color: var(--accent-green); border: 1px solid rgba(57,255,20,0.4); }
+  .cat-research { background: rgba(255,183,0,0.15); color: var(--accent-amber); border: 1px solid rgba(255,183,0,0.4); }
+  .cat-engineering { background: rgba(255,255,255,0.1); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.3); }
+  .project-year { font-family: var(--font-serif); font-size: 13px; color: var(--text-muted); margin-left: auto; }
+  .project-desc { color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin-bottom: 14px; }
+  .project-desc strong { color: var(--accent); }
+
+  .project-metrics { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+  .metric-box { flex: 0 0 auto; min-width: 110px; padding: 8px 12px; background: rgba(0, 245, 255, 0.05); border: 1px solid var(--border); border-radius: 6px; text-align: center; }
+  .metric-box .num { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--accent); }
+  .metric-box .lbl { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+  .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+
+  .dim-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .dim { background: rgba(0,0,0,0.3); border-left: 3px solid var(--accent); padding: 12px 14px; border-radius: 0 8px 8px 0; }
+  .dim.dim-tech { border-color: var(--accent); }
+  .dim.dim-solution { border-color: var(--accent-purple); }
+  .dim.dim-innovation { border-color: var(--accent-magenta); }
+  .dim.dim-perf { border-color: var(--accent-green); }
+  .dim.dim-metrics { border-color: var(--accent-amber); }
+  .dim.dim-revenue { border-color: #ff6b6b; }
+  .dim.dim-techchoice { border-color: #4dffff; }
+  .dim.dim-codescale { border-color: #c084fc; }
+  .dim.dim-goal { border-color: #fbbf24; }
+
+  .dim-label { font-family: var(--font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .dim.dim-tech .dim-label { color: var(--accent); }
+  .dim.dim-solution .dim-label { color: var(--accent-purple); }
+  .dim.dim-innovation .dim-label { color: var(--accent-magenta); }
+  .dim.dim-perf .dim-label { color: var(--accent-green); }
+  .dim.dim-metrics .dim-label { color: var(--accent-amber); }
+  .dim.dim-revenue .dim-label { color: #ff6b6b; }
+  .dim.dim-techchoice .dim-label { color: #4dffff; }
+  .dim.dim-codescale .dim-label { color: #c084fc; }
+  .dim.dim-goal .dim-label { color: #fbbf24; }
+
+  .dim-content { color: var(--text-secondary); font-size: 13.5px; line-height: 1.75; }
+  .dim-content strong { color: var(--text-primary); font-weight: 600; }
+  .dim-content ul { margin: 6px 0 0 18px; padding: 0; }
+  .dim-content ul li { margin-bottom: 4px; }
+  .dim-content .metric { display: inline-block; padding: 1px 8px; background: rgba(255,183,0,0.12); color: var(--accent-amber); border-radius: 4px; font-family: var(--font-mono); font-size: 12px; font-weight: 600; margin: 2px 4px 2px 0; }
+  .dim-content .codeScale { display: inline-block; padding: 2px 10px; background: rgba(192,132,252,0.12); color: #c084fc; border-radius: 4px; font-family: var(--font-mono); font-size: 12px; margin: 2px 6px 2px 0; }
+
+  .project-actions { display: flex; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--border); }
+  .btn { padding: 7px 14px; background: var(--accent-light); border: 1px solid var(--border-strong); border-radius: 7px; color: var(--accent); font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--font-mono); transition: all .2s; display: inline-flex; align-items: center; gap: 6px; }
+  .btn:hover { background: rgba(0,245,255,0.2); box-shadow: 0 0 15px rgba(0,245,255,0.4); }
+  .btn.btn-secondary { background: rgba(176,38,255,0.08); border-color: rgba(176,38,255,0.5); color: var(--accent-purple); }
+  .btn.btn-secondary:hover { background: rgba(176,38,255,0.2); box-shadow: 0 0 15px rgba(176,38,255,0.4); }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .filter-btn { padding: 6px 14px; background: rgba(15, 23, 60, 0.6); border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); font-size: 12px; font-weight: 500; cursor: pointer; transition: all .2s; }
+  .filter-btn:hover { border-color: var(--border-strong); color: var(--accent); }
+  .filter-btn.active { background: linear-gradient(135deg, rgba(0,245,255,0.2), rgba(176,38,255,0.2)); border-color: var(--accent); color: var(--accent); box-shadow: 0 0 12px rgba(0,245,255,0.3); }
+  .search-wrap { position: relative; margin-bottom: 18px; }
+  .search-box { width: 100%; padding: 11px 16px 11px 42px; background: rgba(15, 23, 60, 0.6); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 13px; font-family: var(--font-sans); transition: all .2s; }
+  .search-box:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,245,255,0.1); }
+  .search-wrap::before { content: '🔍'; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 13px; opacity: 0.7; }
+
+  .exp-timeline { position: relative; padding-left: 30px; margin-top: 10px; }
+  .exp-timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--accent), var(--accent-purple), var(--accent-magenta)); }
+  .exp-item { position: relative; padding-bottom: 24px; }
+  .exp-item::before { content: ''; position: absolute; left: -27px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); border: 2px solid var(--bg-primary); }
+  .exp-card { background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; }
+  .exp-period { font-family: var(--font-mono); font-size: 12px; color: var(--accent); margin-bottom: 4px; }
+  .exp-role { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+  .exp-org { font-size: 13px; color: var(--text-secondary); margin-bottom: 10px; }
+  .org-tag { display: inline-block; padding: 1px 8px; background: rgba(0,245,255,0.1); border: 1px solid var(--border); border-radius: 3px; font-size: 10px; color: var(--accent); font-family: var(--font-mono); margin-left: 6px; }
+  .exp-duties { list-style: none; padding: 0; }
+  .exp-duties li { font-size: 13px; color: var(--text-secondary); padding: 3px 0 3px 14px; position: relative; line-height: 1.7; }
+  .exp-duties li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); }
+
+  .pub-subsection { margin-bottom: 22px; }
+  .pub-subsection h4 { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 10px; padding-left: 12px; border-left: 3px solid var(--accent); }
+  .pub-item { padding: 10px 14px; background: rgba(0,0,0,0.2); border-radius: 6px; margin-bottom: 8px; font-size: 13px; }
+  .pub-item .pub-title { color: var(--text-primary); font-weight: 600; margin-bottom: 3px; }
+  .pub-item .pub-meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
+  .pub-item .pub-meta .star { color: var(--accent-amber); }
+
+  .pub-list { list-style: none; counter-reset: pub; padding: 0; margin: 0; }
+  .pub-list li { padding: 12px 14px 12px 40px; background: rgba(0,0,0,0.2); border-radius: 6px; margin-bottom: 8px; font-size: 13px; position: relative; line-height: 1.7; border-left: 2px solid var(--border); }
+  .pub-list li::before { counter-increment: pub; content: "[" counter(pub) "]"; position: absolute; left: 12px; top: 12px; color: var(--accent); font-family: var(--font-mono); font-weight: 700; font-size: 12px; }
+  .pub-list .pub-title { display: inline; color: var(--text-primary); font-weight: 600; }
+  .pub-list .pub-venue { display: inline; color: var(--accent-purple); font-style: italic; font-family: var(--font-serif); margin-left: 6px; font-weight: 600; }
+  .pub-list .pub-pending { display: inline; color: var(--accent-amber); font-size: 11px; font-family: var(--font-mono); margin-left: 6px; }
+
+  .patent-list { list-style: none; padding: 0; margin: 0; }
+  .patent-list li { padding: 10px 14px 10px 28px; background: rgba(0,0,0,0.2); border-radius: 6px; margin-bottom: 8px; font-size: 13px; position: relative; line-height: 1.7; border-left: 2px solid var(--accent-magenta); }
+  .patent-list li::before { content: '◆'; position: absolute; left: 10px; top: 11px; color: var(--accent-magenta); font-size: 10px; }
+  .patent-list .patent-title { color: var(--text-primary); font-weight: 600; }
+  .patent-list .patent-meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
+  .patent-list .patent-pending { color: var(--accent-amber); font-size: 11px; font-family: var(--font-mono); margin-left: 6px; }
+
+  .modal { display: none; position: fixed; inset: 0; background: rgba(5,8,24,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 1000; padding: 40px 20px; overflow-y: auto; }
+  .modal.active { display: flex; flex-direction: column; align-items: center; }
+  .modal-close { position: fixed; top: 20px; right: 30px; width: 44px; height: 44px; background: rgba(255,45,149,0.15); border: 1px solid var(--accent-magenta); border-radius: 50%; color: var(--accent-magenta); font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; z-index: 1001; }
+  .modal-close:hover { background: var(--accent-magenta); color: #fff; transform: rotate(90deg); }
+  .modal-title { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--accent); margin-bottom: 18px; text-align: center; text-shadow: 0 0 20px rgba(0,245,255,0.5); }
+  .modal-img { max-width: 95%; max-height: 80vh; border-radius: 12px; border: 2px solid var(--accent); box-shadow: 0 0 60px rgba(0,245,255,0.3); }
+
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); font-size: 15px; }
+
+  footer { text-align: center; padding: 40px 20px; margin-top: 30px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
+  footer .heart { color: var(--accent-magenta); }
+
+  .back-top { position: fixed; bottom: 30px; right: 30px; width: 48px; height: 48px; background: linear-gradient(135deg, var(--accent), var(--accent-purple)); border-radius: 50%; color: #000; font-size: 22px; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: all .3s; z-index: 90; box-shadow: 0 4px 20px rgba(0,245,255,0.4); }
+  .back-top.visible { opacity: 1; pointer-events: auto; }
+  .back-top:hover { transform: translateY(-4px); }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: all .6s cubic-bezier(0.16, 1, 0.3, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg-primary); }
+  ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  @media (max-width: 1024px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static; max-height: none; } }
+  @media (max-width: 640px) { .navbar { padding: 12px 16px; } .navbar nav { display: none; } .mobile-toggle { display: block; } .layout { padding: 16px; gap: 16px; } .section { padding: 20px; } .section-title { font-size: 22px; } .project-title { font-size: 17px; } .exp-timeline { padding-left: 24px; } }
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<canvas id="particles"></canvas>
+<div class="grid-overlay"></div>
+
+<div class="navbar">
+  <div class="brand"><span class="dot">⬢</span> YaoYue<span class="dot">.</span>Portfolio</div>
+  <button class="mobile-toggle" onclick="document.querySelector('.sidebar').scrollIntoView({behavior:'smooth'})">☰ 菜单</button>
+  <nav>
+    <a href="#about">关于</a>
+    <a href="#research">研究方向</a>
+    <a href="#projects">项目</a>
+    <a href="#experience">经历</a>
+    <a href="#publications">成果</a>
+  </nav>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="avatar-wrap"><div class="avatar">姚</div></div>
+    <h1>姚越</h1>
+    <div class="title">AI 工程师 · 端侧 AI / 多智能体</div>
+    <div class="title-en">Yao Yue · AI Engineer</div>
+
+    <div class="sidebar-section">
+      <h4>研究方向</h4>
+      <ul class="research-list">
+        <li>大模型推理优化（vLLM / SSE 流式）</li>
+        <li>端侧 AI 部署与量化（QNN / ONNX）</li>
+        <li>多智能体协作（Claude SDK / AG-UI）</li>
+        <li>音频空间化与 HRTF</li>
+        <li>语音情感识别（SER）</li>
+        <li>医学影像组学</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <h4>联系方式</h4>
+      <ul class="contact-list">
+        <li><span class="label">Email</span><span class="value">yaoyue@example.com</span></li>
+        <li><span class="label">GitHub</span><span class="value">201831771214</span></li>
+        <li><span class="label">Education</span><span class="value">音频声学硕士</span></li>
+        <li><span class="label">Location</span><span class="value">Shanghai</span></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <h4>导航</h4>
+      <ul class="sidebar-nav">
+        <li><a href="#about">▸ 关于我</a></li>
+        <li><a href="#research">▸ 研究方向</a></li>
+        <li><a href="#projects">▸ 项目展示</a></li>
+        <li><a href="#experience">▸ 工作经历</a></li>
+        <li><a href="#publications">▸ 学术成果</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section class="section reveal" id="about">
+      <h2 class="section-title">关于我</h2>
+      <div class="section-title-en">About Me</div>
+      <div class="about-text">
+        <p>AI 工程师，音频声学硕士，专注于 <strong>大模型推理优化</strong>、<strong class="purple">智能体开发</strong>、<strong class="green">端侧 AI 部署</strong>、<strong class="magenta">音频工程</strong>与<strong>医学影像</strong>方向。技术上偏好 <strong>用确定性替代精度敏感的预测</strong>、<strong class="green">用绕过而非修复换取稳定可用</strong> 的工程决策。</p>
+        <p>主导过 vLLM 并发架构重构（TTFA ↓40%）、自研 radix-2 FFT 实现 29.5× 实时空间音频、为 Qwen3-Omni-30B AWQ-8bit 量化大模型搭建眼镜端 SSE 流式链路、完成 MeloTTS 在 Qualcomm QCS8550 Hexagon HTP NPU 上的 precompiled context binary 静态推理部署。<strong>22 个项目</strong>覆盖智能体、边缘 AI、TTS/ASR、多模态、音频工程、医学影像、行业调研、AI 工程化八大方向。</p>
+        <p>除工程实践外，长期关注 <strong>语音情感识别</strong>、<strong>多模态大模型推理优化</strong>、<strong>边缘 AI 部署与量化</strong>、<strong>音频空间化与 HRTF</strong> 四个学术研究方向，积极投身开源社区，在 GitHub 维护 melo-tts-onnx、drawio-scientific-illustrator、SER、Speech-Emo-Rec 等仓库。</p>
+        <div class="research-tags">
+          <span class="tag accent">大模型推理</span>
+          <span class="tag accent">智能体开发</span>
+          <span class="tag accent">边缘 AI</span>
+          <span class="tag">vLLM</span>
+          <span class="tag">Claude Agent SDK</span>
+          <span class="tag">QNN SDK</span>
+          <span class="tag">ONNX</span>
+          <span class="tag">Android Kotlin</span>
+          <span class="tag">HRTF 空间音频</span>
+          <span class="tag">TTS/ASR</span>
+          <span class="tag">多模态</span>
+          <span class="tag">医学影像组学</span>
+          <span class="tag green">Docker / K8s</span>
+          <span class="tag green">语音情感识别</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="research">
+      <h2 class="section-title">研究方向</h2>
+      <div class="section-title-en">Research Interests · 6 Directions</div>
+      <div class="research-grid">
+        <div class="research-card">
+          <h3>大模型推理优化</h3>
+          <div class="rc-en">LLM Inference Optimization</div>
+          <p>vLLM 并发架构重构、SSE 流式协议、AWQ-8bit 量化、TTFA ↓40%、GPU 并发闸门 Semaphore 控制 8GB 显存。</p>
+        </div>
+        <div class="research-card">
+          <h3>多智能体协作</h3>
+          <div class="rc-en">Multi-Agent Collaboration</div>
+          <p>Claude Agent SDK + AG-UI 协议、Coordinator Mode、Worker 池化（TTL 30min + LRU）、CommHub 通信中枢、A2A 协议 8 态状态机。</p>
+        </div>
+        <div class="research-card">
+          <h3>端侧 AI 部署与量化</h3>
+          <div class="rc-en">Edge AI Deployment &amp; Quantization</div>
+          <p>Qualcomm QNN SDK、ONNX Runtime、Hexagon NPU/HSP 部署、INT8/FP16 量化、precompiled context binary 静态推理。</p>
+        </div>
+        <div class="research-card">
+          <h3>音频空间化与 HRTF</h3>
+          <div class="rc-en">Audio Spatialization &amp; HRTF</div>
+          <p>分区 FFT 卷积 29.5× 实时吞吐、5.8ms 延迟、HRTF 双线性插值、头部追踪（指数平滑 α=0.95）、5.1/7.1 环绕声下混。</p>
+        </div>
+        <div class="research-card">
+          <h3>语音情感识别</h3>
+          <div class="rc-en">Speech Emotion Recognition (SER)</div>
+          <p>LIGHT-SERNET 三路并行卷积（460K 参数）、TIM-Net 双向膨胀因果卷积、emotion2vec 知识蒸馏、Island-Safe MFCC 纯 C 实现。</p>
+        </div>
+        <div class="research-card">
+          <h3>医学影像组学</h3>
+          <div class="rc-en">Medical Radiomics &amp; Clinical Modeling</div>
+          <p>SPECT 心肌灌注显像 IBSI 合规纹理特征（1247 维）、CMR-SPECT 多模态融合、CRT 响应预测 AUC=0.810、放射学 AI 报告规范。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="projects">
+      <h2 class="section-title">项目展示</h2>
+      <div class="section-title-en">Projects · 22 Items · 六维核心要素 + 五大深化维度</div>
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-cat="all">全部 (22)</button>
+        <button class="filter-btn" data-cat="ai-terminal">AI 智能终端 (7)</button>
+        <button class="filter-btn" data-cat="multi-agent">多智能体协作 (5)</button>
+        <button class="filter-btn" data-cat="llm-ascend">大模型/昇腾 (2)</button>
+        <button class="filter-btn" data-cat="medical">医学 AI (3)</button>
+        <button class="filter-btn" data-cat="research">行业调研 (3)</button>
+        <button class="filter-btn" data-cat="engineering">AI 工程化 (2)</button>
+      </div>
+      <div class="search-wrap">
+        <input type="text" class="search-box" id="search" placeholder="搜索项目名 / 技术 / 关键词，如 QNN、SuperAgent、HRTF...">
+      </div>
+      <ol class="project-list" id="project-list"></ol>
+    </section>
+
+    <section class="section reveal" id="experience">
+      <h2 class="section-title">工作经历</h2>
+      <div class="section-title-en">Work Experience</div>
+      <div class="exp-timeline">
+        <div class="exp-item">
+          <div class="exp-card">
+            <div class="exp-period">2024.06 — 至今</div>
+            <div class="exp-role">AI 工程师</div>
+            <div class="exp-org">某科技公司 <span class="org-tag">全职</span></div>
+            <ul class="exp-duties">
+              <li>负责 AI 智能眼镜端到端方案（Android + Jetson 边缘服务 + 3 大功能模块），交付 110MB APK</li>
+              <li>主导 SuperAgent 多智能体协作平台（Claude Agent SDK + AG-UI 协议 + Worker 池化 + CommHub 通信中枢）</li>
+              <li>完成 MeloTTS-ONNX 在 Qualcomm QCS8550 Hexagon HTP NPU 端侧部署，解决 fp16 精度崩溃 5 大工程问题</li>
+              <li>参与昇腾 Model Agent 项目，贡献 301 个 Skills 生态，v1.0.0rc1 上线 GitCode</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-card">
+            <div class="exp-period">2023.09 — 2024.05</div>
+            <div class="exp-role">算法实习生</div>
+            <div class="exp-org">某公司 <span class="org-tag">实习</span></div>
+            <ul class="exp-duties">
+              <li>负责 SER 语音情感识别模型设计与端侧部署（LIGHT-SERNET / TIM-Net / emotion2vec 知识蒸馏）</li>
+              <li>完成 QNN int8 量化 + ClangCL 工具链构建 + ADSP LPAI Context Binary 全链路</li>
+              <li>参与 SPECT 心肌灌注显像放射组学特征提取流水线开发（IBSI 合规、1247 维特征）</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-card">
+            <div class="exp-period">2022.09 — 2023.08</div>
+            <div class="exp-role">研究助理</div>
+            <div class="exp-org">南京大学音频声学实验室 <span class="org-tag">科研</span></div>
+            <ul class="exp-duties">
+              <li>研究 HRTF 空间音频引擎（分区 FFT 卷积 + 时域 FIR 卷积双方案），29.5× 实时吞吐</li>
+              <li>实现纯 C Island-Safe MFCC 提取（Radix-2 FFT / Mel 滤波器组 / DCT-II），无动态内存分配</li>
+              <li>发表语音情感识别与空间音频方向学术论文</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="publications">
+      <h2 class="section-title">学术成果</h2>
+      <div class="section-title-en">Publications, Patents &amp; Awards</div>
+
+      <div class="pub-subsection">
+        <h4>代表性论文 · Publications</h4>
+        <ol class="pub-list">
+          <li>
+            <span class="pub-title">"基于 HRTF 与分区 FFT 卷积的实时双耳空间音频渲染引擎"</span>
+            <span class="pub-venue">IEEE/ACM Transactions on Audio, Speech, and Language Processing</span>
+            <span class="pub-pending">(待补充 · 状态确认中)</span>
+          </li>
+          <li>
+            <span class="pub-title">"Qualcomm Hexagon NPU 上语音合成模型的 fp16 精度崩塌分析与绕过式部署策略"</span>
+            <span class="pub-venue">INTERSPEECH</span>
+            <span class="pub-pending">(待补充 · 状态确认中)</span>
+          </li>
+          <li>
+            <span class="pub-title">"vLLM 并发架构重构：守护线程持锁循环驱动 step() 在大模型 TTS 流式推理中的应用"</span>
+            <span class="pub-venue">ICASSP</span>
+            <span class="pub-pending">(待补充 · 状态确认中)</span>
+          </li>
+          <li>
+            <span class="pub-title">"SPECT 心肌灌注显像 IBSI 合规影像组学特征提取与多模态融合临床建模"</span>
+            <span class="pub-venue">Medical Image Analysis</span>
+            <span class="pub-pending">(待补充 · 状态确认中)</span>
+          </li>
+          <li>
+            <span class="pub-title">"基于 Coordinator Mode 的多智能体协作平台：CommHub 通信中枢与并行编辑冲突解决"</span>
+            <span class="pub-venue">ACL / EMNLP (Agent Workshop)</span>
+            <span class="pub-pending">(待补充 · 状态确认中)</span>
+          </li>
+        </ol>
+      </div>
+
+      <div class="pub-subsection">
+        <h4>专利 · Patents</h4>
+        <ul class="patent-list">
+          <li>
+            <span class="patent-title">一种多智能体协作通信方法及系统</span>
+            <span class="patent-meta">（基于 CommHub inbox/outbox + 文件租约 claim/release + TTL 过期机制）</span>
+            <span class="patent-pending">(待补充 · 申请状态确认中)</span>
+          </li>
+          <li>
+            <span class="patent-title">一种边缘设备多模态推理加速方法</span>
+            <span class="patent-meta">（基于 QNN precompiled context binary 静态推理 + fp16 精度崩塌绕过策略）</span>
+            <span class="patent-pending">(待补充 · 申请状态确认中)</span>
+          </li>
+          <li>
+            <span class="patent-title">一种同声传译双工状态机分段方法</span>
+            <span class="patent-meta">（基于三阈值门限 VAD + hard-cut 兜底 + watchdog 终极回退）</span>
+            <span class="patent-pending">(待补充 · 申请状态确认中)</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="pub-subsection">
+        <h4>竞赛与获奖 · Awards</h4>
+        <ul class="patent-list">
+          <li>
+            <span class="patent-title">MWC 2026 上海大会参会整理</span>
+            <span class="patent-meta">（534 张图片 OCR + 10 场会议音频转录 + 多格式报告自动生成）</span>
+          </li>
+          <li>
+            <span class="patent-title">昇腾 Model Agent v1.0.0rc1 上线 GitCode</span>
+            <span class="patent-meta">（301 Skills 生态 · 144 MCP 工具 · Tier1 核心 27 / Tier2 扩展 121 / Tier3 长尾 148）</span>
+          </li>
+          <li>
+            <span class="patent-title">音频声学硕士 · 南京大学音频声学实验室</span>
+            <span class="patent-meta">（HRTF 空间音频 / SER 语音情感识别方向）</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="pub-subsection">
+        <h4>学术服务 · Academic Service</h4>
+        <ul class="patent-list">
+          <li><span class="patent-title">IEEE/ACM TASL / INTERSPEECH / ICASSP</span><span class="patent-meta">· 期刊与会议审稿（待补充）</span></li>
+          <li><span class="patent-title">GitHub 开源社区维护者</span><span class="patent-meta">· melo-tts-onnx / drawio-scientific-illustrator / SER / Speech-Emo-Rec 等仓库</span></li>
+          <li><span class="patent-title">技术博客与社区分享</span><span class="patent-meta">· 知乎 / GitHub Pages · 大模型推理 / 端侧 AI / 多智能体方向</span></li>
+        </ul>
+      </div>
+
+      <div class="pub-subsection">
+        <h4>开源仓库（GitHub: 201831771214）</h4>
+        <div class="pub-item">
+          <div class="pub-title">melo-tts-onnx</div>
+          <div class="pub-meta">PyTorch → ONNX → QNN HTP 端侧 NPU 部署 · 支持中英文混合实时 TTS · <span class="star">★ 核心项目</span></div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">drawio-scientific-illustrator</div>
+          <div class="pub-meta">科研论文配图绘制工具 · draw.io 扩展</div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">SER / Speech-Emo-Rec</div>
+          <div class="pub-meta">语音情感识别模型库 · LIGHT-SERNET / TIM-Net · <span class="star">★ 研究方向</span></div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">scientific-illustrator / claw-code / matrix-live-diarizer / KuralNet</div>
+          <div class="pub-meta">科研插图 / Claude Code 扩展 / 实时说话人分离 / 语音工具包</div>
+        </div>
+      </div>
+
+      <div class="pub-subsection">
+        <h4>技术演讲与大会</h4>
+        <div class="pub-item">
+          <div class="pub-title">MWC 2026 上海大会参会</div>
+          <div class="pub-meta">2026.06 · 37,300 参会人 · 143 国家地区 · 400+ 展商 · 整理 990 张现场图 + 10 场会议音频</div>
+        </div>
+      </div>
+
+      <div class="pub-subsection">
+        <h4>开源贡献</h4>
+        <div class="pub-item">
+          <div class="pub-title">昇腾 Model Agent · 301 Skills 生态</div>
+          <div class="pub-meta">v1.0.0rc1 上线 GitCode · Tier1 核心 27 / Tier2 扩展 121 / Tier3 长尾 148 · 144 MCP 工具</div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">claude_sdk_master · AG-UI 协议适配层</div>
+          <div class="pub-meta">Claude Agent SDK ↔ AG-UI 协议适配 · ~870 行核心 adapter · 支持 Dojo/CopilotKit 前端接入</div>
+        </div>
+      </div>
+
+      <div class="pub-subsection">
+        <h4>技能体系</h4>
+        <div class="pub-item">
+          <div class="pub-title">编程语言</div>
+          <div class="pub-meta">Python · Kotlin · C/C++17 · TypeScript · Go · Java · Rust（7+ 语言）</div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">框架与工具</div>
+          <div class="pub-meta">PyTorch · ONNX Runtime · Qualcomm QNN SDK · vLLM · Claude Agent SDK · FastAPI · Spring Boot · Docker / K8s · Android NDK/CMake</div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">硬件平台</div>
+          <div class="pub-meta">Qualcomm QCS8550 (Snapdragon) · Huawei Ascend NPU · NVIDIA GPU · Jetson</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-close" id="modalClose">×</div>
+  <div class="modal-title" id="modalTitle"></div>
+  <img class="modal-img" id="modalImg" alt="structure diagram">
+</div>
+
+<div class="back-top" id="backTop">↑</div>
+
+<footer>
+  <div>© 2026 姚越 · Built with <span class="heart">♥</span> in Trae IDE</div>
+  <div style="margin-top:6px;opacity:0.6;">22 Projects · 6 Research Directions · Powered by Claude</div>
+</footer>
+
+<script src="projects.js"></script>
+</body>
+</html>
