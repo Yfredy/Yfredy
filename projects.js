@@ -321,9 +321,9 @@ const projects = [
 
   /* ========== 多智能体协作 (5) ========== */
   {
-    num:"08", name:"SuperAgent 星智", nameEn:"SuperAgent",
+    num:"08", name:"多智能体平台", nameEn:"多智能体平台",
     category:"multi-agent", categoryName:"多智能体协作", year:"2025-2026",
-    diagram:"结构图/SuperAgent.png",
+    diagram:"结构图/多智能体平台.png",
     desc:"基于 Claude Agent SDK 与 AG-UI 协议的多智能体协作平台，Java Service + Python Process 双层架构，支持 Solo/Team 双模式，Coordinator Mode 协调多 Worker CLI 进程并行执行，CommHub 通信中枢解决并行编辑冲突。",
     tech:["Python 3.11","FastAPI","Claude Agent SDK","Java Spring","K8s","MySQL","Docker","AG-UI 协议","SSE","tmux","MCP","Redis"],
     metrics:[
@@ -368,9 +368,9 @@ const projects = [
     goal:"预期成果：① Solo/Team 双模式 Agent 运行平台；② Coordinator Mode 四阶段工作流；③ CommHub 通信中枢；④ Worker 池化调度；⑤ AG-UI 协议合规验证。"
   },
   {
-    num:"09", name:"SuperAgentProces Agent Team", nameEn:"SuperAgentProces-AgentTeam",
+    num:"09", name:"AgentTeam Agent Team", nameEn:"AgentTeam",
     category:"multi-agent", categoryName:"多智能体协作", year:"2025-2026",
-    diagram:"结构图/SuperAgentProces-AgentTeam.png",
+    diagram:"结构图/AgentTeam.png",
     desc:"多 Claude Code CLI 并行 Agent Team 能力包，构建实时 SSE fan-in 执行器（asyncio.Queue + Semaphore 并发控制），支撑 5 种拓扑（Fanout/Producer-Reviewer/Supervisor/Hierarchical/Debate）。",
     tech:["Python asyncio","Claude Code CLI","A2A 协议","Redis","MySQL","CircuitBreaker","SSE","Protocol"],
     metrics:[
@@ -412,10 +412,10 @@ const projects = [
     goal:"预期成果：① 多 Claude Code CLI 并行 Agent Team 能力包；② 5 种拓扑支撑；③ A2A 协议 8 态状态机；④ CircuitBreaker 防雪崩。"
   },
   {
-    num:"10", name:"0701superagent 调研", nameEn:"0701superagent",
+    num:"10", name:"MultiAgent-Research 调研", nameEn:"MultiAgent-Research",
     category:"multi-agent", categoryName:"多智能体协作", year:"2026-07",
-    diagram:"结构图/0701superagent.png",
-    desc:"SuperAgent 多智能体 Swarm 编排核心（SwarmCoordinator），集成 hierarchical/mesh/adaptive 三拓扑 + Q-Learning 路由 + Gossip 共识 + AgentDB 向量记忆。完成四项核心能力端到端测试验证。",
+    diagram:"结构图/MultiAgent-Research.png",
+    desc:"多智能体 Swarm 编排核心（SwarmCoordinator），集成 hierarchical/mesh/adaptive 三拓扑 + Q-Learning 路由 + Gossip 共识 + AgentDB 向量记忆。完成四项核心能力端到端测试验证。",
     tech:["Python","Java Spring Boot","SQLite","sqlite-vss","bge-small-zh-v1.5","psutil","MCP","Q-Learning"],
     metrics:[
       {num:"4 项",label:"核心能力测试"},
@@ -439,7 +439,7 @@ const projects = [
     impact:[
       "量化成果：4 项核心能力测试验证；13 个开源项目调研；8 通信范式 + 8 编排模式总结；3 版本 SDK 适配",
       "技术沉淀：Q-Learning 路由 + Gossip 共识工程实现；ProcessMonitor 监控方案；requeueWithoutSession 反中毒策略",
-      "业务影响：调研成果指导 SuperAgent 演进，避免重复造轮子；4 项测试验证保障 P0-P1 阶段落地",
+      "业务影响：调研成果指导 多智能体平台演进，避免重复造轮子；4 项测试验证保障 P0-P1 阶段落地",
       "开源价值：13 个开源项目调研报告可作为多智能体生态参考"
     ],
     techChoice:[
@@ -453,7 +453,7 @@ const projects = [
       {num:"2",label:"开发周期（月）"},
       {num:"1-2",label:"团队规模（人）"}
     ],
-    goal:"预期成果：① SuperAgent Swarm 编排核心；② 四项核心能力端到端测试验证；③ 13 开源项目调研报告；④ Q-Learning 路由 + Gossip 共识落地。"
+    goal:"预期成果：① 多智能体平台 Swarm 编排核心；② 四项核心能力端到端测试验证；③ 13 开源项目调研报告；④ Q-Learning 路由 + Gossip 共识落地。"
   },
   {
     num:"11", name:"AgentTeam 研究", nameEn:"AgentTeam-Research",
@@ -470,7 +470,7 @@ const projects = [
     techStack:"13 个开源项目浅克隆仓库 + PowerShell 同步脚本；8 维度对比 Subagents vs Agent Teams；CommHub 通信中枢实现方案（11 字段消息格式 + 文件租约表 + 6 个 MCP 工具）",
     innovation:[
       "归纳 8 大通信范式 + 8 大编排模式",
-      "识别 SuperAgent 5 个核心差距（并行执行 / Agent 互通 / 编排引擎 / 任务生命周期 / 隔离并发安全）",
+      "识别 多智能体平台 5 个核心差距（并行执行 / Agent 互通 / 编排引擎 / 任务生命周期 / 隔离并发安全）",
       "P0–P4 演进路线图（每阶段含具体改动量估算与前置依赖）",
       "CommHub 通信中枢方案：11 字段消息格式 + 文件租约表 + 6 个 MCP 工具"
     ],
@@ -495,7 +495,7 @@ const projects = [
       {num:"2",label:"调研周期（月）"},
       {num:"1",label:"团队规模（人）· 主导"}
     ],
-    goal:"预期成果：① 13 开源项目系统剖析；② 8 通信范式 + 8 编排模式总结；③ SuperAgent 5 核心差距识别；④ P0-P4 演进路线图。"
+    goal:"预期成果：① 13 开源项目系统剖析；② 8 通信范式 + 8 编排模式总结；③ 多智能体平台 5 核心差距识别；④ P0-P4 演进路线图。"
   },
   {
     num:"12", name:"claude_sdk_master", nameEn:"claude-sdk-master",
@@ -1091,9 +1091,9 @@ function openDoc(nameEn) {
     'QNN-Deploy': '01_AI智能终端项目.md',
     'SER': 'SER.md',
     'SER-Distill': 'SER-Distill.md',
-    'SuperAgent': 'SuperAgent.md',
-    'SuperAgentProces-AgentTeam': 'SuperAgentProces_agent_team.md',
-    '0701superagent': '0701superagent.md',
+    '多智能体平台': '多智能体平台.md',
+    'AgentTeam': 'AgentTeam_agent_team.md',
+    'MultiAgent-Research': 'MultiAgent-Research.md',
     'AgentTeam-Research': 'AgentTeam研究.md',
     'claude-sdk-master': 'claude_sdk_master.md',
     'Ascend Model Agent': 'model-agent.md',

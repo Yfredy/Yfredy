@@ -80,7 +80,7 @@ HRTF 双耳渲染全平台
 <tr>
 <td width="50%">
 
-### [SuperAgent · 星智]
+### [多智能体协作平台]
 多智能体协作系统
 - 双网关 + Coordinator Mode + Worker 池
 - AgentBus（ANP Pub/Sub）通信
