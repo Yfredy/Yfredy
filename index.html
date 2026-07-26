@@ -623,6 +623,17 @@
     top:4px;
     font-size:10px;
   }
+  .exp-sub-period{
+    font-family:Georgia,serif;
+    font-size:12px;
+    color:var(--green);
+    font-weight:700;
+    letter-spacing:0.4px;
+    margin:10px 0 4px;
+    padding-top:8px;
+    border-top:1px dashed var(--border);
+    text-transform:uppercase;
+  }
 
   /* ===== Publications ===== */
   .pub-subsection{
@@ -678,6 +689,25 @@
     font-size:12px;
     margin-left:4px;
   }
+  .pub-list .pub-detail{
+    display:block;
+    font-size:12.5px;
+    color:var(--text-muted);
+    line-height:1.75;
+    margin-top:4px;
+    text-align:justify;
+  }
+  .award-cat{
+    font-family:Georgia,serif;
+    font-size:13px;
+    color:var(--green);
+    font-weight:700;
+    letter-spacing:0.6px;
+    margin:14px 0 6px;
+    padding-bottom:3px;
+    border-bottom:1px solid var(--border);
+  }
+  .award-cat:first-of-type{margin-top:4px}
   .patent-list{
     list-style:none;
     padding-left:0;
@@ -1118,7 +1148,15 @@
     <ul class="contact-list">
       <li>
         <span class="label">Email</span>
-        <a href="mailto:624665742@qq.com">624665742@qq.com</a>
+        <a href="mailto:yue.yao@smail.nju.edu.cn">yue.yao@smail.nju.edu.cn</a>
+      </li>
+      <li>
+        <span class="label">电话</span>
+        <a href="tel:18951656687">18951656687</a>
+      </li>
+      <li>
+        <span class="label">微信</span>
+        19852128929
       </li>
       <li>
         <span class="label">GitHub</span>
@@ -1136,6 +1174,7 @@
     <li><a href="#research" onclick="closeMobileNav()">研究方向 · Research</a></li>
     <li><a href="#projects" onclick="closeMobileNav()">项目 · Projects</a></li>
     <li><a href="#experience" onclick="closeMobileNav()">工作经历 · Experience</a></li>
+    <li><a href="#research-exp" onclick="closeMobileNav()">科研经历 · Research</a></li>
     <li><a href="#publications" onclick="closeMobileNav()">学术成果 · Publications</a></li>
     <li><a href="#skills" onclick="closeMobileNav()">技能矩阵 · Skills</a></li>
     <li><a href="#education" onclick="closeMobileNav()">教育背景 · Education</a></li>
@@ -1154,7 +1193,7 @@
       <p>我是 <strong>姚越</strong>，<strong>南京大学音频声学硕士</strong>，深耕 AI 大模型加速推理、智能体开发、边缘 AI、AI 终端与具身智能方向。从空间音频引擎的 C99/Android NDK 实时渲染，到 QNN NPU 边缘部署的 INT8 量化与 fp16 精度修复，再到多智能体协作平台的 Coordinator Mode 落地，习惯于在「算法理论 ↔ 工程落地」的闭环中打磨每一处细节。</p>
       <p>技术上偏好 <strong>用确定性替代精度敏感的预测</strong>、<strong class="green">用绕过而非修复换取稳定可用</strong> 的工程决策，主导过 vLLM 并发架构重构（TTFA ↓40%）、自研 radix-2 FFT 实现 29.5× 实时空间音频、为 Qwen3-Omni-30B AWQ-8bit 量化大模型搭建眼镜端 SSE 流式链路。9 个项目覆盖智能体、边缘 AI、TTS/ASR、多模态、音频工程、医学影像六大方向。</p>
       <p>技术栈覆盖 <strong>Python / PyTorch / vLLM / FastAPI / Android Kotlin / QNN SDK / ONNX / Docker / K8s</strong>，既能写守护线程持锁循环驱动 vLLM step() 的并发架构，也能手工拼装 44 字节 WAV header 完成 OpenAI 多模态 audio_url 上行。相信「<strong>层层兜底</strong>」的工程哲学，喜欢在 NPU 部署、流式协议、并发闸门这些底层细节里找性能与稳定性的平衡点。</p>
-      <p>除工程实践外，长期关注 <strong>语音情感识别</strong>、<strong>多模态大模型推理优化</strong>、<strong>边缘 AI 部署与量化</strong>、<strong>音频空间化与 HRTF</strong> 四个学术研究方向，参与南京大学音频声学实验室多项课题，并积极投身开源社区，在 GitHub 维护 scientific-illustrator、drawio-scientific-illustrator、claw-code、matrix-live-diarizer、KuralNet、SER、Speech-Emo-Rec 等 13+ 仓库。</p>
+      <p>除工程实践外，长期关注 <strong>语音情感识别</strong>、<strong>多模态大模型推理优化</strong>、<strong>边缘 AI 部署与量化</strong>、<strong>音频空间化与 HRTF</strong> 四个学术研究方向，参与<strong>国家重点研发项目《多模态光声成像》《光声高速传输成像》</strong>等课题，以第一作者发表 SCI 二区 top 期刊 3 篇（《Optics Letters》《Physical Review Applied》《Optics Express》）与发明专利 1 项，并积极投身开源社区，在 GitHub 维护 scientific-illustrator、drawio-scientific-illustrator、claw-code、matrix-live-diarizer、KuralNet、SER、Speech-Emo-Rec 等 13+ 仓库。</p>
       <div class="research-tags">
         <span class="tag accent">大模型推理</span>
         <span class="tag accent">智能体开发</span>
@@ -1226,38 +1265,117 @@
     <div class="exp-timeline">
       <div class="exp-item">
         <div class="exp-card">
-          <div class="exp-period">2024.06 — 至今 · AI 工程师</div>
-          <div class="exp-role">AI 工程师</div>
-          <div class="exp-org">某科技公司（推导） <span class="org-tag">全职</span></div>
+          <div class="exp-period">2025.07 — 至今 · 研发工程师</div>
+          <div class="exp-role">研发工程师</div>
+          <div class="exp-org">南京信息技术研究院（841研究所）· 人工智能与大数据研究所 <span class="org-tag">全职</span></div>
+          <div class="exp-sub-period">2025.09 — 2026.03 · AI 智能眼镜端到端语音交互系统</div>
           <ul class="exp-duties">
-            <li>负责 <strong>多智能体协作平台</strong>研发：基于 Claude Agent SDK 与 AG-UI 协议，落地 Solo/Team 双模式与 Coordinator Mode 四阶段工作流，CommHub 通信中枢解决并行编辑冲突，1383 事件 AG-UI 合规验证。</li>
-            <li>主导 <strong>AI 眼镜边缘多模态客户端</strong>项目：基于 FFalcon Mercury SDK 的 RayNeo AR 眼镜 Android 应用，Qwen3-Omni-30B AWQ-8bit 量化大模型边缘部署，QA 语音问答 + ST 同声传译双模态交互。</li>
-            <li><strong>QNN 模型部署与量化优化</strong>：Qualcomm QCS8550 Hexagon HTP v73 NPU 上 MeloTTS precompiled context binary 静态推理，fp16 精度崩塌 4 轮迭代排查，5 大核心工程问题修复。</li>
-            <li><strong>CosyVoice3 大模型 TTS 服务</strong>：vLLM 并发架构重构，守护线程持锁循环驱动 step()，TTFA ↓36-44%，RTF ↓1.3-1.8×，8GB 显存稳定承载两路并发。</li>
+            <li>基于<strong>雷鸟 AR 眼镜硬件平台</strong>，设计并实现覆盖 Android 端与 Jetson 边缘服务端的端到端语音交互系统，包含语音问答、同声传译、视频流识人三大解耦模块，交付完整安装包、编译完整的动态 so 库及边缘算力接口服务。</li>
+            <li>实现<strong>智能助手四态机</strong>，输出打字机效果（100ms/字符）+ 流式 TTS，端到端延迟 0.8s 至 1.2s。</li>
+            <li>实现<strong>同声传译双工状态机</strong>：VAD 分段三阈值门限 + 硬切断兜底 + 看门狗回退三层机制保证分段鲁棒性；基于 WebSocket 双工协议，合并短段并批处理长上下文窗口。</li>
+            <li>搭建 <strong>Jetson 边缘服务端 ASR 矩阵</strong>（ASR 流式 + CTC 解码器 + 上下文图 + 前缀得分），集成 MeloTTS / Kokoro 双 TTS 引擎。</li>
+            <li>搭建<strong>视频流识人模块</strong>，集成人脸注册与比对、眼镜拍照目标跟踪、SQL 命令总线。</li>
+          </ul>
+          <div class="exp-sub-period">2026.04 — 至今 · 多智能体协作系统（Agent 开发）</div>
+          <ul class="exp-duties">
+            <li>基于 <strong>Claude Agent SDK</strong> 与开源 <strong>AG-UI 协议</strong>，设计并实现支持 Solo/Team 双模式的多智能体协作平台，包含 Anthropic↔OpenAI 双向协议转换代理、Worker 池化调度、CommHub 通信中枢与 AgentTeam 协作功能等。</li>
+            <li>设计 <strong>Solo/Team 双模式 Agent 架构</strong>，Team 模式支持 Coordinator Mode 协调多 Worker 并行执行，实现 Agent Teams tmux 真并行；搭建 Anthropic↔OpenAI 双向协议转换代理，统一不同 LLM 供应商 API 差异。</li>
+            <li>实现 <strong>SessionWorker 会话池化调度</strong>；输出文件治理四重机制确保多 Agent 并发安全。</li>
+            <li>搭建 <strong>CommHub 通信中枢</strong>，实现 teammate 与 Worker 间的实时消息传递；A2A 协议 8 态任务状态机，SSE 流式事件驱动前端实时渲染。</li>
+            <li>实现<strong>混合模型编排策略与模型层级路由</strong>，混合 Java 端 Service + Python 端 Process 双层架构，K8s + MySQL + Docker 部署。</li>
           </ul>
         </div>
       </div>
       <div class="exp-item">
         <div class="exp-card">
-          <div class="exp-period">2023.09 — 2024.05 · 算法实习生</div>
+          <div class="exp-period">2025.04 — 2025.07 · 算法实习生</div>
           <div class="exp-role">算法实习生</div>
-          <div class="exp-org">某公司（推导） <span class="org-tag">实习</span></div>
+          <div class="exp-org">字节跳动 · 移动 OS <span class="org-tag">实习</span></div>
           <ul class="exp-duties">
-            <li>参与<strong>语音情感识别（SER）项目</strong>：TIM-Net / LIGHT-SERNET 模型训练与 TensorFlow → ONNX → QNN INT8 量化端到端链路打通，产出 NPU 可执行产物 timnet.bin / timnet.eaix。</li>
-            <li><strong>音频应用开发</strong>：参与音频信号处理与 ASR/TTS 相关算法工程化，包括 faster-whisper、sherpa-onnx、PaddleOCR 等多模态流水线集成。</li>
-            <li>完成 <strong>ASR 性能基准评测框架</strong>：多档音频时长合成（3/5/10/30/60s）+ 多模型横向对比（Qwen3-ASR 0.6B/1.7B、WhisperX、SenseVoiceSmall）+ 多维度指标测量。</li>
+            <li>负责<strong>第一代豆包手机 Ocean、PICO 4 Ultra</strong> 声学情感实时识别模型 QNN NPU 部署全流程，实际模型参数量 400K，量化后部署在高通芯片 ADSP 中。</li>
+            <li><strong>4D 模型构建</strong>，MFCC 提取，无动态内存分配，支持 ADSP 推理；QNN int8 量化后模型体积 481KB（3.8× 压缩），推理功耗 &lt;50mW，权重迁移验证无损。</li>
+            <li>设计<strong>三路并行轻量学生模型</strong>（~50-80K 参数，压缩 6-9×），三路卷积分别捕获时/频/时空特征；实现联合蒸馏损失。</li>
+            <li>完成<strong>跨框架权重迁移</strong> QNN int8 量化 → LPAI 格式，打通训练到端侧部署全链路；EMO-DB 5-fold 交叉验证最佳 fold 准确率 85.05%。</li>
+            <li>持续优化 <strong>hal 层音频信号的编解码效率</strong>。</li>
           </ul>
         </div>
       </div>
       <div class="exp-item">
         <div class="exp-card">
-          <div class="exp-period">2022.09 — 2023.08 · 研究助理</div>
-          <div class="exp-role">研究助理</div>
-          <div class="exp-org">南京大学音频声学实验室 <span class="org-tag">科研</span></div>
+          <div class="exp-period">2024.06 — 2024.09 · 算法实习生</div>
+          <div class="exp-role">算法实习生</div>
+          <div class="exp-org">腾讯音乐娱乐集团 · QQ 音乐 <span class="org-tag">实习</span></div>
           <ul class="exp-duties">
-            <li><strong>医学影像组学与临床建模</strong>：SPECT 心肌灌注显像 IBSI 合规特征提取流水线（106 例 × 1130 特征），7 大类 30+ 算法系统比较，多模态融合 AUC 0.736 → 0.905。</li>
-            <li><strong>空间音频引擎研发</strong>：基于 HRTF 的实时双耳空间音频渲染引擎，Python / C99 / C++17 / Kotlin+JNI 四语言实现，自研 radix-2 FFT 实现 29.5× 实时，MIT License 开源。</li>
-            <li>参与实验室音频声学相关课题，研究方向涵盖 HRTF 双耳渲染、分区 FFT 卷积、头部追踪 IMU 平滑等。</li>
+            <li>针对现阶段对后台百万条干声数据集的应用需求，研究 QQ 音乐与全民 K 歌后台的新型声学模型的开发、量化与部署。</li>
+            <li>搭建 <strong>DTCRN 语音增强小型模型</strong>，并部署在 iOS 与 Android 移动端设备当中，实现 QQ 语音与全民 K 歌软件的实时语音增强，rtf 仅 0.2，模型大小 0.5MB。</li>
+            <li>搭建<strong>语音情感识别模型</strong>，部署在 QQ 音乐与全民 K 歌的后台，rtf 仅 0.02，实现移动端上的 AI 人声自动标注功能，节省标注成本，并为天琴实验室后续实验提供完整的歌声情感类数据集。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-card">
+          <div class="exp-period">2023.12 — 2024.05 · 算法实习生</div>
+          <div class="exp-role">算法实习生</div>
+          <div class="exp-org">腾讯 IEG · 魔方工作室 <span class="org-tag">实习</span></div>
+          <ul class="exp-duties">
+            <li>负责<strong>游戏引擎图形学二值化神经网络（BNN）的实现与推理</strong>：面向没有强大 CPU 或大内存的移动设备和物联网设备，BNN 通过使用二进制值替代浮点值，使网络可以更快计算并显著降低内存消耗与功耗。</li>
+            <li>搭建<strong>基于二值化函数的 MLP 与 CNN</strong>，并将浮点参数转换为整型放在 STM32 与 ESP32 设备中。</li>
+            <li>基于 <strong>C 语言</strong>在嵌入式设备上搭建推理模型；同时对 SIREN 模型进行二值化改写，测试其在音频、图像和视频重建中的性能。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Research Experience ===== -->
+  <section id="research-exp" class="section">
+    <h2 class="section-title">科研经历</h2>
+    <div class="section-title-en">Research Experience</div>
+    <div class="exp-timeline">
+      <div class="exp-item">
+        <div class="exp-card">
+          <div class="exp-period">2022.09 — 2024.03 · 国家重点研发项目</div>
+          <div class="exp-role">主要研究人员</div>
+          <div class="exp-org">《多模态光声成像》— 基于自适应滤波算法的光声内窥图像优化 <span class="org-tag">科研</span></div>
+          <ul class="exp-duties">
+            <li>以<strong>第一作者</strong>发表发明专利一项《基于双通道数据采集和噪声抵消的低噪声光声成像方法与系统》。</li>
+            <li>提供一套完整的 <strong>SoC-FPGA 实验系统</strong>，采集卡双通道采样频率峰值 100MHz。</li>
+            <li>系统可在 FPGA 层实现<strong>自适应滤波</strong>功能，超声信号重建为图像后信噪比提升 16.8dB。</li>
+            <li>基于 <strong>Transformer-NLP 的方法</strong>进行语音回声消除，图像信噪比提升 14.2dB，采集时长由 10 分钟缩短至 2 分钟。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-card">
+          <div class="exp-period">2023.09 — 2024.08 · 国家重点研发项目</div>
+          <div class="exp-role">主要研究人员</div>
+          <div class="exp-org">《光声高速传输成像》— 基于 LVDS 超声前端的多通道光声系统 <span class="org-tag">科研</span></div>
+          <ul class="exp-duties">
+            <li>完成一套完整的 <strong>SoC-FPGA / Zynq 实验系统</strong>，基于 TI AFE5805 与 AFE5828 芯片对 256 通道环阵超声探头信号进行完整采集。</li>
+            <li>AFE 基于 <strong>LVDS 接口</strong>采集 8/16 通道 14 位数据，采样频率峰值 65MHz。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-card">
+          <div class="exp-period">2022.08 — 2022.11 · 算法合作课题</div>
+          <div class="exp-role">深度学习算法负责人</div>
+          <div class="exp-org">Re-vis 公司 · 基于 multi-yolo 模型部署车载 HUD 识别系统 <span class="org-tag">科研</span></div>
+          <ul class="exp-duties">
+            <li>负责深度学习算法部分，基于 <strong>Docker</strong> 搭建企业深度学习运行环境。</li>
+            <li>修改 <strong>yolo-v5 模型 baseline</strong>，结合 U-Net 图像分割模型，得到多功能目标检测模型。</li>
+            <li>移植到边缘算力 <strong>Jetson Nano</strong>。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-card">
+          <div class="exp-period">2021.12 — 2022.06 · 江苏省优秀毕业设计</div>
+          <div class="exp-role">独立完成</div>
+          <div class="exp-org">基于 Fully Dense U-Net 的光声成像重建算法 <span class="org-tag">科研</span></div>
+          <ul class="exp-duties">
+            <li>设计<strong>全密集 U-Net（FD U-Net）模型</strong>，折衷成像分辨率与成像速度。</li>
+            <li>使用<strong>线性声学方程</strong>对光声波场时间演化建模，将初始压力分布加载到 K-Wave 模拟工具，形成脑部细胞图像数据集。</li>
           </ul>
         </div>
       </div>
@@ -1270,94 +1388,120 @@
     <div class="section-title-en">Publications, Patents &amp; Awards</div>
 
     <div class="pub-subsection">
-      <h3>代表性论文 · Publications</h3>
+      <h3>SCI 论文 · Publications（3 篇 SCI 二区 top）</h3>
       <ol class="pub-list">
         <li>
-          <span class="pub-title">"基于 HRTF 与分区 FFT 卷积的实时双耳空间音频渲染引擎"</span>
+          <span class="pub-title">"In vivo structural and functional imaging of human nailbed microvasculature using photoacoustic microscopy"</span>
           Yao, Y., et al.
-          <span class="pub-venue">IEEE/ACM Transactions on Audio, Speech, and Language Processing</span>
-          <span class="pub-pending">(待补充 · 状态确认中)</span>
+          <span class="pub-venue">Optics Letters · SCI 二区 top / Q1 · 2022.09 — 2023.10</span>
+          <span class="pub-detail">光声显微镜基于扫描镜系统，偏转光和超声。论文用线（柱）聚焦超声探头而非点聚焦，旨在利用自适应滤波算法以及深度学习算法，对低分辨率的人体甲床图像进行重建优化；并在双波长条件下测量人体样本的血氧饱和度。</span>
         </li>
         <li>
-          <span class="pub-title">"Qualcomm Hexagon NPU 上语音合成模型的 fp16 精度崩塌分析与绕过式部署策略"</span>
+          <span class="pub-title">"Anti-interference photoacoustic microscopy with adaptive noise cancellation and echo recovery for in vivo ocular imaging"</span>
           Yao, Y., et al.
-          <span class="pub-venue">INTERSPEECH</span>
-          <span class="pub-pending">(待补充 · 状态确认中)</span>
+          <span class="pub-venue">Physical Review Applied · SCI 二区 top / Q1 · 2023.06 — 2024.07</span>
+          <span class="pub-detail">基于自适应滤波的双通道低噪声光声信号采集与成像系统与方法。基于 SoC-FPGA 平台搭建双通道高速率信号采集系统，硬件采集平台可完成双通道采集与 LMS 算法处理；同时提出自适应滤波降噪算法与匹配滤波算法。</span>
         </li>
         <li>
-          <span class="pub-title">"vLLM 并发架构重构：守护线程持锁循环驱动 step() 在大模型 TTS 流式推理中的应用"</span>
+          <span class="pub-title">"Enhancement of structural and functional photoacoustic imaging based on a reference-inputted convolutional neural network"</span>
           Yao, Y., et al.
-          <span class="pub-venue">ICASSP</span>
-          <span class="pub-pending">(待补充 · 状态确认中)</span>
-        </li>
-        <li>
-          <span class="pub-title">"SPECT 心肌灌注显像 IBSI 合规影像组学特征提取与多模态融合临床建模"</span>
-          Yao, Y., et al.
-          <span class="pub-venue">Medical Image Analysis</span>
-          <span class="pub-pending">(待补充 · 状态确认中)</span>
-        </li>
-        <li>
-          <span class="pub-title">"基于 Coordinator Mode 的多智能体协作平台：CommHub 通信中枢与并行编辑冲突解决"</span>
-          Yao, Y., et al.
-          <span class="pub-venue">ACL / EMNLP (Agent Workshop)</span>
-          <span class="pub-pending">(待补充 · 状态确认中)</span>
+          <span class="pub-venue">Optics Express · SCI 二区 top / Q2 · 2024.11 — 2025.01</span>
+          <span class="pub-detail">提出参考输入型神经网络 Ri-Net，实现 2.6 倍的图像对比度改善和 9.6dB 的信噪比提高。网络在单波长数据上训练并应用于多波长的功能成像，小鼠耳的功能性成像证明了该方法的稳健性。</span>
         </li>
       </ol>
     </div>
 
     <div class="pub-subsection">
-      <h3>专利 · Patents</h3>
+      <h3>国家级期刊论文 · Domestic Journals（3 篇）</h3>
+      <ol class="pub-list">
+        <li>
+          <span class="pub-title">"基于改进型 U-Net 神经网络的光声图像重建算法"</span>
+          <span class="pub-venue">《电子技术与软件工程》· 国家级期刊 · 2022.07 — 2024.07</span>
+        </li>
+        <li>
+          <span class="pub-title">"电子信息通信工程中设备抗干扰问题分析"</span>
+          <span class="pub-venue">《数码设计》· 国家级期刊 · 2022.07 — 2024.07</span>
+        </li>
+        <li>
+          <span class="pub-title">"传输技术在信息通信工程中的有效应用分析"</span>
+          <span class="pub-venue">《江苏通信》· 国家级期刊 · 2022.07 — 2024.07</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="pub-subsection">
+      <h3>发明专利 · Patents（1 项，第一作者）</h3>
       <ul class="patent-list">
         <li>
-          <span class="patent-title">一种多智能体协作通信方法及系统</span>（基于 CommHub inbox/outbox + 文件租约 claim/release + TTL 过期机制）
-          <span class="patent-pending">(待补充 · 申请状态确认中)</span>
-        </li>
-        <li>
-          <span class="patent-title">一种边缘设备多模态推理加速方法</span>（基于 QNN precompiled context binary 静态推理 + fp16 精度崩塌绕过策略）
-          <span class="patent-pending">(待补充 · 申请状态确认中)</span>
-        </li>
-        <li>
-          <span class="patent-title">一种基于 HRTF 的实时双耳空间音频渲染方法及装置</span>（基于自研 radix-2 FFT + 分区 FFT 卷积 + overlap-add + 双线性 HRTF 插值）
-          <span class="patent-pending">(待补充 · 申请状态确认中)</span>
-        </li>
-        <li>
-          <span class="patent-title">一种大模型 TTS 流式推理并发架构</span>（基于守护线程持锁循环驱动 vLLM step() + GPU 并发闸门 Semaphore + 客户端断连释放）
-          <span class="patent-pending">(待补充 · 申请状态确认中)</span>
-        </li>
-        <li>
-          <span class="patent-title">一种医学影像 IBSI 合规特征提取与多模态融合建模方法</span>（基于 PyRadiomics + 5 折分层 CV + Bootstrap 95% CI + 过拟合 Gap 检测）
-          <span class="patent-pending">(待补充 · 申请状态确认中)</span>
+          <span class="patent-title">《基于双通道数据采集和噪声抵消的低噪声光声成像方法与系统》</span>
+          （第一作者；基于双通道数据采集与噪声抵消的低噪声光声成像方法与系统，对应 SoC-FPGA 双通道高速率信号采集平台与自适应滤波降噪算法）
         </li>
       </ul>
     </div>
 
     <div class="pub-subsection">
-      <h3>竞赛与获奖 · Awards</h3>
+      <h3>荣誉证书 · Honors &amp; Awards</h3>
+      <h4 class="award-cat">国家级（11 项）</h4>
       <ul class="award-list">
         <li>
-          <span class="award-year">2025</span>
-          <strong>LRAC 挑战赛</strong>（南京大学音频声学实验室参赛，空间音频 / 语音情感识别相关方向，推导用户可能参与）
-          <span class="award-pending">(待补充 · 参赛状态与名次确认中)</span>
+          <span class="award-year">2024</span>
+          <strong>研究生国家奖学金</strong>（2024 年度）
         </li>
         <li>
           <span class="award-year">2024</span>
-          <strong>开源贡献奖</strong>（空间音频引擎 MIT License 开源，自研 radix-2 FFT 29.5× 实时性能）
-          <span class="award-pending">(待补充 · 具体奖项名称确认中)</span>
+          <strong>研究生电子设计竞赛国家二等奖</strong>
         </li>
         <li>
-          <span class="award-year">2023</span>
-          <strong>学术研究成果奖</strong>（医学影像组学 AUC 0.736 → 0.905 多模态融合增益）
-          <span class="award-pending">(待补充 · 具体奖项名称确认中)</span>
+          <span class="award-year">2022</span>
+          <strong>中国光谷奖学金</strong>
+        </li>
+        <li>
+          <span class="award-year">2022</span>
+          <strong>中国电信集团飞"young"奖学金</strong>
+        </li>
+        <li>
+          <span class="award-year">2019</span>
+          <strong>国家奖学金</strong>（2018-2019 年度）
+        </li>
+        <li>
+          <span class="award-year">2020</span>
+          <strong>国家奖学金</strong>（2019-2020 年度）
+        </li>
+        <li>
+          <span class="award-year">—</span>
+          <strong>平煤神马奖学金</strong>
+        </li>
+        <li>
+          <span class="award-year">—</span>
+          <strong>帝奥微电子奖学金</strong>
+        </li>
+        <li>
+          <span class="award-year">2021</span>
+          <strong>美国大学生数学建模比赛二等奖</strong>
+        </li>
+        <li>
+          <span class="award-year">2020</span>
+          <strong>全国大学生英语竞赛二等奖</strong>
+        </li>
+        <li>
+          <span class="award-year">2019</span>
+          <strong>全国大学生高数竞赛三等奖</strong>
         </li>
       </ul>
-    </div>
-
-    <div class="pub-subsection">
-      <h3>学术服务 · Academic Service</h3>
-      <ul class="service-list">
-        <li>期刊审稿：<strong>IEEE/ACM Transactions on Audio, Speech, and Language Processing (TASLP)</strong>、<strong>INTERSPEECH</strong>、<strong>ICASSP</strong> <span class="svc-pending">(待补充 · 审稿人身份确认中)</span></li>
-        <li>程序委员会：相关音频 / AI 领域会议 <span class="svc-pending">(待补充)</span></li>
-        <li>开源社区贡献：GitHub 维护 13+ 仓库（scientific-illustrator、drawio-scientific-illustrator、claw-code、matrix-live-diarizer、KuralNet、SER、Speech-Emo-Rec 等）</li>
+      <h4 class="award-cat">省级（3 项）</h4>
+      <ul class="award-list">
+        <li>
+          <span class="award-year">2021</span>
+          <strong>江苏省优秀学生干部</strong>
+        </li>
+        <li>
+          <span class="award-year">2021</span>
+          <strong>江苏省五一数学建模大赛三等奖</strong>
+        </li>
+        <li>
+          <span class="award-year">2020</span>
+          <strong>APMCM 亚太数学建模大赛三等奖</strong>
+        </li>
       </ul>
     </div>
   </section>
@@ -1407,7 +1551,6 @@
         <span class="repo-tag">Speech-Emo-Rec</span>
         <span class="repo-tag">MeloTTS-ONNX</span>
       </div>
-      <div class="os-pending">技术演讲与社区活动：待补充</div>
     </div>
   </section>
 
@@ -1417,14 +1560,15 @@
     <div class="section-title-en">Education</div>
     <ul class="edu-list">
       <li>
-        <div class="edu-period">2022 — 2025 · 硕士</div>
+        <div class="edu-period">2022.07 — 2025.07 · 硕士</div>
         <div class="edu-school">南京大学</div>
-        <div class="edu-major">音频声学 · 硕士（空间音频 / HRTF / 医学影像组学方向）</div>
+        <div class="edu-major">电子信息 — 音频声学方向 · 硕士</div>
       </li>
       <li>
-        <div class="edu-period">2018 — 2022 · 本科</div>
-        <div class="edu-school">本科院校</div>
-        <div class="edu-major">音频 / 声学相关 · 本科</div>
+        <div class="edu-period">2018.09 — 2022.07 · 本科</div>
+        <div class="edu-school">中国矿业大学</div>
+        <div class="edu-major">主修电子信息工程 · 本科（辅修会计）</div>
+        <div class="edu-major">英语六级 592 分 · 英语四级 597 分</div>
       </li>
     </ul>
   </section>
@@ -1446,7 +1590,7 @@
 /* ============ Project Data (完整保留 9 个项目 + 五大深化维度) ============ */
 const projects = [
   {
-    num:"01", name:"多智能体协作平台", category:"智能体开发", year:"2024",
+    num:"01", name:"多智能体协作平台", category:"智能体开发", year:"2026.04 至今",
     img:"结构图/MultiAgent.png",
     desc:"基于 Claude Agent SDK 与 AG-UI 协议的多智能体协作平台，Java Service + Python Process 双层架构，支持 Solo/Team 双模式运行，Coordinator Mode 协调多 Worker CLI 进程并行执行，CommHub 通信中枢解决并行编辑冲突。",
     tech:["Python 3.11","FastAPI","Claude Agent SDK","Java Spring","K8s","MySQL","Docker","AG-UI 协议"],
@@ -1507,7 +1651,7 @@ const projects = [
     }
   },
   {
-    num:"02", name:"AI 眼镜边缘多模态客户端", category:"边缘 AI", year:"2024",
+    num:"02", name:"AI 眼镜边缘多模态客户端", category:"边缘 AI", year:"2025.09-2026.03",
     img:"结构图/AI-Glasses.png",
     desc:"基于 FFalcon Mercury SDK 的 AR 眼镜 Android 应用，面向 RayNeo 终端提供 QA 语音问答 + ST 同声传译双模态交互。端侧 sherpa-onnx VAD + 离线 ASR，边缘 Qwen3-Omni-30B AWQ-8bit 量化大模型 SSE 流式回传。",
     tech:["Android Kotlin","Compose","sherpa-onnx","Qwen3-Omni-30B AWQ-8bit","SSE","OkHttp","Coroutines"],
@@ -1569,7 +1713,7 @@ const projects = [
     }
   },
   {
-    num:"03", name:"QNN 模型部署与量化", category:"边缘 AI", year:"2024",
+    num:"03", name:"QNN 模型部署与量化", category:"边缘 AI", year:"2025.04-2025.07",
     img:"结构图/QNN-Deploy.png",
     desc:"TIM-Net / LIGHT-SERNET 与 MeloTTS 端到端 NPU 部署链路：TF 训练 → tf2onnx → QNN INT8 量化 → Hexagon NPU 部署。fp16 精度崩塌 4 轮迭代排查，最终用常量乘法 4 帧/token 替代 Duration Predictor，彻底消除 fp16 敏感 op。",
     tech:["QNN SDK","tf2onnx","PyTorch 2.8","ONNX opset 16","QCS8550 HTP v73","ONNXRuntime 1.23.2","QAIRT 2.46"],
@@ -2017,6 +2161,7 @@ const skills = [
   {cat:"AI 框架",items:[
     {name:"PyTorch",stars:5,note:"模型训练 / 导出 / torch.onnx.export / torch.jit.trace"},
     {name:"vLLM",stars:5,note:"并发架构重构 / 守护线程持锁循环驱动 step() / continuous batching"},
+    {name:"vLLM-Omni",stars:4,note:"多模态大模型边缘部署 / Jetson 平台推理服务"},
     {name:"ONNX / ONNXRuntime",stars:5,note:"CPU/CUDA/QNN 多 EP 兼容 / 静态化 / 模型导出"},
     {name:"Transformers",stars:4,note:"Qwen2 LLM / CosyVoice3 / Qwen3-Omni 大模型加载与推理"},
     {name:"Claude Agent SDK",stars:4,note:"多智能体协作 / Coordinator Mode / AG-UI 协议"},
@@ -2038,10 +2183,23 @@ const skills = [
   ]},
   {cat:"音频 / 多模态",items:[
     {name:"HRTF 空间音频",stars:5,note:"双耳渲染 / 分区 FFT 卷积 / 头部追踪 / 5.1/7.1 下混"},
+    {name:"音频信号处理算法",stars:5,note:"C++ / Python 开发 / 图像处理 / 语音识别转换 / 自研 radix-2 FFT"},
     {name:"TTS / ASR",stars:5,note:"CosyVoice3 / MeloTTS / faster-whisper / Qwen3-ASR / SenseVoice"},
     {name:"语音情感识别",stars:5,note:"TIM-Net / LIGHT-SERNET / SER 模型训练与边缘部署"},
     {name:"PaddleOCR / OCR",stars:4,note:"中文模型 + 角度分类 / 坐标重排 / 990+ 图片批量识别"},
     {name:"多模态大模型",stars:4,note:"Qwen3-Omni-30B / QA 语音问答 / ST 同声传译"}
+  ]},
+  {cat:"硬件开发",items:[
+    {name:"FPGA",stars:5,note:"SoC-FPGA / Zynq 平台 / 自适应滤波硬件加速 / 双通道 100MHz 采集"},
+    {name:"SoC-FPGA",stars:5,note:"TI AFE5805 / AFE5828 / 256 通道环阵超声探头信号采集"},
+    {name:"STM32",stars:4,note:"嵌入式推理 / BNN 二值化神经网络部署 / K-Wave 模拟"},
+    {name:"Quartus",stars:4,note:"FPGA 综合 / 实现 / 时序约束 / LVDS 接口开发"},
+    {name:"Keil",stars:4,note:"STM32 / ESP32 嵌入式开发 / C 语言推理模型"}
+  ]},
+  {cat:"嵌入式软硬件",items:[
+    {name:"Linux 系统 / 驱动开发",stars:4,note:"hal 层音频信号编解码 / 内核模块 / 设备驱动"},
+    {name:"ARM 交叉编译",stars:5,note:"aarch64-oe-linux-gcc / arm64-v8a / armeabi-v7a / x86_64 多架构"},
+    {name:"上位机系统开发",stars:4,note:"配套上位机 / 数据采集控制 / SQL 命令总线"}
   ]},
   {cat:"工程 / 工具",items:[
     {name:"Git / GitHub",stars:5,note:"13+ 公开仓库 / MIT License / 开源协作"},
@@ -2140,7 +2298,7 @@ function renderSectionContent(p, section){
       html += `<div class="detail-block"><h4>经济收益</h4><p>${esc(d.benefit)}</p></div>`;
     }
   }
-  return html || `<div class="detail-block"><p style="color:var(--text-muted);font-style:italic;">（该维度暂无数据 · 待补充）</p></div>`;
+  return html || `<div class="detail-block"><p style="color:var(--text-muted);font-style:italic;">（该维度暂无数据）</p></div>`;
 }
 
 /* 折叠/展开某个 section */
