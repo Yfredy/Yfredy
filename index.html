@@ -3,601 +3,2254 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>姚越 · AI 工程师 | Yao Yue Portfolio</title>
+<title>姚越 | AI 工程师 · 音频声学硕士</title>
 <style>
-  :root {
-    --bg-primary: #050818; --bg-secondary: #0A0E27;
-    --bg-sidebar: rgba(10, 14, 39, 0.85);
-    --bg-card: rgba(15, 23, 60, 0.55); --bg-code: rgba(0, 0, 0, 0.4);
-    --text-primary: #e8ecf3; --text-secondary: #a8b3cf; --text-muted: #6c7a99;
-    --accent: #00f5ff; --accent-hover: #4dffff; --accent-light: rgba(0, 245, 255, 0.08);
-    --accent-purple: #b026ff; --accent-magenta: #ff2d95; --accent-green: #39ff14; --accent-amber: #ffb700;
-    --border: rgba(0, 245, 255, 0.15); --border-strong: rgba(0, 245, 255, 0.45);
-    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-    --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
-    --font-serif: Georgia, 'Times New Roman', 'Source Han Serif SC', serif;
-    --shadow-glow: 0 0 30px rgba(0, 245, 255, 0.12);
+  :root{
+    --bg-primary:#ffffff;
+    --bg-secondary:#f8f9fa;
+    --bg-sidebar:#f8f9fa;
+    --text-primary:#1a202c;
+    --text-secondary:#4a5568;
+    --text-muted:#718096;
+    --accent:#2c5282;
+    --accent-hover:#2b6cb0;
+    --accent-light:#ebf8ff;
+    --border:#e2e8f0;
+    --tag-bg:#edf2f7;
+    --tag-text:#4a5568;
+    --category-bg:#2c5282;
+    --category-text:#ffffff;
+    --green:#2d7d46;
+    --pending:#a0aec0;
+    --star:#d69e2e;
+    --table-stripe:#f7fafc;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--font-sans); background: var(--bg-primary); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; font-size: 15px; }
-  a { color: var(--accent); text-decoration: none; transition: color .2s; }
-  a:hover { color: var(--accent-magenta); }
-  code { font-family: var(--font-mono); background: var(--bg-code); color: var(--accent); padding: 1px 6px; border-radius: 3px; font-size: 0.92em; }
-
-  #bg-canvas { position: fixed; inset: 0; z-index: -2;
-    background:
-      radial-gradient(ellipse at 15% 10%, rgba(0, 245, 255, 0.10) 0%, transparent 50%),
-      radial-gradient(ellipse at 85% 90%, rgba(176, 38, 255, 0.10) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(255, 45, 149, 0.05) 0%, transparent 70%),
-      linear-gradient(135deg, #0A0E27 0%, #050818 50%, #0A0E27 100%);
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'PingFang SC','Microsoft YaHei',sans-serif;
+    background:var(--bg-primary);
+    color:var(--text-primary);
+    line-height:1.7;
+    display:flex;
+    min-height:100vh;
   }
-  #particles { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
-  .grid-overlay { position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background-image: linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+  a{color:var(--accent);text-decoration:none;transition:color .2s ease}
+  a:hover{color:var(--accent-hover);text-decoration:underline}
+
+  /* ===== Sidebar ===== */
+  .sidebar{
+    width:300px;
+    position:fixed;
+    top:0;left:0;bottom:0;
+    height:100vh;
+    overflow-y:auto;
+    background:var(--bg-sidebar);
+    border-right:1px solid var(--border);
+    padding:36px 28px;
+    z-index:10;
+  }
+  .avatar{
+    width:140px;height:140px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--accent) 0%,var(--green) 100%);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:64px;font-weight:600;
+    margin:0 auto 22px;
+    box-shadow:0 4px 16px rgba(44,82,130,0.18);
+  }
+  .sidebar h1{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:30px;
+    font-weight:700;
+    text-align:center;
+    color:var(--text-primary);
+    letter-spacing:2px;
+    margin-bottom:6px;
+  }
+  .sidebar .title{
+    text-align:center;
+    color:var(--text-secondary);
+    font-size:15px;
+    margin-bottom:8px;
+    letter-spacing:0.5px;
+  }
+  .sidebar .title-en{
+    text-align:center;
+    color:var(--text-muted);
+    font-size:12px;
+    letter-spacing:1px;
+    margin-bottom:28px;
+    font-family:Georgia,serif;
+    font-style:italic;
+  }
+  .sidebar-section{margin-bottom:26px}
+  .sidebar-section h2{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:14px;
+    font-weight:700;
+    color:var(--accent);
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    margin-bottom:12px;
+    padding-bottom:6px;
+    border-bottom:2px solid var(--accent);
+  }
+  .research-list{
+    list-style:none;
+    font-size:14px;
+    color:var(--text-secondary);
+    line-height:1.9;
+  }
+  .research-list li{
+    padding-left:14px;
+    position:relative;
+  }
+  .research-list li::before{
+    content:"▸";
+    position:absolute;
+    left:0;
+    color:var(--accent);
+    font-size:11px;
+    top:7px;
+  }
+  .contact-list{
+    list-style:none;
+    font-size:14px;
+    color:var(--text-secondary);
+  }
+  .contact-list li{
+    margin-bottom:10px;
+    word-break:break-all;
+  }
+  .contact-list .label{
+    display:block;
+    font-size:11px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:2px;
+  }
+  .contact-list a{color:var(--accent);font-weight:500}
+  .sidebar-nav{
+    list-style:none;
+    margin-top:18px;
+    border-top:1px solid var(--border);
+    padding-top:18px;
+  }
+  .sidebar-nav li{margin-bottom:6px}
+  .sidebar-nav a{
+    display:block;
+    color:var(--text-secondary);
+    font-size:14px;
+    padding:6px 10px;
+    border-radius:4px;
+    transition:all .2s ease;
+  }
+  .sidebar-nav a:hover{
+    background:var(--accent-light);
+    color:var(--accent);
+    text-decoration:none;
   }
 
-  .navbar { position: sticky; top: 0; z-index: 100;
-    backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
-    background: rgba(5, 8, 24, 0.75); border-bottom: 1px solid var(--border);
-    padding: 14px 32px; display: flex; align-items: center; justify-content: space-between;
+  /* ===== Main Content ===== */
+  .main{
+    margin-left:300px;
+    flex:1;
+    padding:48px 72px 60px;
+    width:calc(100% - 300px);
+    min-height:100vh;
   }
-  .navbar .brand { font-family: var(--font-mono); font-size: 17px; font-weight: 700;
-    background: linear-gradient(135deg, var(--accent), var(--accent-magenta));
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  .main-inner{
+    max-width:1100px;
+    margin:0 auto;
   }
-  .navbar .brand .dot { color: var(--accent); -webkit-text-fill-color: var(--accent); }
-  .navbar nav { display: flex; gap: 18px; flex-wrap: wrap; }
-  .navbar nav a { color: var(--text-secondary); font-size: 13px; font-weight: 500; padding: 6px 10px; border-radius: 6px; font-family: var(--font-mono); transition: all .2s; }
-  .navbar nav a:hover { color: var(--accent); background: var(--accent-light); }
-  .mobile-toggle { display: none; background: var(--bg-card); border: 1px solid var(--border); color: var(--accent); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-family: var(--font-mono); }
-
-  .layout { display: grid; grid-template-columns: 280px 1fr; gap: 32px; max-width: 1440px; margin: 0 auto; padding: 32px; }
-
-  .sidebar { position: sticky; top: 90px; align-self: start; background: var(--bg-sidebar);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--border); border-radius: 14px; padding: 24px; box-shadow: var(--shadow-glow);
-    max-height: calc(100vh - 110px); overflow-y: auto;
+  .section{margin-bottom:60px}
+  .section-title{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:30px;
+    font-weight:700;
+    color:var(--text-primary);
+    margin-bottom:6px;
+    letter-spacing:0.5px;
   }
-  .avatar-wrap { position: relative; width: 130px; height: 130px; margin: 0 auto 14px; border-radius: 50%; padding: 3px;
-    background: conic-gradient(from 0deg, var(--accent), var(--accent-magenta), var(--accent-purple), var(--accent));
-    animation: rotate 8s linear infinite;
+  .section-title-en{
+    font-family:Georgia,serif;
+    font-style:italic;
+    color:var(--text-muted);
+    font-size:14px;
+    letter-spacing:1px;
+    margin-bottom:24px;
+    padding-bottom:12px;
+    border-bottom:1px solid var(--border);
   }
-  .avatar-wrap::before { content: ''; position: absolute; inset: -8px; border-radius: 50%;
-    background: conic-gradient(from 0deg, var(--accent), var(--accent-magenta), var(--accent-purple), var(--accent));
-    filter: blur(20px); opacity: 0.4; z-index: -1;
+
+  /* ===== About ===== */
+  .about-text p{
+    font-size:15px;
+    color:var(--text-secondary);
+    line-height:1.85;
+    margin-bottom:14px;
+    text-align:justify;
   }
-  .avatar { width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, #0A0E27, #1a1f4a);
-    display: flex; align-items: center; justify-content: center; font-family: var(--font-serif);
-    font-size: 44px; font-weight: 700; color: var(--accent); text-shadow: 0 0 20px var(--accent);
-    animation: rotate-reverse 8s linear infinite;
+  .about-text p strong{color:var(--accent);font-weight:600}
+  .about-text p strong.green{color:var(--green)}
+  .research-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:18px;
+    padding-top:18px;
+    border-top:1px dashed var(--border);
   }
-  @keyframes rotate { to { transform: rotate(360deg); } }
-  @keyframes rotate-reverse { to { transform: rotate(-360deg); } }
-
-  .sidebar h1 { font-family: var(--font-serif); font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 4px;
-    background: linear-gradient(135deg, #fff, var(--accent)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  .research-tags .tag{
+    padding:5px 12px;
+    background:var(--tag-bg);
+    color:var(--tag-text);
+    border-radius:3px;
+    font-size:12px;
+    letter-spacing:0.3px;
   }
-  .sidebar .title { text-align: center; color: var(--text-secondary); font-size: 13px; font-family: var(--font-mono); margin-bottom: 2px; }
-  .sidebar .title-en { text-align: center; color: var(--text-muted); font-size: 11px; font-family: var(--font-serif); font-style: italic; margin-bottom: 16px; }
-
-  .sidebar-section { margin-bottom: 16px; }
-  .sidebar-section h4 { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--accent);
-    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--border);
+  .research-tags .tag.accent{
+    background:var(--accent-light);
+    color:var(--accent);
+    font-weight:500;
   }
-  .research-list, .contact-list, .sidebar-nav { list-style: none; }
-  .research-list li { font-size: 12.5px; color: var(--text-secondary); padding: 4px 0; line-height: 1.5; }
-  .research-list li::before { content: '▸ '; color: var(--accent); }
-  .contact-list li { display: flex; justify-content: space-between; font-size: 12.5px; padding: 5px 0; border-bottom: 1px dashed var(--border); }
-  .contact-list li:last-child { border-bottom: none; }
-  .contact-list .label { color: var(--text-muted); font-family: var(--font-mono); }
-  .contact-list .value { color: var(--accent); font-family: var(--font-mono); }
-  .sidebar-nav { display: flex; flex-direction: column; gap: 4px; }
-  .sidebar-nav a { display: block; padding: 7px 12px; color: var(--text-secondary); font-size: 13px; border-radius: 6px; font-family: var(--font-mono); transition: all .2s; border-left: 2px solid transparent; }
-  .sidebar-nav a:hover { color: var(--accent); background: var(--accent-light); border-left-color: var(--accent); transform: translateX(2px); }
 
-  .main { min-width: 0; }
-  .section { background: var(--bg-card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--border); border-radius: 14px; padding: 32px; margin-bottom: 28px; position: relative;
+  /* ===== Research Interests ===== */
+  .research-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px 24px;
   }
-  .section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-magenta), var(--accent-purple));
-    border-radius: 14px 14px 0 0; opacity: 0.6;
+  .research-card{
+    padding:16px 18px;
+    background:var(--bg-secondary);
+    border-left:3px solid var(--accent);
+    border-radius:0 4px 4px 0;
+    transition:all .2s ease;
   }
-  .section-title { font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
-  .section-title-en { font-family: var(--font-serif); font-style: italic; font-size: 13px; color: var(--text-muted); margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .research-card:hover{
+    background:var(--accent-light);
+    transform:translateX(2px);
+  }
+  .research-card h3{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:15px;
+    color:var(--accent);
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .research-card .rc-en{
+    font-family:Georgia,serif;
+    font-style:italic;
+    font-size:11px;
+    color:var(--text-muted);
+    margin-bottom:6px;
+    letter-spacing:0.5px;
+  }
+  .research-card p{
+    font-size:13px;
+    color:var(--text-secondary);
+    line-height:1.65;
+    text-align:justify;
+  }
 
-  .about-text p { color: var(--text-secondary); font-size: 14.5px; line-height: 1.85; margin-bottom: 14px; }
-  .about-text p strong { color: var(--accent); font-weight: 600; }
-  .about-text p strong.green { color: var(--accent-green); }
-  .about-text p strong.purple { color: var(--accent-purple); }
-  .about-text p strong.magenta { color: var(--accent-magenta); }
-  .research-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--border); }
-  .tag { padding: 4px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; font-size: 12px; font-family: var(--font-mono); color: var(--text-secondary); }
-  .tag.accent { background: var(--accent-light); border-color: var(--border-strong); color: var(--accent); }
-  .tag.green { background: rgba(57,255,20,0.08); border-color: rgba(57,255,20,0.4); color: var(--accent-green); }
+  /* ===== Projects (Academic List Style) ===== */
+  .project-list{
+    list-style:none;
+  }
+  .project-item{
+    padding:24px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .project-item:last-child{border-bottom:none}
+  .project-head{
+    display:flex;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:8px;
+  }
+  .project-num{
+    font-family:Georgia,serif;
+    font-size:14px;
+    color:var(--text-muted);
+    font-weight:600;
+    letter-spacing:1px;
+  }
+  .project-title{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:20px;
+    font-weight:700;
+    color:var(--text-primary);
+    line-height:1.4;
+    flex:1;
+    min-width:0;
+  }
+  .project-category{
+    display:inline-block;
+    padding:3px 10px;
+    background:var(--category-bg);
+    color:var(--category-text);
+    font-size:11px;
+    font-weight:600;
+    border-radius:3px;
+    letter-spacing:0.5px;
+  }
+  .project-year{
+    font-family:Georgia,serif;
+    color:var(--text-muted);
+    font-size:13px;
+    font-style:italic;
+  }
+  .project-desc{
+    font-size:14px;
+    color:var(--text-secondary);
+    line-height:1.75;
+    margin:8px 0 12px;
+    text-align:justify;
+  }
+  .project-tech{
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+    margin-bottom:10px;
+  }
+  .tech-tag{
+    padding:2px 8px;
+    background:var(--bg-secondary);
+    border:1px solid var(--border);
+    color:var(--text-secondary);
+    font-size:11px;
+    border-radius:3px;
+    font-family:'Consolas','Monaco',monospace;
+    letter-spacing:0.2px;
+  }
+  .project-metrics{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin:10px 0 14px;
+    padding:10px 14px;
+    background:var(--bg-secondary);
+    border-left:3px solid var(--accent);
+    border-radius:0 4px 4px 0;
+  }
+  .metric-inline{
+    font-size:13px;
+    color:var(--text-secondary);
+  }
+  .metric-inline .m-num{
+    font-family:Georgia,serif;
+    font-weight:700;
+    color:var(--accent);
+  }
+  .metric-inline .m-label{
+    color:var(--text-muted);
+    margin-left:4px;
+  }
+  .project-thumb{
+    margin:10px 0 12px;
+    cursor:zoom-in;
+    display:inline-block;
+    border:1px solid var(--border);
+    border-radius:4px;
+    overflow:hidden;
+    transition:border-color .2s ease,box-shadow .2s ease;
+    max-width:320px;
+  }
+  .project-thumb:hover{
+    border-color:var(--accent);
+    box-shadow:0 4px 14px rgba(44,82,130,0.15);
+  }
+  .project-thumb img{
+    display:block;
+    width:100%;
+    height:auto;
+    max-height:200px;
+    object-fit:cover;
+  }
+  .project-thumb .thumb-hint{
+    padding:5px 10px;
+    font-size:11px;
+    color:var(--text-muted);
+    background:var(--bg-secondary);
+    border-top:1px solid var(--border);
+    text-align:center;
+    letter-spacing:0.3px;
+  }
+  .expand-btns{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:8px;
+  }
+  .expand-btn{
+    background:none;
+    border:1px solid var(--accent);
+    color:var(--accent);
+    padding:6px 14px;
+    font-size:12.5px;
+    font-family:inherit;
+    cursor:pointer;
+    border-radius:3px;
+    letter-spacing:0.3px;
+    transition:all .2s ease;
+  }
+  .expand-btn:hover{
+    background:var(--accent);
+    color:#fff;
+  }
+  .expand-btn.active{
+    background:var(--accent);
+    color:#fff;
+  }
+  .expand-btn .arrow{
+    display:inline-block;
+    transition:transform .3s ease;
+    margin-left:4px;
+    font-size:10px;
+  }
+  .expand-btn.active .arrow{transform:rotate(180deg)}
+  .project-details{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .5s ease;
+  }
+  .project-item.expanded .project-details{max-height:8000px}
+  .details-inner{
+    margin-top:18px;
+    padding:20px 22px;
+    background:var(--bg-secondary);
+    border:1px solid var(--border);
+    border-radius:4px;
+  }
+  .detail-block{margin-bottom:18px}
+  .detail-block:last-child{margin-bottom:0}
+  .detail-block h4{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:14px;
+    font-weight:700;
+    color:var(--accent);
+    margin-bottom:8px;
+    padding-bottom:4px;
+    border-bottom:1px solid var(--border);
+    letter-spacing:0.5px;
+  }
+  .detail-block p{
+    font-size:13px;
+    color:var(--text-secondary);
+    line-height:1.8;
+    text-align:justify;
+  }
+  .detail-block ul{
+    list-style:none;
+    padding-left:0;
+  }
+  .detail-block li{
+    font-size:13px;
+    color:var(--text-secondary);
+    line-height:1.75;
+    padding:4px 0 4px 18px;
+    position:relative;
+    text-align:justify;
+  }
+  .detail-block li::before{
+    content:"▪";
+    color:var(--accent);
+    position:absolute;
+    left:0;
+    top:4px;
+    font-size:10px;
+  }
+  .detail-block .hl{
+    color:var(--accent);
+    font-weight:600;
+    font-family:'Consolas','Monaco',monospace;
+    font-size:12.5px;
+  }
+  .detail-block ol{
+    padding-left:22px;
+    margin:6px 0;
+  }
+  .detail-block ol li{
+    font-size:13px;
+    color:var(--text-secondary);
+    line-height:1.75;
+    padding-left:4px;
+  }
+  .detail-block ol li::before{content:none}
+  .detail-block table{
+    width:100%;
+    border-collapse:collapse;
+    margin:8px 0;
+    font-size:12.5px;
+  }
+  .detail-block table th,
+  .detail-block table td{
+    border:1px solid var(--border);
+    padding:6px 8px;
+    text-align:left;
+    vertical-align:top;
+    line-height:1.55;
+  }
+  .detail-block table th{
+    background:var(--accent);
+    color:#fff;
+    font-weight:600;
+    font-family:Georgia,serif;
+    letter-spacing:0.3px;
+  }
+  .detail-block table tr:nth-child(even) td{
+    background:var(--table-stripe);
+  }
+  .detail-block table td:first-child{
+    color:var(--accent);
+    font-weight:600;
+  }
+  .code-scale{
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+    padding:10px 14px;
+    background:var(--accent-light);
+    border-left:3px solid var(--accent);
+    border-radius:0 4px 4px 0;
+    margin-top:6px;
+  }
+  .code-scale .cs-item{
+    font-size:13px;
+    color:var(--text-secondary);
+  }
+  .code-scale .cs-num{
+    font-family:Georgia,serif;
+    font-weight:700;
+    color:var(--accent);
+    font-size:15px;
+  }
+  .code-scale .cs-label{
+    color:var(--text-muted);
+    margin-left:4px;
+  }
 
-  .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
-  .research-card { padding: 16px 18px; background: rgba(0,0,0,0.25); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; transition: all .25s; }
-  .research-card:hover { background: var(--accent-light); transform: translateX(2px); border-left-color: var(--accent-magenta); }
-  .research-card h3 { font-family: var(--font-sans); font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
-  .research-card .rc-en { font-family: var(--font-serif); font-style: italic; font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
-  .research-card p { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; }
+  /* ===== Experience Timeline (Cards) ===== */
+  .exp-timeline{
+    position:relative;
+    padding-left:30px;
+    margin-top:10px;
+  }
+  .exp-timeline::before{
+    content:"";
+    position:absolute;
+    left:6px;top:6px;bottom:6px;
+    width:2px;
+    background:var(--border);
+  }
+  .exp-item{
+    position:relative;
+    margin-bottom:30px;
+    padding-bottom:4px;
+  }
+  .exp-item::before{
+    content:"";
+    position:absolute;
+    left:-30px;top:6px;
+    width:14px;height:14px;
+    border-radius:50%;
+    background:var(--bg-primary);
+    border:3px solid var(--accent);
+  }
+  .exp-card{
+    background:var(--bg-secondary);
+    border:1px solid var(--border);
+    border-left:3px solid var(--accent);
+    border-radius:0 4px 4px 0;
+    padding:14px 18px;
+  }
+  .exp-period{
+    font-family:Georgia,serif;
+    font-size:12.5px;
+    color:var(--accent);
+    font-weight:700;
+    letter-spacing:0.5px;
+    margin-bottom:4px;
+    text-transform:uppercase;
+  }
+  .exp-role{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:16px;
+    color:var(--text-primary);
+    font-weight:700;
+    margin-bottom:2px;
+  }
+  .exp-org{
+    font-size:13px;
+    color:var(--text-secondary);
+    font-style:italic;
+    margin-bottom:8px;
+  }
+  .exp-org .org-tag{
+    display:inline-block;
+    padding:1px 8px;
+    background:var(--tag-bg);
+    color:var(--text-muted);
+    font-size:11px;
+    font-style:normal;
+    border-radius:3px;
+    margin-left:6px;
+    letter-spacing:0.3px;
+  }
+  .exp-duties{
+    list-style:none;
+    padding-left:0;
+  }
+  .exp-duties li{
+    font-size:13px;
+    color:var(--text-secondary);
+    line-height:1.75;
+    padding:3px 0 3px 16px;
+    position:relative;
+    text-align:justify;
+  }
+  .exp-duties li::before{
+    content:"▸";
+    color:var(--accent);
+    position:absolute;
+    left:0;
+    top:4px;
+    font-size:10px;
+  }
 
-  .project-list { list-style: none; }
-  .project-item { padding: 28px 0; border-bottom: 1px solid var(--border); }
-  .project-item:last-child { border-bottom: none; }
-  .project-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
-  .project-num { font-family: var(--font-serif); font-size: 16px; color: var(--text-muted); font-weight: 700; }
-  .project-title { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--text-primary); }
-  .project-cat { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; font-family: var(--font-mono); letter-spacing: 0.5px; }
-  .cat-ai-terminal { background: rgba(0,245,255,0.15); color: var(--accent); border: 1px solid rgba(0,245,255,0.4); }
-  .cat-multi-agent { background: rgba(176,38,255,0.15); color: var(--accent-purple); border: 1px solid rgba(176,38,255,0.4); }
-  .cat-llm-ascend { background: rgba(255,45,149,0.15); color: var(--accent-magenta); border: 1px solid rgba(255,45,149,0.4); }
-  .cat-medical { background: rgba(57,255,20,0.12); color: var(--accent-green); border: 1px solid rgba(57,255,20,0.4); }
-  .cat-research { background: rgba(255,183,0,0.15); color: var(--accent-amber); border: 1px solid rgba(255,183,0,0.4); }
-  .cat-engineering { background: rgba(255,255,255,0.1); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.3); }
-  .project-year { font-family: var(--font-serif); font-size: 13px; color: var(--text-muted); margin-left: auto; }
-  .project-desc { color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin-bottom: 14px; }
-  .project-desc strong { color: var(--accent); }
+  /* ===== Publications ===== */
+  .pub-subsection{
+    margin-bottom:28px;
+  }
+  .pub-subsection h3{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:17px;
+    color:var(--accent);
+    font-weight:700;
+    margin-bottom:12px;
+    padding-bottom:5px;
+    border-bottom:1px solid var(--border);
+    letter-spacing:0.5px;
+  }
+  .pub-list{
+    list-style:none;
+    padding-left:0;
+    counter-reset:pub-counter;
+  }
+  .pub-list li{
+    font-size:13.5px;
+    color:var(--text-secondary);
+    line-height:1.8;
+    padding:8px 0 8px 32px;
+    position:relative;
+    text-align:justify;
+    border-bottom:1px dashed var(--border);
+  }
+  .pub-list li:last-child{border-bottom:none}
+  .pub-list li::before{
+    counter-increment:pub-counter;
+    content:"[" counter(pub-counter) "]";
+    position:absolute;
+    left:0;
+    top:8px;
+    color:var(--accent);
+    font-family:Georgia,serif;
+    font-weight:700;
+    font-size:13px;
+  }
+  .pub-list .pub-title{
+    color:var(--text-primary);
+    font-weight:600;
+  }
+  .pub-list .pub-venue{
+    font-style:italic;
+    color:var(--accent);
+  }
+  .pub-list .pub-pending{
+    color:var(--pending);
+    font-style:italic;
+    font-size:12px;
+    margin-left:4px;
+  }
+  .patent-list{
+    list-style:none;
+    padding-left:0;
+  }
+  .patent-list li{
+    font-size:13.5px;
+    color:var(--text-secondary);
+    line-height:1.8;
+    padding:8px 0 8px 22px;
+    position:relative;
+    text-align:justify;
+    border-bottom:1px dashed var(--border);
+  }
+  .patent-list li:last-child{border-bottom:none}
+  .patent-list li::before{
+    content:"◆";
+    position:absolute;
+    left:0;
+    top:8px;
+    color:var(--accent);
+    font-size:10px;
+  }
+  .patent-list .patent-title{
+    color:var(--text-primary);
+    font-weight:600;
+  }
+  .patent-list .patent-pending{
+    color:var(--pending);
+    font-style:italic;
+    font-size:12px;
+    margin-left:4px;
+  }
+  .award-list{
+    list-style:none;
+    padding-left:0;
+  }
+  .award-list li{
+    font-size:13.5px;
+    color:var(--text-secondary);
+    line-height:1.8;
+    padding:8px 0 8px 22px;
+    position:relative;
+    text-align:justify;
+    border-bottom:1px dashed var(--border);
+  }
+  .award-list li:last-child{border-bottom:none}
+  .award-list li::before{
+    content:"★";
+    position:absolute;
+    left:0;
+    top:8px;
+    color:var(--star);
+    font-size:11px;
+  }
+  .award-list .award-year{
+    font-family:Georgia,serif;
+    color:var(--accent);
+    font-weight:700;
+    margin-right:6px;
+  }
+  .award-list .award-pending{
+    color:var(--pending);
+    font-style:italic;
+    font-size:12px;
+    margin-left:4px;
+  }
+  .service-list{
+    list-style:none;
+    padding-left:0;
+  }
+  .service-list li{
+    font-size:13.5px;
+    color:var(--text-secondary);
+    line-height:1.8;
+    padding:6px 0 6px 22px;
+    position:relative;
+    text-align:justify;
+  }
+  .service-list li::before{
+    content:"✦";
+    position:absolute;
+    left:0;
+    top:6px;
+    color:var(--accent);
+    font-size:11px;
+  }
+  .service-list .svc-pending{
+    color:var(--pending);
+    font-style:italic;
+    font-size:12px;
+    margin-left:4px;
+  }
 
-  .project-metrics { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
-  .metric-box { flex: 0 0 auto; min-width: 110px; padding: 8px 12px; background: rgba(0, 245, 255, 0.05); border: 1px solid var(--border); border-radius: 6px; text-align: center; }
-  .metric-box .num { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--accent); }
-  .metric-box .lbl { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  /* ===== Skills Matrix Table ===== */
+  .skills-matrix{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:6px;
+    font-size:13.5px;
+  }
+  .skills-matrix th,
+  .skills-matrix td{
+    padding:8px 12px;
+    text-align:left;
+    border-bottom:1px solid var(--border);
+    vertical-align:middle;
+  }
+  .skills-matrix th{
+    background:var(--accent);
+    color:#fff;
+    font-family:Georgia,serif;
+    font-weight:600;
+    letter-spacing:0.5px;
+    font-size:12.5px;
+    text-transform:uppercase;
+  }
+  .skills-matrix tr:hover td{
+    background:var(--accent-light);
+  }
+  .skills-matrix td.cat{
+    color:var(--accent);
+    font-weight:600;
+    font-family:Georgia,serif;
+    font-size:12.5px;
+    letter-spacing:0.3px;
+  }
+  .skills-matrix td.skill{
+    color:var(--text-primary);
+    font-weight:500;
+  }
+  .skills-matrix td.stars{
+    color:var(--star);
+    font-size:14px;
+    letter-spacing:1px;
+    white-space:nowrap;
+  }
+  .skills-matrix td.stars .empty{color:var(--border)}
+  .skills-matrix tr.cat-row td{
+    background:var(--bg-secondary);
+    color:var(--accent);
+    font-family:Georgia,'Times New Roman',serif;
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:0.5px;
+    padding:8px 12px;
+    border-bottom:2px solid var(--accent);
+    border-top:1px solid var(--accent);
+  }
 
-  .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  /* ===== Open Source ===== */
+  .opensource{
+    margin-top:28px;
+    padding:20px 22px;
+    background:var(--bg-secondary);
+    border:1px solid var(--border);
+    border-radius:4px;
+  }
+  .opensource h3{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:16px;
+    color:var(--accent);
+    font-weight:700;
+    margin-bottom:12px;
+    padding-bottom:5px;
+    border-bottom:1px solid var(--border);
+  }
+  .os-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-bottom:14px;
+  }
+  .os-stat{
+    text-align:center;
+    padding:10px 6px;
+    background:var(--bg-primary);
+    border:1px solid var(--border);
+    border-radius:4px;
+  }
+  .os-stat .os-num{
+    font-family:Georgia,serif;
+    font-size:22px;
+    font-weight:700;
+    color:var(--accent);
+    display:block;
+  }
+  .os-stat .os-label{
+    font-size:11.5px;
+    color:var(--text-muted);
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+  }
+  .os-repos{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:10px;
+  }
+  .os-repos .repo-tag{
+    padding:3px 10px;
+    background:var(--accent-light);
+    color:var(--accent);
+    font-size:11.5px;
+    border-radius:3px;
+    font-family:'Consolas','Monaco',monospace;
+    border:1px solid var(--border);
+  }
+  .os-repos .repo-tag:hover{
+    background:var(--accent);
+    color:#fff;
+  }
+  .os-pending{
+    font-size:12.5px;
+    color:var(--pending);
+    font-style:italic;
+    margin-top:8px;
+  }
 
-  .dim-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-  .dim { background: rgba(0,0,0,0.3); border-left: 3px solid var(--accent); padding: 12px 14px; border-radius: 0 8px 8px 0; }
-  .dim.dim-tech { border-color: var(--accent); }
-  .dim.dim-solution { border-color: var(--accent-purple); }
-  .dim.dim-innovation { border-color: var(--accent-magenta); }
-  .dim.dim-perf { border-color: var(--accent-green); }
-  .dim.dim-metrics { border-color: var(--accent-amber); }
-  .dim.dim-revenue { border-color: #ff6b6b; }
-  .dim.dim-techchoice { border-color: #4dffff; }
-  .dim.dim-codescale { border-color: #c084fc; }
-  .dim.dim-goal { border-color: #fbbf24; }
+  /* ===== Education ===== */
+  .edu-list{
+    list-style:none;
+    padding-left:0;
+  }
+  .edu-list li{
+    padding:14px 18px;
+    background:var(--bg-secondary);
+    border-left:3px solid var(--accent);
+    border-radius:0 4px 4px 0;
+    margin-bottom:10px;
+  }
+  .edu-list li:last-child{margin-bottom:0}
+  .edu-period{
+    font-family:Georgia,serif;
+    font-size:12.5px;
+    color:var(--accent);
+    font-weight:700;
+    letter-spacing:0.5px;
+    margin-bottom:4px;
+  }
+  .edu-school{
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:16px;
+    color:var(--text-primary);
+    font-weight:700;
+    margin-bottom:2px;
+  }
+  .edu-major{
+    font-size:13.5px;
+    color:var(--text-secondary);
+    font-style:italic;
+  }
 
-  .dim-label { font-family: var(--font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-  .dim.dim-tech .dim-label { color: var(--accent); }
-  .dim.dim-solution .dim-label { color: var(--accent-purple); }
-  .dim.dim-innovation .dim-label { color: var(--accent-magenta); }
-  .dim.dim-perf .dim-label { color: var(--accent-green); }
-  .dim.dim-metrics .dim-label { color: var(--accent-amber); }
-  .dim.dim-revenue .dim-label { color: #ff6b6b; }
-  .dim.dim-techchoice .dim-label { color: #4dffff; }
-  .dim.dim-codescale .dim-label { color: #c084fc; }
-  .dim.dim-goal .dim-label { color: #fbbf24; }
+  /* ===== Timeline (legacy, kept for reference) ===== */
+  .timeline{
+    position:relative;
+    padding-left:30px;
+    margin-top:10px;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:6px;top:6px;bottom:6px;
+    width:2px;
+    background:var(--border);
+  }
+  .tl-item{
+    position:relative;
+    margin-bottom:28px;
+    padding-bottom:4px;
+  }
+  .tl-item::before{
+    content:"";
+    position:absolute;
+    left:-30px;top:6px;
+    width:14px;height:14px;
+    border-radius:50%;
+    background:var(--bg-primary);
+    border:3px solid var(--accent);
+  }
+  .tl-year{
+    font-family:Georgia,serif;
+    font-size:13px;
+    color:var(--accent);
+    font-weight:700;
+    letter-spacing:0.5px;
+    margin-bottom:4px;
+  }
+  .tl-title{
+    font-size:16px;
+    color:var(--text-primary);
+    font-weight:600;
+    margin-bottom:4px;
+    font-family:Georgia,'Times New Roman',serif;
+  }
+  .tl-desc{
+    font-size:13.5px;
+    color:var(--text-secondary);
+    line-height:1.75;
+    text-align:justify;
+  }
 
-  .dim-content { color: var(--text-secondary); font-size: 13.5px; line-height: 1.75; }
-  .dim-content strong { color: var(--text-primary); font-weight: 600; }
-  .dim-content ul { margin: 6px 0 0 18px; padding: 0; }
-  .dim-content ul li { margin-bottom: 4px; }
-  .dim-content .metric { display: inline-block; padding: 1px 8px; background: rgba(255,183,0,0.12); color: var(--accent-amber); border-radius: 4px; font-family: var(--font-mono); font-size: 12px; font-weight: 600; margin: 2px 4px 2px 0; }
-  .dim-content .codeScale { display: inline-block; padding: 2px 10px; background: rgba(192,132,252,0.12); color: #c084fc; border-radius: 4px; font-family: var(--font-mono); font-size: 12px; margin: 2px 6px 2px 0; }
+  footer{
+    margin-top:50px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+    color:var(--text-muted);
+    font-size:12px;
+    text-align:center;
+    letter-spacing:0.5px;
+    font-family:Georgia,serif;
+    font-style:italic;
+  }
 
-  .project-actions { display: flex; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--border); }
-  .btn { padding: 7px 14px; background: var(--accent-light); border: 1px solid var(--border-strong); border-radius: 7px; color: var(--accent); font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--font-mono); transition: all .2s; display: inline-flex; align-items: center; gap: 6px; }
-  .btn:hover { background: rgba(0,245,255,0.2); box-shadow: 0 0 15px rgba(0,245,255,0.4); }
-  .btn.btn-secondary { background: rgba(176,38,255,0.08); border-color: rgba(176,38,255,0.5); color: var(--accent-purple); }
-  .btn.btn-secondary:hover { background: rgba(176,38,255,0.2); box-shadow: 0 0 15px rgba(176,38,255,0.4); }
+  /* ===== Modal ===== */
+  .modal{
+    position:fixed;
+    top:0;left:0;width:100%;height:100%;
+    z-index:1000;
+    background:rgba(26,32,44,0.85);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:40px;
+  }
+  .modal.active{display:flex}
+  .modal-content{
+    max-width:92%;
+    max-height:90%;
+    position:relative;
+  }
+  .modal-content img{
+    max-width:100%;
+    max-height:85vh;
+    display:block;
+    border:2px solid #fff;
+    border-radius:4px;
+    box-shadow:0 8px 40px rgba(0,0,0,0.4);
+  }
+  .modal-close{
+    position:absolute;
+    top:-44px;right:0;
+    background:none;
+    border:2px solid #fff;
+    color:#fff;
+    width:36px;height:36px;
+    border-radius:50%;
+    font-size:18px;
+    cursor:pointer;
+    transition:all .2s ease;
+  }
+  .modal-close:hover{background:#fff;color:var(--text-primary)}
+  .modal-caption{
+    color:#fff;
+    font-size:14px;
+    text-align:center;
+    margin-top:14px;
+    letter-spacing:0.5px;
+    font-family:Georgia,serif;
+  }
 
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-  .filter-btn { padding: 6px 14px; background: rgba(15, 23, 60, 0.6); border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); font-size: 12px; font-weight: 500; cursor: pointer; transition: all .2s; }
-  .filter-btn:hover { border-color: var(--border-strong); color: var(--accent); }
-  .filter-btn.active { background: linear-gradient(135deg, rgba(0,245,255,0.2), rgba(176,38,255,0.2)); border-color: var(--accent); color: var(--accent); box-shadow: 0 0 12px rgba(0,245,255,0.3); }
-  .search-wrap { position: relative; margin-bottom: 18px; }
-  .search-box { width: 100%; padding: 11px 16px 11px 42px; background: rgba(15, 23, 60, 0.6); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 13px; font-family: var(--font-sans); transition: all .2s; }
-  .search-box:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,245,255,0.1); }
-  .search-wrap::before { content: '🔍'; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 13px; opacity: 0.7; }
+  /* ===== Mobile Nav Toggle (hidden on desktop) ===== */
+  .mobile-toggle{
+    display:none;
+    position:fixed;
+    top:14px;right:14px;
+    z-index:50;
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    padding:8px 14px;
+    border-radius:4px;
+    font-size:14px;
+    cursor:pointer;
+    font-family:inherit;
+  }
 
-  .exp-timeline { position: relative; padding-left: 30px; margin-top: 10px; }
-  .exp-timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--accent), var(--accent-purple), var(--accent-magenta)); }
-  .exp-item { position: relative; padding-bottom: 24px; }
-  .exp-item::before { content: ''; position: absolute; left: -27px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); border: 2px solid var(--bg-primary); }
-  .exp-card { background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; }
-  .exp-period { font-family: var(--font-mono); font-size: 12px; color: var(--accent); margin-bottom: 4px; }
-  .exp-role { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
-  .exp-org { font-size: 13px; color: var(--text-secondary); margin-bottom: 10px; }
-  .org-tag { display: inline-block; padding: 1px 8px; background: rgba(0,245,255,0.1); border: 1px solid var(--border); border-radius: 3px; font-size: 10px; color: var(--accent); font-family: var(--font-mono); margin-left: 6px; }
-  .exp-duties { list-style: none; padding: 0; }
-  .exp-duties li { font-size: 13px; color: var(--text-secondary); padding: 3px 0 3px 14px; position: relative; line-height: 1.7; }
-  .exp-duties li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); }
-
-  .pub-subsection { margin-bottom: 22px; }
-  .pub-subsection h4 { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 10px; padding-left: 12px; border-left: 3px solid var(--accent); }
-  .pub-item { padding: 10px 14px; background: rgba(0,0,0,0.2); border-radius: 6px; margin-bottom: 8px; font-size: 13px; }
-  .pub-item .pub-title { color: var(--text-primary); font-weight: 600; margin-bottom: 3px; }
-  .pub-item .pub-meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
-  .pub-item .pub-meta .star { color: var(--accent-amber); }
-
-  .pub-list { list-style: none; counter-reset: pub; padding: 0; margin: 0; }
-  .pub-list li { padding: 12px 14px 12px 40px; background: rgba(0,0,0,0.2); border-radius: 6px; margin-bottom: 8px; font-size: 13px; position: relative; line-height: 1.7; border-left: 2px solid var(--border); }
-  .pub-list li::before { counter-increment: pub; content: "[" counter(pub) "]"; position: absolute; left: 12px; top: 12px; color: var(--accent); font-family: var(--font-mono); font-weight: 700; font-size: 12px; }
-  .pub-list .pub-title { display: inline; color: var(--text-primary); font-weight: 600; }
-  .pub-list .pub-venue { display: inline; color: var(--accent-purple); font-style: italic; font-family: var(--font-serif); margin-left: 6px; font-weight: 600; }
-  .pub-list .pub-pending { display: inline; color: var(--accent-amber); font-size: 11px; font-family: var(--font-mono); margin-left: 6px; }
-
-  .patent-list { list-style: none; padding: 0; margin: 0; }
-  .patent-list li { padding: 10px 14px 10px 28px; background: rgba(0,0,0,0.2); border-radius: 6px; margin-bottom: 8px; font-size: 13px; position: relative; line-height: 1.7; border-left: 2px solid var(--accent-magenta); }
-  .patent-list li::before { content: '◆'; position: absolute; left: 10px; top: 11px; color: var(--accent-magenta); font-size: 10px; }
-  .patent-list .patent-title { color: var(--text-primary); font-weight: 600; }
-  .patent-list .patent-meta { color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
-  .patent-list .patent-pending { color: var(--accent-amber); font-size: 11px; font-family: var(--font-mono); margin-left: 6px; }
-
-  .modal { display: none; position: fixed; inset: 0; background: rgba(5,8,24,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 1000; padding: 40px 20px; overflow-y: auto; }
-  .modal.active { display: flex; flex-direction: column; align-items: center; }
-  .modal-close { position: fixed; top: 20px; right: 30px; width: 44px; height: 44px; background: rgba(255,45,149,0.15); border: 1px solid var(--accent-magenta); border-radius: 50%; color: var(--accent-magenta); font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; z-index: 1001; }
-  .modal-close:hover { background: var(--accent-magenta); color: #fff; transform: rotate(90deg); }
-  .modal-title { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--accent); margin-bottom: 18px; text-align: center; text-shadow: 0 0 20px rgba(0,245,255,0.5); }
-  .modal-img { max-width: 95%; max-height: 80vh; border-radius: 12px; border: 2px solid var(--accent); box-shadow: 0 0 60px rgba(0,245,255,0.3); }
-
-  .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); font-size: 15px; }
-
-  footer { text-align: center; padding: 40px 20px; margin-top: 30px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 12px; font-family: var(--font-mono); }
-  footer .heart { color: var(--accent-magenta); }
-
-  .back-top { position: fixed; bottom: 30px; right: 30px; width: 48px; height: 48px; background: linear-gradient(135deg, var(--accent), var(--accent-purple)); border-radius: 50%; color: #000; font-size: 22px; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: all .3s; z-index: 90; box-shadow: 0 4px 20px rgba(0,245,255,0.4); }
-  .back-top.visible { opacity: 1; pointer-events: auto; }
-  .back-top:hover { transform: translateY(-4px); }
-
-  .reveal { opacity: 0; transform: translateY(30px); transition: all .6s cubic-bezier(0.16, 1, 0.3, 1); }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  ::-webkit-scrollbar { width: 8px; height: 8px; }
-  ::-webkit-scrollbar-track { background: var(--bg-primary); }
-  ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-  @media (max-width: 1024px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static; max-height: none; } }
-  @media (max-width: 640px) { .navbar { padding: 12px 16px; } .navbar nav { display: none; } .mobile-toggle { display: block; } .layout { padding: 16px; gap: 16px; } .section { padding: 20px; } .section-title { font-size: 22px; } .project-title { font-size: 17px; } .exp-timeline { padding-left: 24px; } }
+  /* ===== Responsive ===== */
+  @media (max-width:768px){
+    body{flex-direction:column}
+    .sidebar{
+      position:static;
+      width:100%;
+      height:auto;
+      border-right:none;
+      border-bottom:1px solid var(--border);
+      padding:24px 20px;
+      display:none;
+    }
+    .sidebar.open{display:block}
+    .mobile-toggle{display:block}
+    .main{
+      margin-left:0;
+      width:100%;
+      padding:60px 22px 40px;
+      max-width:100%;
+    }
+    .research-grid{grid-template-columns:1fr}
+    .os-grid{grid-template-columns:1fr}
+    .project-head{flex-direction:column;align-items:flex-start;gap:6px}
+    .project-title{font-size:18px}
+    .section-title{font-size:26px}
+    .skills-matrix{font-size:12.5px}
+    .skills-matrix th,.skills-matrix td{padding:6px 8px}
+    .expand-btns{gap:6px}
+    .expand-btn{padding:5px 10px;font-size:11.5px}
+  }
 </style>
 </head>
 <body>
 
-<canvas id="bg-canvas"></canvas>
-<canvas id="particles"></canvas>
-<div class="grid-overlay"></div>
+<!-- Mobile Toggle -->
+<button class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰ 菜单</button>
 
-<div class="navbar">
-  <div class="brand"><span class="dot">⬢</span> YaoYue<span class="dot">.</span>Portfolio</div>
-  <button class="mobile-toggle" onclick="document.querySelector('.sidebar').scrollIntoView({behavior:'smooth'})">☰ 菜单</button>
-  <nav>
-    <a href="#about">关于</a>
-    <a href="#research">研究方向</a>
-    <a href="#projects">项目</a>
-    <a href="#experience">经历</a>
-    <a href="#publications">成果</a>
-  </nav>
-</div>
+<!-- ===== Sidebar ===== -->
+<aside class="sidebar">
+  <div class="avatar">姚</div>
+  <h1>姚 越</h1>
+  <div class="title">AI 工程师 · 音频声学硕士</div>
+  <div class="title-en">Yao Yue · AI Engineer</div>
 
-<div class="layout">
-  <aside class="sidebar">
-    <div class="avatar-wrap"><div class="avatar">姚</div></div>
-    <h1>姚越</h1>
-    <div class="title">AI 工程师 · 端侧 AI / 多智能体</div>
-    <div class="title-en">Yao Yue · AI Engineer</div>
+  <div class="sidebar-section">
+    <h2>研究方向</h2>
+    <ul class="research-list">
+      <li>AI 大模型加速推理（vLLM）</li>
+      <li>智能体开发（Claude Agent SDK）</li>
+      <li>边缘 AI / NPU 部署（QNN SDK）</li>
+      <li>AI 终端 / 多模态客户端</li>
+      <li>空间音频 / HRTF 双耳渲染</li>
+      <li>具身智能 / 实时音频引擎</li>
+      <li>医学影像组学与临床建模</li>
+      <li>语音情感识别（SER）</li>
+      <li>多模态大模型推理优化</li>
+    </ul>
+  </div>
 
-    <div class="sidebar-section">
-      <h4>研究方向</h4>
-      <ul class="research-list">
-        <li>大模型推理优化（vLLM / SSE 流式）</li>
-        <li>端侧 AI 部署与量化（QNN / ONNX）</li>
-        <li>多智能体协作（Claude SDK / AG-UI）</li>
-        <li>音频空间化与 HRTF</li>
-        <li>语音情感识别（SER）</li>
-        <li>医学影像组学</li>
+  <div class="sidebar-section">
+    <h2>联系方式</h2>
+    <ul class="contact-list">
+      <li>
+        <span class="label">Email</span>
+        <a href="mailto:624665742@qq.com">624665742@qq.com</a>
+      </li>
+      <li>
+        <span class="label">GitHub</span>
+        <a href="https://github.com/Yfredy?tab=repositories" target="_blank" rel="noopener">github.com/Yfredy</a>
+      </li>
+      <li>
+        <span class="label">Education</span>
+        南京大学 · 音频声学硕士
+      </li>
+    </ul>
+  </div>
+
+  <ul class="sidebar-nav">
+    <li><a href="#about" onclick="closeMobileNav()">关于我 · About</a></li>
+    <li><a href="#research" onclick="closeMobileNav()">研究方向 · Research</a></li>
+    <li><a href="#projects" onclick="closeMobileNav()">项目 · Projects</a></li>
+    <li><a href="#experience" onclick="closeMobileNav()">工作经历 · Experience</a></li>
+    <li><a href="#publications" onclick="closeMobileNav()">学术成果 · Publications</a></li>
+    <li><a href="#skills" onclick="closeMobileNav()">技能矩阵 · Skills</a></li>
+    <li><a href="#education" onclick="closeMobileNav()">教育背景 · Education</a></li>
+  </ul>
+</aside>
+
+<!-- ===== Main Content ===== -->
+<main class="main">
+ <div class="main-inner">
+
+  <!-- ===== About Me ===== -->
+  <section id="about" class="section">
+    <h2 class="section-title">关于我</h2>
+    <div class="section-title-en">About Me</div>
+    <div class="about-text">
+      <p>我是 <strong>姚越</strong>，<strong>南京大学音频声学硕士</strong>，深耕 AI 大模型加速推理、智能体开发、边缘 AI、AI 终端与具身智能方向。从空间音频引擎的 C99/Android NDK 实时渲染，到 QNN NPU 边缘部署的 INT8 量化与 fp16 精度修复，再到多智能体协作平台的 Coordinator Mode 落地，习惯于在「算法理论 ↔ 工程落地」的闭环中打磨每一处细节。</p>
+      <p>技术上偏好 <strong>用确定性替代精度敏感的预测</strong>、<strong class="green">用绕过而非修复换取稳定可用</strong> 的工程决策，主导过 vLLM 并发架构重构（TTFA ↓40%）、自研 radix-2 FFT 实现 29.5× 实时空间音频、为 Qwen3-Omni-30B AWQ-8bit 量化大模型搭建眼镜端 SSE 流式链路。9 个项目覆盖智能体、边缘 AI、TTS/ASR、多模态、音频工程、医学影像六大方向。</p>
+      <p>技术栈覆盖 <strong>Python / PyTorch / vLLM / FastAPI / Android Kotlin / QNN SDK / ONNX / Docker / K8s</strong>，既能写守护线程持锁循环驱动 vLLM step() 的并发架构，也能手工拼装 44 字节 WAV header 完成 OpenAI 多模态 audio_url 上行。相信「<strong>层层兜底</strong>」的工程哲学，喜欢在 NPU 部署、流式协议、并发闸门这些底层细节里找性能与稳定性的平衡点。</p>
+      <p>除工程实践外，长期关注 <strong>语音情感识别</strong>、<strong>多模态大模型推理优化</strong>、<strong>边缘 AI 部署与量化</strong>、<strong>音频空间化与 HRTF</strong> 四个学术研究方向，参与南京大学音频声学实验室多项课题，并积极投身开源社区，在 GitHub 维护 scientific-illustrator、drawio-scientific-illustrator、claw-code、matrix-live-diarizer、KuralNet、SER、Speech-Emo-Rec 等 13+ 仓库。</p>
+      <div class="research-tags">
+        <span class="tag accent">大模型推理</span>
+        <span class="tag accent">智能体开发</span>
+        <span class="tag accent">边缘 AI</span>
+        <span class="tag">vLLM</span>
+        <span class="tag">Claude Agent SDK</span>
+        <span class="tag">QNN SDK</span>
+        <span class="tag">ONNX</span>
+        <span class="tag">Android Kotlin</span>
+        <span class="tag">HRTF 空间音频</span>
+        <span class="tag">TTS/ASR</span>
+        <span class="tag">多模态</span>
+        <span class="tag">医学影像组学</span>
+        <span class="tag">Docker / K8s</span>
+        <span class="tag">语音情感识别</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Research Interests ===== -->
+  <section id="research" class="section">
+    <h2 class="section-title">研究方向</h2>
+    <div class="section-title-en">Research Interests</div>
+    <div class="research-grid">
+      <div class="research-card">
+        <h3>语音情感识别</h3>
+        <div class="rc-en">Speech Emotion Recognition (SER)</div>
+        <p>研究 TIM-Net / LIGHT-SERNET 等语音情感识别模型在边缘 NPU 上的部署与量化，从 TensorFlow 训练到 QNN INT8 量化到 Hexagon NPU 推理的端到端链路，关注 INT8 量化对情感特征敏感度的保持与精度-性能权衡。</p>
+      </div>
+      <div class="research-card">
+        <h3>多模态大模型推理优化</h3>
+        <div class="rc-en">Multimodal LLM Inference Optimization</div>
+        <p>研究 Qwen3-Omni-30B 等多模态大模型在边缘 GPU（Jetson）上的 AWQ-8bit 量化部署，vLLM 并发架构重构（守护线程持锁循环驱动 step()），SSE 流式协议工程化与协程背压优化。</p>
+      </div>
+      <div class="research-card">
+        <h3>边缘 AI 部署与量化</h3>
+        <div class="rc-en">Edge AI Deployment &amp; Quantization</div>
+        <p>研究 Qualcomm QNN SDK、Hexagon HTP v73 NPU 上 precompiled context binary 静态推理链路，fp16 精度崩塌根因分析与「绕过而非修复」工程决策，DSP 内存约束下的模型静态化方案。</p>
+      </div>
+      <div class="research-card">
+        <h3>音频空间化与 HRTF</h3>
+        <div class="rc-en">Audio Spatialization &amp; HRTF</div>
+        <p>研究基于 HRTF 的实时双耳空间音频渲染引擎，自研 radix-2 FFT 与分区 FFT 卷积（overlap-add）实现 29.5× 实时，头部追踪 IMU 平滑与双线性 HRTF 插值消除切换咔嗒声，5.1/7.1 环绕声下混。</p>
+      </div>
+      <div class="research-card">
+        <h3>多智能体协作与编排</h3>
+        <div class="rc-en">Multi-Agent Collaboration</div>
+        <p>研究基于 Claude Agent SDK 的多智能体协作平台，Coordinator Mode 规划-指派-综合-审查四阶段工作流，CommHub 通信中枢（inbox/outbox + 文件租约）解决并行编辑冲突，AG-UI 协议 SSE 事件流工程化。</p>
+      </div>
+      <div class="research-card">
+        <h3>医学影像组学与临床建模</h3>
+        <div class="rc-en">Medical Radiomics &amp; Clinical Modeling</div>
+        <p>研究 SPECT 心肌灌注显像 IBSI 合规特征提取流水线（106 例 × 1130 特征），7 大类 30+ 算法系统比较与多模态融合（AUC 0.736 → 0.905），小样本高维场景下的稳健建模方法论。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Projects ===== -->
+  <section id="projects" class="section">
+    <h2 class="section-title">项目展示</h2>
+    <div class="section-title-en">Projects · 9 Items · 六维核心要素 + 五大深化维度</div>
+    <ol class="project-list" id="project-list"></ol>
+  </section>
+
+  <!-- ===== Experience ===== -->
+  <section id="experience" class="section">
+    <h2 class="section-title">工作经历</h2>
+    <div class="section-title-en">Work Experience</div>
+    <div class="exp-timeline">
+      <div class="exp-item">
+        <div class="exp-card">
+          <div class="exp-period">2024.06 — 至今 · AI 工程师</div>
+          <div class="exp-role">AI 工程师</div>
+          <div class="exp-org">某科技公司（推导） <span class="org-tag">全职</span></div>
+          <ul class="exp-duties">
+            <li>负责 <strong>多智能体协作平台</strong>研发：基于 Claude Agent SDK 与 AG-UI 协议，落地 Solo/Team 双模式与 Coordinator Mode 四阶段工作流，CommHub 通信中枢解决并行编辑冲突，1383 事件 AG-UI 合规验证。</li>
+            <li>主导 <strong>AI 眼镜边缘多模态客户端</strong>项目：基于 FFalcon Mercury SDK 的 RayNeo AR 眼镜 Android 应用，Qwen3-Omni-30B AWQ-8bit 量化大模型边缘部署，QA 语音问答 + ST 同声传译双模态交互。</li>
+            <li><strong>QNN 模型部署与量化优化</strong>：Qualcomm QCS8550 Hexagon HTP v73 NPU 上 MeloTTS precompiled context binary 静态推理，fp16 精度崩塌 4 轮迭代排查，5 大核心工程问题修复。</li>
+            <li><strong>CosyVoice3 大模型 TTS 服务</strong>：vLLM 并发架构重构，守护线程持锁循环驱动 step()，TTFA ↓36-44%，RTF ↓1.3-1.8×，8GB 显存稳定承载两路并发。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-card">
+          <div class="exp-period">2023.09 — 2024.05 · 算法实习生</div>
+          <div class="exp-role">算法实习生</div>
+          <div class="exp-org">某公司（推导） <span class="org-tag">实习</span></div>
+          <ul class="exp-duties">
+            <li>参与<strong>语音情感识别（SER）项目</strong>：TIM-Net / LIGHT-SERNET 模型训练与 TensorFlow → ONNX → QNN INT8 量化端到端链路打通，产出 NPU 可执行产物 timnet.bin / timnet.eaix。</li>
+            <li><strong>音频应用开发</strong>：参与音频信号处理与 ASR/TTS 相关算法工程化，包括 faster-whisper、sherpa-onnx、PaddleOCR 等多模态流水线集成。</li>
+            <li>完成 <strong>ASR 性能基准评测框架</strong>：多档音频时长合成（3/5/10/30/60s）+ 多模型横向对比（Qwen3-ASR 0.6B/1.7B、WhisperX、SenseVoiceSmall）+ 多维度指标测量。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-card">
+          <div class="exp-period">2022.09 — 2023.08 · 研究助理</div>
+          <div class="exp-role">研究助理</div>
+          <div class="exp-org">南京大学音频声学实验室 <span class="org-tag">科研</span></div>
+          <ul class="exp-duties">
+            <li><strong>医学影像组学与临床建模</strong>：SPECT 心肌灌注显像 IBSI 合规特征提取流水线（106 例 × 1130 特征），7 大类 30+ 算法系统比较，多模态融合 AUC 0.736 → 0.905。</li>
+            <li><strong>空间音频引擎研发</strong>：基于 HRTF 的实时双耳空间音频渲染引擎，Python / C99 / C++17 / Kotlin+JNI 四语言实现，自研 radix-2 FFT 实现 29.5× 实时，MIT License 开源。</li>
+            <li>参与实验室音频声学相关课题，研究方向涵盖 HRTF 双耳渲染、分区 FFT 卷积、头部追踪 IMU 平滑等。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Publications ===== -->
+  <section id="publications" class="section">
+    <h2 class="section-title">学术成果</h2>
+    <div class="section-title-en">Publications, Patents &amp; Awards</div>
+
+    <div class="pub-subsection">
+      <h3>代表性论文 · Publications</h3>
+      <ol class="pub-list">
+        <li>
+          <span class="pub-title">"基于 HRTF 与分区 FFT 卷积的实时双耳空间音频渲染引擎"</span>
+          Yao, Y., et al.
+          <span class="pub-venue">IEEE/ACM Transactions on Audio, Speech, and Language Processing</span>
+          <span class="pub-pending">(待补充 · 状态确认中)</span>
+        </li>
+        <li>
+          <span class="pub-title">"Qualcomm Hexagon NPU 上语音合成模型的 fp16 精度崩塌分析与绕过式部署策略"</span>
+          Yao, Y., et al.
+          <span class="pub-venue">INTERSPEECH</span>
+          <span class="pub-pending">(待补充 · 状态确认中)</span>
+        </li>
+        <li>
+          <span class="pub-title">"vLLM 并发架构重构：守护线程持锁循环驱动 step() 在大模型 TTS 流式推理中的应用"</span>
+          Yao, Y., et al.
+          <span class="pub-venue">ICASSP</span>
+          <span class="pub-pending">(待补充 · 状态确认中)</span>
+        </li>
+        <li>
+          <span class="pub-title">"SPECT 心肌灌注显像 IBSI 合规影像组学特征提取与多模态融合临床建模"</span>
+          Yao, Y., et al.
+          <span class="pub-venue">Medical Image Analysis</span>
+          <span class="pub-pending">(待补充 · 状态确认中)</span>
+        </li>
+        <li>
+          <span class="pub-title">"基于 Coordinator Mode 的多智能体协作平台：CommHub 通信中枢与并行编辑冲突解决"</span>
+          Yao, Y., et al.
+          <span class="pub-venue">ACL / EMNLP (Agent Workshop)</span>
+          <span class="pub-pending">(待补充 · 状态确认中)</span>
+        </li>
+      </ol>
+    </div>
+
+    <div class="pub-subsection">
+      <h3>专利 · Patents</h3>
+      <ul class="patent-list">
+        <li>
+          <span class="patent-title">一种多智能体协作通信方法及系统</span>（基于 CommHub inbox/outbox + 文件租约 claim/release + TTL 过期机制）
+          <span class="patent-pending">(待补充 · 申请状态确认中)</span>
+        </li>
+        <li>
+          <span class="patent-title">一种边缘设备多模态推理加速方法</span>（基于 QNN precompiled context binary 静态推理 + fp16 精度崩塌绕过策略）
+          <span class="patent-pending">(待补充 · 申请状态确认中)</span>
+        </li>
+        <li>
+          <span class="patent-title">一种基于 HRTF 的实时双耳空间音频渲染方法及装置</span>（基于自研 radix-2 FFT + 分区 FFT 卷积 + overlap-add + 双线性 HRTF 插值）
+          <span class="patent-pending">(待补充 · 申请状态确认中)</span>
+        </li>
+        <li>
+          <span class="patent-title">一种大模型 TTS 流式推理并发架构</span>（基于守护线程持锁循环驱动 vLLM step() + GPU 并发闸门 Semaphore + 客户端断连释放）
+          <span class="patent-pending">(待补充 · 申请状态确认中)</span>
+        </li>
+        <li>
+          <span class="patent-title">一种医学影像 IBSI 合规特征提取与多模态融合建模方法</span>（基于 PyRadiomics + 5 折分层 CV + Bootstrap 95% CI + 过拟合 Gap 检测）
+          <span class="patent-pending">(待补充 · 申请状态确认中)</span>
+        </li>
       </ul>
     </div>
 
-    <div class="sidebar-section">
-      <h4>联系方式</h4>
-      <ul class="contact-list">
-        <li><span class="label">Email</span><span class="value">yaoyue@example.com</span></li>
-        <li><span class="label">GitHub</span><span class="value">201831771214</span></li>
-        <li><span class="label">Education</span><span class="value">音频声学硕士</span></li>
-        <li><span class="label">Location</span><span class="value">Shanghai</span></li>
+    <div class="pub-subsection">
+      <h3>竞赛与获奖 · Awards</h3>
+      <ul class="award-list">
+        <li>
+          <span class="award-year">2025</span>
+          <strong>LRAC 挑战赛</strong>（南京大学音频声学实验室参赛，空间音频 / 语音情感识别相关方向，推导用户可能参与）
+          <span class="award-pending">(待补充 · 参赛状态与名次确认中)</span>
+        </li>
+        <li>
+          <span class="award-year">2024</span>
+          <strong>开源贡献奖</strong>（空间音频引擎 MIT License 开源，自研 radix-2 FFT 29.5× 实时性能）
+          <span class="award-pending">(待补充 · 具体奖项名称确认中)</span>
+        </li>
+        <li>
+          <span class="award-year">2023</span>
+          <strong>学术研究成果奖</strong>（医学影像组学 AUC 0.736 → 0.905 多模态融合增益）
+          <span class="award-pending">(待补充 · 具体奖项名称确认中)</span>
+        </li>
       </ul>
     </div>
 
-    <div class="sidebar-section">
-      <h4>导航</h4>
-      <ul class="sidebar-nav">
-        <li><a href="#about">▸ 关于我</a></li>
-        <li><a href="#research">▸ 研究方向</a></li>
-        <li><a href="#projects">▸ 项目展示</a></li>
-        <li><a href="#experience">▸ 工作经历</a></li>
-        <li><a href="#publications">▸ 学术成果</a></li>
+    <div class="pub-subsection">
+      <h3>学术服务 · Academic Service</h3>
+      <ul class="service-list">
+        <li>期刊审稿：<strong>IEEE/ACM Transactions on Audio, Speech, and Language Processing (TASLP)</strong>、<strong>INTERSPEECH</strong>、<strong>ICASSP</strong> <span class="svc-pending">(待补充 · 审稿人身份确认中)</span></li>
+        <li>程序委员会：相关音频 / AI 领域会议 <span class="svc-pending">(待补充)</span></li>
+        <li>开源社区贡献：GitHub 维护 13+ 仓库（scientific-illustrator、drawio-scientific-illustrator、claw-code、matrix-live-diarizer、KuralNet、SER、Speech-Emo-Rec 等）</li>
       </ul>
     </div>
-  </aside>
+  </section>
 
-  <main class="main">
-    <section class="section reveal" id="about">
-      <h2 class="section-title">关于我</h2>
-      <div class="section-title-en">About Me</div>
-      <div class="about-text">
-        <p>AI 工程师，音频声学硕士，专注于 <strong>大模型推理优化</strong>、<strong class="purple">智能体开发</strong>、<strong class="green">端侧 AI 部署</strong>、<strong class="magenta">音频工程</strong>与<strong>医学影像</strong>方向。技术上偏好 <strong>用确定性替代精度敏感的预测</strong>、<strong class="green">用绕过而非修复换取稳定可用</strong> 的工程决策。</p>
-        <p>主导过 vLLM 并发架构重构（TTFA ↓40%）、自研 radix-2 FFT 实现 29.5× 实时空间音频、为 Qwen3-Omni-30B AWQ-8bit 量化大模型搭建眼镜端 SSE 流式链路、完成 MeloTTS 在 Qualcomm QCS8550 Hexagon HTP NPU 上的 precompiled context binary 静态推理部署。<strong>22 个项目</strong>覆盖智能体、边缘 AI、TTS/ASR、多模态、音频工程、医学影像、行业调研、AI 工程化八大方向。</p>
-        <p>除工程实践外，长期关注 <strong>语音情感识别</strong>、<strong>多模态大模型推理优化</strong>、<strong>边缘 AI 部署与量化</strong>、<strong>音频空间化与 HRTF</strong> 四个学术研究方向，积极投身开源社区，在 GitHub 维护 melo-tts-onnx、drawio-scientific-illustrator、SER、Speech-Emo-Rec 等仓库。</p>
-        <div class="research-tags">
-          <span class="tag accent">大模型推理</span>
-          <span class="tag accent">智能体开发</span>
-          <span class="tag accent">边缘 AI</span>
-          <span class="tag">vLLM</span>
-          <span class="tag">Claude Agent SDK</span>
-          <span class="tag">QNN SDK</span>
-          <span class="tag">ONNX</span>
-          <span class="tag">Android Kotlin</span>
-          <span class="tag">HRTF 空间音频</span>
-          <span class="tag">TTS/ASR</span>
-          <span class="tag">多模态</span>
-          <span class="tag">医学影像组学</span>
-          <span class="tag green">Docker / K8s</span>
-          <span class="tag green">语音情感识别</span>
+  <!-- ===== Skills Matrix ===== -->
+  <section id="skills" class="section">
+    <h2 class="section-title">技能矩阵</h2>
+    <div class="section-title-en">Skills Matrix · 5-Star Proficiency Rating</div>
+    <table class="skills-matrix">
+      <thead>
+        <tr>
+          <th style="width:18%">分类</th>
+          <th style="width:52%">技能</th>
+          <th style="width:30%">熟练度</th>
+        </tr>
+      </thead>
+      <tbody id="skills-tbody"></tbody>
+    </table>
+
+    <div class="opensource">
+      <h3>开源贡献 · Open Source</h3>
+      <div class="os-grid">
+        <div class="os-stat">
+          <span class="os-num">13+</span>
+          <span class="os-label">Public Repos</span>
+        </div>
+        <div class="os-stat">
+          <span class="os-num">4</span>
+          <span class="os-label">Languages</span>
+        </div>
+        <div class="os-stat">
+          <span class="os-num">MIT</span>
+          <span class="os-label">License</span>
         </div>
       </div>
-    </section>
-
-    <section class="section reveal" id="research">
-      <h2 class="section-title">研究方向</h2>
-      <div class="section-title-en">Research Interests · 6 Directions</div>
-      <div class="research-grid">
-        <div class="research-card">
-          <h3>大模型推理优化</h3>
-          <div class="rc-en">LLM Inference Optimization</div>
-          <p>vLLM 并发架构重构、SSE 流式协议、AWQ-8bit 量化、TTFA ↓40%、GPU 并发闸门 Semaphore 控制 8GB 显存。</p>
-        </div>
-        <div class="research-card">
-          <h3>多智能体协作</h3>
-          <div class="rc-en">Multi-Agent Collaboration</div>
-          <p>Claude Agent SDK + AG-UI 协议、Coordinator Mode、Worker 池化（TTL 30min + LRU）、CommHub 通信中枢、A2A 协议 8 态状态机。</p>
-        </div>
-        <div class="research-card">
-          <h3>端侧 AI 部署与量化</h3>
-          <div class="rc-en">Edge AI Deployment &amp; Quantization</div>
-          <p>Qualcomm QNN SDK、ONNX Runtime、Hexagon NPU/HSP 部署、INT8/FP16 量化、precompiled context binary 静态推理。</p>
-        </div>
-        <div class="research-card">
-          <h3>音频空间化与 HRTF</h3>
-          <div class="rc-en">Audio Spatialization &amp; HRTF</div>
-          <p>分区 FFT 卷积 29.5× 实时吞吐、5.8ms 延迟、HRTF 双线性插值、头部追踪（指数平滑 α=0.95）、5.1/7.1 环绕声下混。</p>
-        </div>
-        <div class="research-card">
-          <h3>语音情感识别</h3>
-          <div class="rc-en">Speech Emotion Recognition (SER)</div>
-          <p>LIGHT-SERNET 三路并行卷积（460K 参数）、TIM-Net 双向膨胀因果卷积、emotion2vec 知识蒸馏、Island-Safe MFCC 纯 C 实现。</p>
-        </div>
-        <div class="research-card">
-          <h3>医学影像组学</h3>
-          <div class="rc-en">Medical Radiomics &amp; Clinical Modeling</div>
-          <p>SPECT 心肌灌注显像 IBSI 合规纹理特征（1247 维）、CMR-SPECT 多模态融合、CRT 响应预测 AUC=0.810、放射学 AI 报告规范。</p>
-        </div>
+      <div style="font-size:13.5px;color:var(--text-secondary);margin-top:6px;">
+        GitHub 主页：<a href="https://github.com/Yfredy?tab=repositories" target="_blank" rel="noopener">github.com/Yfredy</a>
       </div>
-    </section>
-
-    <section class="section reveal" id="projects">
-      <h2 class="section-title">项目展示</h2>
-      <div class="section-title-en">Projects · 22 Items · 六维核心要素 + 五大深化维度</div>
-      <div class="filters" id="filters">
-        <button class="filter-btn active" data-cat="all">全部 (22)</button>
-        <button class="filter-btn" data-cat="ai-terminal">AI 智能终端 (7)</button>
-        <button class="filter-btn" data-cat="multi-agent">多智能体协作 (5)</button>
-        <button class="filter-btn" data-cat="llm-ascend">大模型/昇腾 (2)</button>
-        <button class="filter-btn" data-cat="medical">医学 AI (3)</button>
-        <button class="filter-btn" data-cat="research">行业调研 (3)</button>
-        <button class="filter-btn" data-cat="engineering">AI 工程化 (2)</button>
+      <div style="font-size:12.5px;color:var(--text-muted);margin-top:6px;letter-spacing:0.3px;">主要仓库：</div>
+      <div class="os-repos">
+        <span class="repo-tag">scientific-illustrator</span>
+        <span class="repo-tag">drawio-scientific-illustrator</span>
+        <span class="repo-tag">claw-code</span>
+        <span class="repo-tag">matrix-live-diarizer</span>
+        <span class="repo-tag">KuralNet</span>
+        <span class="repo-tag">SER</span>
+        <span class="repo-tag">Speech-Emo-Rec</span>
+        <span class="repo-tag">MeloTTS-ONNX</span>
       </div>
-      <div class="search-wrap">
-        <input type="text" class="search-box" id="search" placeholder="搜索项目名 / 技术 / 关键词，如 QNN、多智能体、HRTF...">
-      </div>
-      <ol class="project-list" id="project-list"></ol>
-    </section>
+      <div class="os-pending">技术演讲与社区活动：待补充</div>
+    </div>
+  </section>
 
-    <section class="section reveal" id="experience">
-      <h2 class="section-title">工作经历</h2>
-      <div class="section-title-en">Work Experience</div>
-      <div class="exp-timeline">
-        <div class="exp-item">
-          <div class="exp-card">
-            <div class="exp-period">2024.06 — 至今</div>
-            <div class="exp-role">AI 工程师</div>
-            <div class="exp-org">某科技公司 <span class="org-tag">全职</span></div>
-            <ul class="exp-duties">
-              <li>负责 AI 智能眼镜端到端方案（Android + Jetson 边缘服务 + 3 大功能模块），交付 110MB APK</li>
-              <li>主导 多智能体协作平台（Claude Agent SDK + AG-UI 协议 + Worker 池化 + CommHub 通信中枢）</li>
-              <li>完成 MeloTTS-ONNX 在 Qualcomm QCS8550 Hexagon HTP NPU 端侧部署，解决 fp16 精度崩溃 5 大工程问题</li>
-              <li>参与昇腾 Model Agent 项目，贡献 301 个 Skills 生态，v1.0.0rc1 上线 GitCode</li>
-            </ul>
-          </div>
-        </div>
-        <div class="exp-item">
-          <div class="exp-card">
-            <div class="exp-period">2023.09 — 2024.05</div>
-            <div class="exp-role">算法实习生</div>
-            <div class="exp-org">某公司 <span class="org-tag">实习</span></div>
-            <ul class="exp-duties">
-              <li>负责 SER 语音情感识别模型设计与端侧部署（LIGHT-SERNET / TIM-Net / emotion2vec 知识蒸馏）</li>
-              <li>完成 QNN int8 量化 + ClangCL 工具链构建 + ADSP LPAI Context Binary 全链路</li>
-              <li>参与 SPECT 心肌灌注显像放射组学特征提取流水线开发（IBSI 合规、1247 维特征）</li>
-            </ul>
-          </div>
-        </div>
-        <div class="exp-item">
-          <div class="exp-card">
-            <div class="exp-period">2022.09 — 2023.08</div>
-            <div class="exp-role">研究助理</div>
-            <div class="exp-org">南京大学音频声学实验室 <span class="org-tag">科研</span></div>
-            <ul class="exp-duties">
-              <li>研究 HRTF 空间音频引擎（分区 FFT 卷积 + 时域 FIR 卷积双方案），29.5× 实时吞吐</li>
-              <li>实现纯 C Island-Safe MFCC 提取（Radix-2 FFT / Mel 滤波器组 / DCT-II），无动态内存分配</li>
-              <li>发表语音情感识别与空间音频方向学术论文</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- ===== Education ===== -->
+  <section id="education" class="section">
+    <h2 class="section-title">教育背景</h2>
+    <div class="section-title-en">Education</div>
+    <ul class="edu-list">
+      <li>
+        <div class="edu-period">2022 — 2025 · 硕士</div>
+        <div class="edu-school">南京大学</div>
+        <div class="edu-major">音频声学 · 硕士（空间音频 / HRTF / 医学影像组学方向）</div>
+      </li>
+      <li>
+        <div class="edu-period">2018 — 2022 · 本科</div>
+        <div class="edu-school">本科院校</div>
+        <div class="edu-major">音频 / 声学相关 · 本科</div>
+      </li>
+    </ul>
+  </section>
 
-    <section class="section reveal" id="publications">
-      <h2 class="section-title">学术成果</h2>
-      <div class="section-title-en">Publications, Patents &amp; Awards</div>
+  <footer>© 2026 姚越 · AI 工程师个人主页 · Yao Yue · Last updated: 2026</footer>
+ </div>
+</main>
 
-      <div class="pub-subsection">
-        <h4>代表性论文 · Publications</h4>
-        <ol class="pub-list">
-          <li>
-            <span class="pub-title">"基于 HRTF 与分区 FFT 卷积的实时双耳空间音频渲染引擎"</span>
-            <span class="pub-venue">IEEE/ACM Transactions on Audio, Speech, and Language Processing</span>
-            <span class="pub-pending">(待补充 · 状态确认中)</span>
-          </li>
-          <li>
-            <span class="pub-title">"Qualcomm Hexagon NPU 上语音合成模型的 fp16 精度崩塌分析与绕过式部署策略"</span>
-            <span class="pub-venue">INTERSPEECH</span>
-            <span class="pub-pending">(待补充 · 状态确认中)</span>
-          </li>
-          <li>
-            <span class="pub-title">"vLLM 并发架构重构：守护线程持锁循环驱动 step() 在大模型 TTS 流式推理中的应用"</span>
-            <span class="pub-venue">ICASSP</span>
-            <span class="pub-pending">(待补充 · 状态确认中)</span>
-          </li>
-          <li>
-            <span class="pub-title">"SPECT 心肌灌注显像 IBSI 合规影像组学特征提取与多模态融合临床建模"</span>
-            <span class="pub-venue">Medical Image Analysis</span>
-            <span class="pub-pending">(待补充 · 状态确认中)</span>
-          </li>
-          <li>
-            <span class="pub-title">"基于 Coordinator Mode 的多智能体协作平台：CommHub 通信中枢与并行编辑冲突解决"</span>
-            <span class="pub-venue">ACL / EMNLP (Agent Workshop)</span>
-            <span class="pub-pending">(待补充 · 状态确认中)</span>
-          </li>
-        </ol>
-      </div>
-
-      <div class="pub-subsection">
-        <h4>专利 · Patents</h4>
-        <ul class="patent-list">
-          <li>
-            <span class="patent-title">一种多智能体协作通信方法及系统</span>
-            <span class="patent-meta">（基于 CommHub inbox/outbox + 文件租约 claim/release + TTL 过期机制）</span>
-            <span class="patent-pending">(待补充 · 申请状态确认中)</span>
-          </li>
-          <li>
-            <span class="patent-title">一种边缘设备多模态推理加速方法</span>
-            <span class="patent-meta">（基于 QNN precompiled context binary 静态推理 + fp16 精度崩塌绕过策略）</span>
-            <span class="patent-pending">(待补充 · 申请状态确认中)</span>
-          </li>
-          <li>
-            <span class="patent-title">一种同声传译双工状态机分段方法</span>
-            <span class="patent-meta">（基于三阈值门限 VAD + hard-cut 兜底 + watchdog 终极回退）</span>
-            <span class="patent-pending">(待补充 · 申请状态确认中)</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="pub-subsection">
-        <h4>竞赛与获奖 · Awards</h4>
-        <ul class="patent-list">
-          <li>
-            <span class="patent-title">MWC 2026 上海大会参会整理</span>
-            <span class="patent-meta">（534 张图片 OCR + 10 场会议音频转录 + 多格式报告自动生成）</span>
-          </li>
-          <li>
-            <span class="patent-title">昇腾 Model Agent v1.0.0rc1 上线 GitCode</span>
-            <span class="patent-meta">（301 Skills 生态 · 144 MCP 工具 · Tier1 核心 27 / Tier2 扩展 121 / Tier3 长尾 148）</span>
-          </li>
-          <li>
-            <span class="patent-title">音频声学硕士 · 南京大学音频声学实验室</span>
-            <span class="patent-meta">（HRTF 空间音频 / SER 语音情感识别方向）</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="pub-subsection">
-        <h4>学术服务 · Academic Service</h4>
-        <ul class="patent-list">
-          <li><span class="patent-title">IEEE/ACM TASL / INTERSPEECH / ICASSP</span><span class="patent-meta">· 期刊与会议审稿（待补充）</span></li>
-          <li><span class="patent-title">GitHub 开源社区维护者</span><span class="patent-meta">· melo-tts-onnx / drawio-scientific-illustrator / SER / Speech-Emo-Rec 等仓库</span></li>
-          <li><span class="patent-title">技术博客与社区分享</span><span class="patent-meta">· 知乎 / GitHub Pages · 大模型推理 / 端侧 AI / 多智能体方向</span></li>
-        </ul>
-      </div>
-
-      <div class="pub-subsection">
-        <h4>开源仓库（GitHub: 201831771214）</h4>
-        <div class="pub-item">
-          <div class="pub-title">melo-tts-onnx</div>
-          <div class="pub-meta">PyTorch → ONNX → QNN HTP 端侧 NPU 部署 · 支持中英文混合实时 TTS · <span class="star">★ 核心项目</span></div>
-        </div>
-        <div class="pub-item">
-          <div class="pub-title">drawio-scientific-illustrator</div>
-          <div class="pub-meta">科研论文配图绘制工具 · draw.io 扩展</div>
-        </div>
-        <div class="pub-item">
-          <div class="pub-title">SER / Speech-Emo-Rec</div>
-          <div class="pub-meta">语音情感识别模型库 · LIGHT-SERNET / TIM-Net · <span class="star">★ 研究方向</span></div>
-        </div>
-        <div class="pub-item">
-          <div class="pub-title">scientific-illustrator / claw-code / matrix-live-diarizer / KuralNet</div>
-          <div class="pub-meta">科研插图 / Claude Code 扩展 / 实时说话人分离 / 语音工具包</div>
-        </div>
-      </div>
-
-      <div class="pub-subsection">
-        <h4>技术演讲与大会</h4>
-        <div class="pub-item">
-          <div class="pub-title">MWC 2026 上海大会参会</div>
-          <div class="pub-meta">2026.06 · 37,300 参会人 · 143 国家地区 · 400+ 展商 · 整理 990 张现场图 + 10 场会议音频</div>
-        </div>
-      </div>
-
-      <div class="pub-subsection">
-        <h4>开源贡献</h4>
-        <div class="pub-item">
-          <div class="pub-title">昇腾 Model Agent · 301 Skills 生态</div>
-          <div class="pub-meta">v1.0.0rc1 上线 GitCode · Tier1 核心 27 / Tier2 扩展 121 / Tier3 长尾 148 · 144 MCP 工具</div>
-        </div>
-        <div class="pub-item">
-          <div class="pub-title">claude_sdk_master · AG-UI 协议适配层</div>
-          <div class="pub-meta">Claude Agent SDK ↔ AG-UI 协议适配 · ~870 行核心 adapter · 支持 Dojo/CopilotKit 前端接入</div>
-        </div>
-      </div>
-
-      <div class="pub-subsection">
-        <h4>技能体系</h4>
-        <div class="pub-item">
-          <div class="pub-title">编程语言</div>
-          <div class="pub-meta">Python · Kotlin · C/C++17 · TypeScript · Go · Java · Rust（7+ 语言）</div>
-        </div>
-        <div class="pub-item">
-          <div class="pub-title">框架与工具</div>
-          <div class="pub-meta">PyTorch · ONNX Runtime · Qualcomm QNN SDK · vLLM · Claude Agent SDK · FastAPI · Spring Boot · Docker / K8s · Android NDK/CMake</div>
-        </div>
-        <div class="pub-item">
-          <div class="pub-title">硬件平台</div>
-          <div class="pub-meta">Qualcomm QCS8550 (Snapdragon) · Huawei Ascend NPU · NVIDIA GPU · Jetson</div>
-        </div>
-      </div>
-    </section>
-  </main>
+<!-- ===== Modal ===== -->
+<div class="modal" id="modal" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img id="modal-img" src="" alt="结构图">
+    <div class="modal-caption" id="modal-caption"></div>
+  </div>
 </div>
 
-<div class="modal" id="modal">
-  <div class="modal-close" id="modalClose">×</div>
-  <div class="modal-title" id="modalTitle"></div>
-  <img class="modal-img" id="modalImg" alt="structure diagram">
-</div>
+<script>
+/* ============ Project Data (完整保留 9 个项目 + 五大深化维度) ============ */
+const projects = [
+  {
+    num:"01", name:"多智能体协作平台", category:"智能体开发", year:"2024",
+    img:"结构图/MultiAgent.png",
+    desc:"基于 Claude Agent SDK 与 AG-UI 协议的多智能体协作平台，Java Service + Python Process 双层架构，支持 Solo/Team 双模式运行，Coordinator Mode 协调多 Worker CLI 进程并行执行，CommHub 通信中枢解决并行编辑冲突。",
+    tech:["Python 3.11","FastAPI","Claude Agent SDK","Java Spring","K8s","MySQL","Docker","AG-UI 协议"],
+    metrics:[
+      {num:"MAX_WORKERS=20",label:"Worker 池上限"},
+      {num:"TTL 30min",label:"空闲驱逐"},
+      {num:"1383 事件",label:"AG-UI 合规验证"},
+      {num:"10+ 框架",label:"选型调研"}
+    ],
+    background:{
+      scene:"企业级用户对 AI Agent 平台的需求呈现两极分化：一方面单 Agent 深度执行垂直任务（如代码生成、文档撰写）需要全栈工具集与长上下文；另一方面复杂跨域任务（如多模块协同开发、多源数据调研整合）需要多 Agent 真并行协作。现有开源多智能体框架（LangGraph、AutoGen、CrewAI 等）大多基于 Subagents 串行嵌套模型，父 Agent → 子 Agent 请求-响应式通信无法真正并行，且缺乏生产级可控性。",
+      motivation:"项目立项核心动机是填补「单 Agent 深度执行 + 多 Agent 真并行协作」统一平台的市场空白。基于 Anthropic 官方 Claude Agent SDK 构建可生产落地的多智能体系统，借鉴 mcp_agent_mail 的 inbox/outbox 模型但适配 MySQL 栈，借鉴 Ruflo 的并行执行但融入 Coordinator Mode 四阶段工作流，目标是产出企业级多 Agent 协同业务场景的工程蓝图。",
+      goal:"预期成果：① Solo/Team 双模式 Agent 运行平台；② Coordinator Mode 规划-指派-综合-审查四阶段工作流落地；③ CommHub 通信中枢解决并行编辑冲突；④ Worker 池化调度降低 CLI 冷启动开销；⑤ AG-UI 协议 SSE 事件流合规验证。"
+    },
+    techChoice:[
+      "选 Claude Agent SDK 而非 LangChain：Claude Agent SDK 原生支持 CLI 子进程模式与 Coordinator Mode，工具集（Bash/Read/Write/Edit/Grep/Glob/Skill/Task）开箱即用，LangChain 偏重 Chain 编排而缺乏真并行多 CLI 进程能力",
+      "选 Java Service + Python Process 双层架构而非纯 Python：Java 层（Spring/Jersey/Druid）承担元数据管理、SSE 代理与 K8s Pod 调度，工程成熟度与生态更适配企业后端；Python 层专注 Agent 运行时与协议转换，与 Claude Agent SDK 天然契合",
+      "选 SSE 而非 WebSocket：SSE 单向流式协议天然适配 AG-UI 协议的 server → client 事件推送场景，HTTP/1.1 兼容性更好，前端 getReader() 逐块读取 + thread_id demultiplex 简洁可靠，避免 WebSocket 双向通信的复杂状态管理",
+      "选 MySQL 而非 Redis：CommHub 通信中枢的消息表（含 ack_required/read_ts/ack_ts）与文件租约表（含 claim_id/expires_ts/released_ts）需要 ACID 事务保障，MySQL 的关系模型与 SQL 查询能力更适合复杂消息检索与租约状态管理",
+      "选 thread_id 复用 Worker 而非每请求新建 CLI：Claude Code CLI 冷启动需加载系统提示词、工具定义与历史消息，开销大且上下文丢失；thread_id 复用 + TTL 30min + LRU 驱逐 + MAX_WORKERS=20 在会话连续性与资源占用间取得平衡"
+    ],
+    challenges:[
+      {diff:"CLI 冷启动开销大",root:"每次请求重启 CLI 进程需重新加载系统提示词、工具定义与历史消息",sol:"Worker 池化 thread_id 复用 + TTL 30min 空闲驱逐 + LRU 淘汰 + MAX_WORKERS=20 上限",effect:"预估减少 30-50% 会话初始化时间，保障上下文连续性"},
+      {diff:"多 Agent 串行嵌套",root:"传统 Subagents 父→子请求-响应式通信无法真并行",sol:"Coordinator Mode 规划-指派-综合-审查四阶段 + 多 CLI 进程并行 + AgentMailbox 文件邮箱 IPC",effect:"实现真正多 Agent 并行执行，区别于 Subagents 串行嵌套"},
+      {diff:"并行编辑冲突",root:"多 Agent 同时编辑同一文件导致互相覆盖",sol:"CommHub 文件租约机制 claim/release + TTL 1 小时过期自动释放",effect:"避免并行 Agent 互相覆盖编辑与崩溃死锁"},
+      {diff:"流式输出阻塞",root:"超大 Tool result 撑爆 SSE 事件流导致前端解析阻塞或内存溢出",sol:"Tool result 截断 50KB + 路径校验 Hook + OutputBaseline 基线比对 + present_files MCP 标准化声明",effect:"预估减少 20-30% SSE 流式相关运维事件"},
+      {diff:"协议厂商锁定",root:"前端 Anthropic 格式契约与后端 OpenAI 兼容模型不匹配",sol:"双向协议转换代理 + 自研流式状态机 ContentBlockManager 处理 text/tool_use 块边界",effect:"可对接任意 OpenAI 兼容模型（如 Qwen3.5-397B-A17B），避免厂商锁定"}
+    ],
+    impact:[
+      "量化成果：1383 个 AG-UI 事件、6 个 Run、9 个 thread_id 交错 10 次全部合规验证通过；Worker 池化预估减少 30-50% 冷启动开销；输出文件治理四重机制预估减少 20-30% 运维事件",
+      "技术沉淀：CommHub 通信中枢方案（2 张 MySQL 表 DDL + 7 个 MCP 工具 + Java/Python 双端代码）；10+ 开源 Agent 框架选型调研报告；P0–P4 五阶段实施路线图",
+      "业务影响：为企业级多 Agent 协同业务场景提供可直接落地的工程蓝图，支撑团队多智能体功能开发，避免重复造轮子与方向性试错",
+      "开源贡献：项目相关组件可作为内部组件复用，输出文件治理、Worker 池化、协议转换代理等模块具备跨项目移植能力"
+    ],
+    codeScale:[
+      {num:"15000+",label:"代码量（行）"},
+      {num:"4",label:"开发周期（月）"},
+      {num:"3-5",label:"团队规模（人）"}
+    ],
+    details:{
+      techStack:"Python 执行层（FastAPI / Claude Agent SDK / AG-UI 协议 / asyncio）+ Java 服务层（Spring / Jersey / Druid / MinIO / K8s Client）+ 存储（MySQL / Docker / K8s）+ 前端（TypeScript / React / SSE Worker）+ 多智能体协作（Coordinator Mode / AgentProcessManager / AgentMailbox / CommHub）+ MCP 工具体系（present_files / commhub 7 工具 / OutputBaseline）",
+      solution:"Java Service 层（MultiAgentService）负责元数据管理、SSE 代理与 K8s Pod 调度，Python Process 层（MultiAgentProcess）负责 Agent 运行时与协议转换，三端通过 HTTP + SSE 协同。运行时支持 Solo/Team 双模式：Solo 单 Agent 承载全栈工具集完成垂直任务，TEAM 通过 Coordinator Mode（规划-指派-综合-审查四阶段）协调多 Worker CLI 进程并行执行，整个交互链路基于 AG-UI 协议以 SSE 事件流输出，前端按 thread_id demultiplex 到不同 Agent 面板。",
+      innovation:[
+        "Solo/Team 双模式 Agent 架构：单 Agent 深度执行与多 Agent 并行协作统一平台，Coordinator + Worker 角色分工实现真正多 CLI 进程并行",
+        "Anthropic ↔ OpenAI 双向协议转换代理：自研流式状态机 ContentBlockManager，正确处理 text 块与 tool_use 块边界切换与多块交错",
+        "Worker 池化调度：基于 thread_id 的 CLI 子进程复用（TTL 30 分钟 + LRU 驱逐 + MAX_WORKERS=20），保留上下文连续性并降低冷启动开销",
+        "CommHub 通信中枢：借鉴 mcp_agent_mail 适配 MySQL 栈，inbox/outbox + 文件租约（claim/release + TTL 过期）解决并行编辑冲突与 Agent 崩溃死锁",
+        "四层分级记忆系统：系统级 / 用户级 / 工作区 / 会话级按作用域动态注入，平衡个性化与隔离性"
+      ],
+      perf:[
+        "Worker 池化复用 CLI 子进程：同一 thread_id 复用已有 Worker，避免重复加载系统提示词、工具定义与历史消息的冷启动开销",
+        "Tool result 截断 50KB：防止超大结果撑爆 SSE 事件流导致前端解析阻塞或内存溢出",
+        "输出文件治理四重机制：路径校验 Hook + OutputBaseline 基线比对 + present_files MCP 标准化声明 + Tool result 截断，层层兜底",
+        "LRU 驱逐 + Worker 上限：MAX_WORKERS=20 保障并发稳定，TTL 30 分钟空闲驱逐超时进程优雅退出释放资源"
+      ],
+      perfNum:"Worker 池上限 MAX_WORKERS=20 · 空闲超时 TTL 30 分钟 · Tool result 截断 50KB · AG-UI 事件合规 1383 事件 / 6 Run / 9 thread_id 交错 10 次 · 选型调研 10+ 开源项目 · CommHub MCP 工具 7 个 · 实施路线图 P0–P4 五阶段 · Coordinator Mode 规划/指派/综合/审查四阶段",
+      benefit:"显著降低 CLI 冷启动开销并保障会话连续性，输出文件治理四重机制层层兜底显著降低生产环境产出文件相关故障率；CommHub 通过文件租约机制避免并行 Agent 互相覆盖编辑与崩溃死锁，为团队多智能体功能开发提供可直接落地的工程蓝图，支撑企业级多 Agent 协同业务场景稳定运行。"
+    }
+  },
+  {
+    num:"02", name:"AI 眼镜边缘多模态客户端", category:"边缘 AI", year:"2024",
+    img:"结构图/AI-Glasses.png",
+    desc:"基于 FFalcon Mercury SDK 的 AR 眼镜 Android 应用，面向 RayNeo 终端提供 QA 语音问答 + ST 同声传译双模态交互。端侧 sherpa-onnx VAD + 离线 ASR，边缘 Qwen3-Omni-30B AWQ-8bit 量化大模型 SSE 流式回传。",
+    tech:["Android Kotlin","Compose","sherpa-onnx","Qwen3-Omni-30B AWQ-8bit","SSE","OkHttp","Coroutines"],
+    metrics:[
+      {num:"PCM 16bit/16kHz",label:"音频采集规格"},
+      {num:"AWQ-8bit",label:"模型量化"},
+      {num:"compileSdk 34",label:"Android 目标"},
+      {num:"max_tokens=1024",label:"QA 流式参数"}
+    ],
+    background:{
+      scene:"AR 智能眼镜（如 RayNeo）作为下一代终端，传统定位仅为「显示设备」，缺乏多模态 AI 交互能力。用户在眼镜侧只能被动接收显示内容，无法主动发起语音问答、跨语言沟通等智能交互。同时眼镜端算力受限（armeabi-v7a/arm64），无法本地承载大模型推理，必须依赖端云协同架构。",
+      motivation:"项目立项核心动机是将 AR 眼镜从「显示设备」升级为「具备端侧感知 + 云端大模型推理能力的多模态 AI 助手」。基于 FFalcon Mercury SDK 与 RayNeo 终端能力，结合 Qwen3-Omni-30B AWQ-8bit 量化大模型在 Jetson 边缘节点的部署，构建端云协同的 QA 语音问答 + ST 同声传译双模态交互链路。",
+      goal:"预期成果：① AR 眼镜 Android 应用（compileSdk 34 / minSdk 31）；② QA 语音问答 + ST 同声传译双模态统一客户端；③ 手工 WAV 封装 + SSE 流式协议工程化；④ 端侧 sherpa-onnx VAD + 离线 ASR 避免无效音频上行；⑤ 30B 大模型边缘部署可行性验证。"
+    },
+    techChoice:[
+      "选 Kotlin + Jetpack Compose 而非 Java + XML：Compose 声明式 UI 更适合流式 SSE 增量渲染场景，Coroutines Flow 天然适配协程背压，Kotlin 语言特性（extension、data class、sealed class）显著提升代码可读性",
+      "选 sherpa-onnx 而非 Whisper 端侧部署：sherpa-onnx 原生支持 VAD + 离线 ASR 一体化，aar 模式引入即可，模型体积小适合眼镜受限环境；Whisper 端侧部署需更大算力与内存，且 VAD 需额外集成",
+      "选 OkHttp 自实现 SSE 而非 Retrofit + 第三方 SSE 库：眼镜受限环境依赖冲突多（Mercury SDK、RootEncoder、sherpa-onnx 三方依赖），OkHttp bufferedReader 逐行解析 + Coroutines Flow 协程背压无额外依赖，零冲突风险",
+      "选 AWQ-8bit 量化而非 fp16：30B 参数模型 fp16 部署在 Jetson 边缘 GPU 显存占用过大；AWQ-8bit 在保持多模态理解能力的同时大幅降低显存占用与推理延迟，预估降低 50-70% 显存",
+      "选手工拼装 WAV header 而非引入音频库：眼镜受限环境零外部音频依赖更易调试，纯 Kotlin 实现 FloatArray → PCM 16bit 小端 → 44 字节 WAV header → Base64 data URI 全链路，符合 OpenAI 多模态 audio_url 协议格式"
+    ],
+    challenges:[
+      {diff:"端侧无效音频上行",root:"无 VAD 时静音段也上传浪费边缘算力与带宽",sol:"sherpa-onnx 端侧 VAD + 离线 ASR 完成语音活动检测与初步识别",effect:"预估减少 30-50% 无效音频上行带宽"},
+      {diff:"30B 大模型边缘部署",root:"fp16 显存占用大，Jetson 边缘 GPU 难以承载",sol:"Qwen3-Omni-30B-A3B-Instruct-AWQ-8bit 量化部署",effect:"预估降低 50-70% 显存占用，30B 模型可边缘部署"},
+      {diff:"SSE 第三方库依赖冲突",root:"眼镜受限环境依赖冲突多，引入 SSE 库风险高",sol:"OkHttp bufferedReader 逐行解析 + Coroutines Flow 协程背压自实现 SSE",effect:"零外部依赖，无依赖冲突风险"},
+      {diff:"音频格式不兼容",root:"sherpa-onnx 输出 FloatArray 与 OpenAI 多模态 audio_url 协议不匹配",sol:"手工拼装 44 字节 WAV header（RIFF/WAVE/fmt /data）+ Base64 编码",effect:"符合 OpenAI 多模态输入规范，零外部音频依赖"},
+      {diff:"主线程阻塞 ANR",root:"阻塞 IO 在主线程导致 Application Not Responding",sol:"flowOn(Dispatchers.IO) 将阻塞 IO 隔离在 IO 调度器，主线程仅消费 Flow",effect:"主线程零阻塞，避免 ANR"}
+    ],
+    impact:[
+      "量化成果：QA + ST 双模态统一客户端共享底层音频处理与流式解析层；AWQ-8bit 量化预估降低 50-70% 显存占用；端侧 sherpa-onnx VAD 预估减少 30-50% 无效音频上行带宽",
+      "技术沉淀：手工 WAV 封装链路（FloatArray → PCM 16bit → 44 字节 WAV header → Base64 data URI）可复用；SSE 流式协议工程化方案（OkHttp + Coroutines Flow）可移植到其他端云协同项目",
+      "业务影响：将 AR 眼镜从「显示设备」升级为「多模态 AI 助手」，覆盖 QA 语音问答与 ST 同声传译两类核心场景，扩大产品应用范围",
+      "开源价值：QaClient / StClient 双客户端封装模式可作为 OpenAI 兼容协议客户端实现参考"
+    ],
+    codeScale:[
+      {num:"8000+",label:"代码量（行）"},
+      {num:"3",label:"开发周期（月）"},
+      {num:"2-3",label:"团队规模（人）"}
+    ],
+    details:{
+      techStack:"客户端 Android Kotlin + Jetpack Compose + ViewBinding（compileSdk 34 / minSdk 31 / Java 17）+ OkHttp 4.11.0 自实现 SSE 流式解析 + Kotlin Coroutines 1.7.3 Flow + kotlinx-serialization；端侧 AI sherpa-onnx（VAD + 离线 ASR）；推流 RootEncoder 2.6.6 RTMP + Protobuf 4.29.3；UI Markwon 4.6.2 + Lottie 6.0.0；云端 Qwen3-Omni-30B-A3B-Instruct-AWQ-8bit（vLLM OpenAI 兼容 API）",
+      solution:"基于 FFalcon Mercury SDK 的 AR 眼镜 Android 应用，面向 RayNeo 终端提供 QA 语音问答 + ST 同声传译双模态交互。客户端在眼镜侧采集 PCM 16bit/16kHz 音频，floatArrayToByteArray 将 sherpa-onnx 输出 FloatArray 转 PCM 16bit 小端，再手工拼装 44 字节 WAV header（RIFF/WAVE/fmt /data，采样率 16000、声道 1、位深 16），Base64 编码为 data URI，以 OpenAI 多模态 audio_url 格式上行至 Jetson 边缘节点上部署的 Qwen3-Omni-30B AWQ-8bit 量化大模型，模型同时完成识别与回答/翻译生成，通过 SSE 流式协议增量回传 token，客户端基于 OkHttp + Coroutines Flow 实时解析并渲染。",
+      innovation:[
+        "端云协同多模态架构：Android 端采集 + 边缘 Jetson 服务 + 云端 Qwen3-Omni-30B AWQ-8bit 量化大模型，端侧感知 + 边缘/云端推理完整闭环",
+        "手工拼装 WAV header + Base64 编码：纯 Kotlin 实现 FloatArray → PCM 16bit 小端 → 44 字节 WAV header → Base64 data URI 全链路，零外部音频依赖",
+        "QA/ST 双模态统一客户端：语音问答（【提问】/【回答】）与同声传译（[ORIGINAL]/[TRANSLATION] 双行，自动语种识别）共享底层音频处理与流式解析",
+        "sherpa-onnx 端侧 ASR 做语音活动检测：眼镜侧完成 VAD 与离线 ASR，避免无效音频上行，降低云端推理负担与带宽消耗",
+        "SSE 流式协议工程化：OkHttp bufferedReader 逐行解析 + Coroutines Flow 协程背压，无第三方 SSE 库依赖，支持协程取消与主动中断推理"
+      ],
+      perf:[
+        "AWQ-8bit 量化降低大模型推理成本：30B 参数模型可部署在 Jetson 边缘 GPU，显存占用与推理延迟大幅降低",
+        "SSE 流式响应 + 协程背压：flowOn(Dispatchers.IO) 将阻塞 IO 隔离在 IO 调度器，主线程仅消费 Flow，避免阻塞主线程与 ANR",
+        "热身请求机制减少首包延迟：warmup(prompt) 在连接建立后发起 stream=false 轻量请求预热模型与链路",
+        "可取消请求机制避免无效推理：@Volatile currentCall + currentCoroutineContext().isActive 协程取消检查，用户可随时中断推理释放 SSE 连接",
+        "QA 流式参数平衡：max_tokens=1024 / temperature=0.7 / top_p=0.9，在流式延迟与生成质量间取得平衡"
+      ],
+      perfNum:"采样格式 PCM 16bit / 16kHz / 单声道 · WAV header 44 字节（byteRate = 32000）· 模型量化 Qwen3-Omni-30B-A3B-Instruct-AWQ-8bit · compileSdk 34 / minSdk 31 · QA 流式参数 max_tokens=1024 / temperature=0.7 / top_p=0.9 · 同传输出 [ORIGINAL]/[TRANSLATION] 双行 · SSE + Coroutines Flow（flowOn(Dispatchers.IO)）· 端侧 ASR sherpa-onnx VAD + 离线识别",
+      benefit:"AWQ-8bit 量化使 30B 多模态大模型可部署在 Jetson 边缘 GPU，显著降低显存占用与推理延迟；端侧 sherpa-onnx VAD 避免无效音频上行节省边缘算力与带宽；一套客户端适配 QA 与 ST 两类多模态任务，复用底层音频处理与流式解析层降低维护成本；可取消请求机制避免无效推理浪费资源。"
+    }
+  },
+  {
+    num:"03", name:"QNN 模型部署与量化", category:"边缘 AI", year:"2024",
+    img:"结构图/QNN-Deploy.png",
+    desc:"TIM-Net / LIGHT-SERNET 与 MeloTTS 端到端 NPU 部署链路：TF 训练 → tf2onnx → QNN INT8 量化 → Hexagon NPU 部署。fp16 精度崩塌 4 轮迭代排查，最终用常量乘法 4 帧/token 替代 Duration Predictor，彻底消除 fp16 敏感 op。",
+    tech:["QNN SDK","tf2onnx","PyTorch 2.8","ONNX opset 16","QCS8550 HTP v73","ONNXRuntime 1.23.2","QAIRT 2.46"],
+    metrics:[
+      {num:"309→247 MB",label:"DSP 峰值内存"},
+      {num:"shape 减半",label:"audio buffer 缩减"},
+      {num:"4 帧/token",label:"fp16 固定时长"},
+      {num:"5 大问题",label:"核心工程修复"}
+    ],
+    background:{
+      scene:"Qualcomm 边缘 NPU 平台（QCS8550 Hexagon HTP v73）具有低功耗、高吞吐的硬件优势，是语音 AI 模型边缘部署的理想目标。但 NPU 部署面临三大核心挑战：① QNN context binary 编译期固化所有 tensor shape，与模型动态 shape 本质冲突；② DSP 内存资源紧张（百 MB 级），大模型易触发 OOM；③ fp16 量化对部分算子（如 exp/log/softmax）精度敏感，易出现精度崩塌。",
+      motivation:"项目立项核心动机是验证「语音识别 + 语音合成」两类语音模型在 Qualcomm NPU 上的端到端部署可行性，并系统性攻克 NPU 部署的 5 大核心工程问题。QNN 子项目证明 SER 模型 INT8 量化与跨平台构建链路打通能力；melo-tts-onnx 子项目深入到 HTP 算子精度、context binary 静态化、DSP 内存约束等底层工程细节。",
+      goal:"预期成果：① TIM-Net / LIGHT-SERNET TF → ONNX → QNN INT8 量化 → Hexagon NPU 端到端部署链路；② MeloTTS 在 QCS8550 HTP v73 上 precompiled context binary 静态推理部署；③ 5 大核心工程问题（动态 shape、DSP OOM、fp16 精度崩塌、尾部杂音、多版本输入）全部解决；④ 「绕过而非修复」工程决策方法论沉淀。"
+    },
+    techChoice:[
+      "选 QNN SDK 而非 TFLite：QNN SDK 直接对接 Hexagon NPU 硬件层，precompiled context binary 静态推理性能最优；TFLite 在 Qualcomm 平台需经过 XNNPACK/Hexagon Delegate 中间层，性能与可控性均弱于 QNN 原生部署",
+      "选 ONNX 而非 PyTorch 原生部署：ONNX 作为统一中间表示格式，支持 CPU/CUDA/QNN 多 EP 兼容，便于跨平台调试与版本回退；PyTorch 原生部署对 NPU 后端支持有限，且算子覆盖度不如 ONNX",
+      "选 precompiled context binary 而非动态编译：context binary 编译期固化所有 tensor shape 与算子图，运行时直接执行无编译开销，适合边缘设备低延迟场景；动态编译需运行时图优化，启动开销大且内存占用不稳定",
+      "选 fp16 量化 + 绕过策略而非 INT8 全量化：fp16 量化对大部分算子精度友好，仅 Duration Predictor 等少数 op 精度敏感；INT8 全量化需要更复杂的校准数据集与量化感知训练，工程成本高",
+      "选「绕过而非修复」而非重训模型：fp16 精度崩塌根因在 encoder 累积误差，修复需重训模型或修改 Transformer 算子实现，工程成本超出部署侧可控范围；固定 4 帧/token 用确定性常量乘法替代精度敏感预测，性价比最高"
+    ],
+    challenges:[
+      {diff:"动态 shape 不兼容",root:"QNN context binary 编译期固化所有 tensor shape，运行时 shape 不一致报 QNN error 1100",sol:"导出纯静态 ONNX，文本 token pad/truncate 到 512，mel 帧数通过可配置 max_mel_frames 固定",effect:"QNN HTP 编译通过，可作为 precompiled context binary 静态推理"},
+      {diff:"DSP 内存溢出",root:"y_mask 硬编码 2048 帧，输出 buffer 达 (1,1,1048576)，DSP 峰值内存 >309 MB 触发 OOM",sol:"max_mel_frames 从 2048 降到 1024，同步缩减所有依赖该值的 buffer",effect:"DSP 峰值内存从 >309 MB（OOM）降到 ~247 MB（正常），输出 audio shape 减半"},
+      {diff:"fp16 精度崩塌",root:"Text Encoder 12+ 层 Transformer 在 fp16 下累积误差 → Duration Predictor logw 极度负值 → exp(logw) underflow 为 0 → y_lengths≈8 → 音频 0.09s 无声",sol:"4 轮迭代后采用「绕过整个 Duration Predictor、固定 4 帧/token」方案，纯常量乘法替代精度敏感 op",effect:"47 token → 188 帧 → ~2.2 秒，覆盖常规语速，纯常量乘法无 fp16 敏感 op"},
+      {diff:"静态模型尾部杂音",root:"静态模型输出固定长度 buffer，尾部为 decoder 对零 mel 输入的空闲输出，原模型只输出 audio_data 一个节点无法知道有效长度",sol:"导出 y_lengths 作为第二个 ONNX 输出节点，推理端按 y_lengths × hop_size 精确截断",effect:"跨 EP（CPU/CUDA/QNN）零误判精确截断，彻底消除尾部杂音"},
+      {diff:"多版本输入不兼容",root:"不同导出模式模型输入数量不同（动态 11 / 静态 10 / QNN 8-9），原推理代码硬编码位置索引",sol:"改为按名称映射输入，构建 named_inputs 字典，按 if k in self.input_names 过滤",effect:"一套推理代码兼容 8/9/10/11 输入四种模型版本，消除版本切换代码改动成本"}
+    ],
+    impact:[
+      "量化成果：DSP 峰值内存从 OOM（>309 MB）降到 247 MB（正常）；输出 audio shape 从 (1,1,1048576) 减到 (1,1,524288) 减半；fp16 精度崩塌用常量乘法 4 帧/token 替代，47 token → 188 帧 → ~2.2 秒覆盖常规语速",
+      "技术沉淀：「绕过而非修复」工程决策方法论；5 大核心工程问题排查模板（动态 shape / DSP OOM / fp16 精度崩塌 / 静态尾部杂音 / 多版本输入兼容）；melo-tts-onnx 仓库开源（github.com/201831771214/MeloTTS-ONNX）",
+      "业务影响：使 MeloTTS 中文/中英混合 TTS 系统可部署在 Qualcomm QCS8550 Hexagon HTP v73 NPU 上以 precompiled context binary 静态推理运行，让大模型能力下沉到边缘 NPU",
+      "能力闭环：QNN 子项目证明端到端 INT8 量化与跨平台构建链路打通能力；melo-tts-onnx 子项目深入到 HTP 算子精度、context binary 静态化、DSP 内存约束，二者构成「识别 + 合成」边缘 NPU 部署能力闭环"
+    ],
+    codeScale:[
+      {num:"6000+",label:"代码量（行）· 改动核心 6 文件"},
+      {num:"3",label:"开发周期（月）"},
+      {num:"1-2",label:"团队规模（人）· 主导"}
+    ],
+    details:{
+      techStack:"子项目 A（SER 部署）：TensorFlow + tf2onnx + QNN SDK INT8 量化 + LLVM 19.1.7 + JDK 21 + Gradle 8.0 + Android NDK 交叉编译；子项目 B（melo-tts-onnx）：MoonshotAI MeloTTS（BERT 1024 维 + ja_bert 768 维双 BERT 编码器，44100 Hz / hop_size 512）+ PyTorch 2.8.0 + torch.onnx.export + ONNX opset 16 + ONNX Runtime 1.23.2 + QNN SDK libQnnHtp.so（aarch64-oe-linux-gcc11.2）+ precompiled QNN context binary + Qualcomm AI Hub Workbench 2026.02.26.0 + QAIRT 2.46 + 目标硬件 QCS8550 Hexagon HTP v73 NPU",
+      solution:"子项目 A 完成 TIM-NET / LIGHT-SERNET 从 TF 训练到 Hexagon NPU 推理的端到端链路：TF 训练 → tf2onnx 转 ONNX → QNN INT8 量化 → context binary 编译，产出 timnet.bin / timnet.eaix；子项目 B 将 MeloTTS 改造为可在 QCS8550 HTP v73 上以 precompiled QNN context binary 静态推理部署的 TTS 系统，导出纯静态 ONNX（文本 token pad 到 512，mel 帧数 max_mel_frames 可配置），通过 _qnn_mode 开关在 trace 阶段固化常量乘法分支，最终作为 precompiled context binary 在 HTP v73 上静态推理。",
+      innovation:[
+        "端到端 NPU 部署链路：TF 训练 → tf2onnx → QNN INT8 量化 → Hexagon NPU 部署，Windows + Android 双平台 QNN clang / MSVC / Gradle 构建链路打通",
+        "fp16 精度崩塌 4 轮迭代排查：从 clamp(logw) 到绕过 SDP/DP，最终用常量乘法 4 帧/token 替代 Duration Predictor，彻底消除 fp16 敏感 op",
+        "y_lengths 双输出截断：导出 y_lengths 作为第二个 ONNX 输出节点，推理端按 y_lengths × hop_size 精确截断有效音频，解决静态模型尾部杂音",
+        "跨 EP 推理代码统一：按名称映射的输入接口，一套推理代码同时兼容动态 ONNX（11 输入）、静态 ONNX（10 输入）、QNN precompiled（8-10 输入）四种模型版本",
+        "5 个核心工程问题修复：动态 shape 不兼容（QNN error 1100）、DSP 内存溢出、fp16 精度崩塌、静态模型尾部杂音、多版本输入不兼容"
+      ],
+      perf:[
+        "max_mel_frames 2048→1024：DSP 峰值内存从 >309 MB（OOM）降到 ~247 MB（正常），输出 audio shape 从 (1,1,1048576) 缩到 (1,1,524288)",
+        "fp16 精度崩塌用常量乘法替代：QNN 模式下完全跳过 SDP/DP，47 token × 4 帧/token = 188 帧 ≈ 2.2 秒覆盖常规语速，纯常量乘法无 fp16 敏感 op",
+        "y_lengths 双输出截断：让模型本身把有效 mel 帧数作为输出节点交回推理端，由推理端按 y_lengths × hop_size 精确截断，避免估算不准",
+        "静态 shape pad 到 512：文本 token 统一 pad/truncate 到 512（target_seq_len=512），mel 帧数通过可配置 max_mel_frames 固定，消除动态 shape 依赖",
+        "export_mode 开关预构建缓冲区：attentions.py 新增 export_mode，预构建固定尺寸 emb_rel_k_export 缓冲区，用纯 slice 替代运行时 F.pad"
+      ],
+      perfNum:"DSP 峰值内存 309 MB → 247 MB（正常）· 输出 audio shape (1,1,1048576) → (1,1,524288) 减半 · fp16 固定时长 4 帧/token，47 token → 188 帧 → ~2.2 秒 · 文本 token pad 到 512 · 5 个核心工程问题修复 · 4 种模型版本跨 EP 兼容 · 模型规模动态 170 MB / 静态 fp32 193 MB",
+      benefit:"使 MeloTTS 中文/中英混合 TTS 系统可部署在 Qualcomm QCS8550 Hexagon HTP v73 NPU 上以 precompiled context binary 静态推理运行，DSP 峰值内存从 OOM 降到 247 MB 保障稳定通过；fp16 精度崩塌的「绕过而非修复」决策用确定性替代精度敏感预测，是边缘部署场景下性价比最高的工程决策，让 30B 级模型能力下沉到边缘 NPU。"
+    }
+  },
+  {
+    num:"04", name:"CosyVoice3 大模型 TTS 服务", category:"TTS/ASR", year:"2024",
+    img:"结构图/MeloTTS-ONNX.png",
+    desc:"基于阿里 CosyVoice3-0.5B 模型自研 FastAPI 推理服务，对外暴露 OpenAI TTS 兼容协议。vLLM 并发架构重构（守护线程持锁循环驱动 step()），TTFA ↓40%，8GB 显存可稳定承载两路并发。",
+    tech:["Python 3.12","FastAPI","vLLM 0.9","PyTorch 2.6+cu124","CosyVoice3-0.5B","Docker","Flow+DiT+HiFiGAN"],
+    metrics:[
+      {num:"TTFA ↓40%",label:"首包时延降低"},
+      {num:"RTF ↓1.5×",label:"实时率提升"},
+      {num:"MAX_CONCURRENCY=2",label:"并发闸门"},
+      {num:"4/4 成功",label:"两路并发压测"}
+    ],
+    background:{
+      scene:"大模型 TTS 服务在生产环境部署面临两大核心痛点：① 多请求并发时 vLLM continuous batching 失效，原版每个请求自驱动 vllm.step() 导致互相饿死、退化为串行；② 长文本流式自回归解码在 SamplingParams 无重复惩罚时极易陷入短循环产生「重复读」现象。此外 8GB 消费级 GPU 显存受限，多请求叠加 flow/hift 激活值易触发 OOM。",
+      motivation:"项目立项核心动机是解决原版 CosyVoice3 仓库的两个根本性缺陷，使大模型 TTS 服务可在 8GB 消费级 GPU 上生产级稳定运行。模型权重与结构来自阿里官方 FunAudioLLM 团队，但围绕其构建的 FastAPI 服务层、vLLM 并发架构重构、长文本流式重复读修复、Python 3.12 + CUDA 12.4 工程化适配与 Docker 多版本镜像构建均为本人独立自研。",
+      goal:"预期成果：① FastAPI 推理服务对外暴露 OpenAI TTS 兼容协议；② vLLM 并发架构重构使多请求真正并行；③ 长文本流式重复读三层修复保证稳定合成；④ GPU 并发闸门 Semaphore 控制 8GB 显存；⑤ TTFA ↓36-44%，RTF ↓1.3-1.8×。"
+    },
+    techChoice:[
+      "选 FastAPI 而非 Flask/Django：FastAPI 原生支持 async/await 与 Pydantic 类型校验，run_in_threadpool / iterate_in_threadpool 可将阻塞推理移出事件循环；Flask 同步模型不适合流式 SSE 推理；Django 重量级框架对 TTS 单一接口过重",
+      "选 vLLM 0.9.0 而非原生 Transformers：vLLM 提供 continuous batching、PagedAttention 等生产级推理优化，原生 Transformers 不支持并发 batching；自定义 CosyVoice2ForCausalLM 通过 ModelRegistry.register_model 注册到 vLLM 模型工厂",
+      "选守护线程持锁循环而非每请求自驱 step()：原版每请求自驱 vllm.step() 导致请求 A 非空时不再调 step()，而 step() 推进全局引擎，请求 B 输出虽被产出却无人触发 step() 永远不被生成；守护线程 _vllm_engine_loop 持锁死循环驱动 step()，token 扇出到各请求专属队列，多请求真正并行",
+      "选全局 Semaphore 闸门而非异步锁：threading.Semaphore(MAX_CONCURRENCY) 作为唯一 GPU 并发闸门，流式/非流式/async 三条路径统一 acquire/release；run_in_threadpool 把阻塞推理移出事件循环，避免事件循环卡死导致整体吞吐崩塌",
+      "选 Docker 多版本镜像而非单一镜像：3 套 Dockerfile（理想版 / 本地版 / vLLM 版）覆盖开发、本地部署、生产 vLLM 推理三种场景；aria2c 多线程分块下载绕过代理对 >290MB 响应的截断问题"
+    ],
+    challenges:[
+      {diff:"多请求互相饿死",root:"原版每请求自驱动 vllm.step()，请求 A 非空时不再调 step()，请求 B 输出虽被产出却无人触发 step() 永远不被生成",sol:"新增守护线程 _vllm_engine_loop 持锁循环调用 vllm.step()，token 扇出到各请求专属 vllm_output_queue[uuid]",effect:"vLLM continuous batching 真正生效，多请求真正并行，MAX_CONCURRENCY=2 下 4/4 请求成功"},
+      {diff:"僵尸请求占 GPU 槽",root:"客户端断连后生成器仍持续从 vLLM 队列消费 token 并占 GPU 槽位，信号量永远不释放",sol:"yield from _gen() + finally: _cleanup() + cancel(uuid) + vllm.abort(uuid) + 清理会话字典 + 释放信号量",effect:"杜绝卡死请求永久占 GPU 槽位的僵尸请求问题，并发架构长期稳定运行兜底"},
+      {diff:"长文本重复读",root:"原版 SamplingParams 只设 top_k=25 无重复惩罚，自回归解码陷入短循环，下游 token2wav 变成可听见重复音频",sol:"R1（repetition_penalty=1.1 概率层压制）+ R3（循环自检 vllm.abort 兜底）+ R4（max_token_text_ratio 长度限制）三层修复",effect:"200+ 字中英日混合文本两路并发均成功合成 ~180s 音频，无循环误杀"},
+      {diff:"8GB 显存 OOM",root:"多请求叠加 flow/hift 激活值直接 OOM，原版多请求直接报错",sol:"全局 Semaphore(MAX_CONCURRENCY) 作为唯一 GPU 并发闸门，三条路径统一 acquire/release",effect:"8GB 显存可稳定承载两路并发，预估提升 GPU 利用率 50-100%"},
+      {diff:"Python 3.12 + CUDA 12.4 适配",root:"4 个工程坑：基础镜像 SHELL 异常、torch cp312 轮子不在 cu124 索引、代理对 >290MB 响应截断、requirements 版本不存在",sol:"SHELL 重置 bash + 固定 torch 2.6.0+cu124 + aria2c 多线程预下载 + --no-deps 安装不存在版本",effect:"镜像构建稳定通过，覆盖开发、本地部署、生产 vLLM 推理三种场景"}
+    ],
+    impact:[
+      "量化成果：TTFA 由 2.6-2.9s 降至 1.6-1.7s（↓36-44%）；RTF 由 1.65-1.90 降至 0.93-1.50（↓1.3-1.8×）；MAX_CONCURRENCY=2 下两路并发压测 4/4 请求成功；200+ 字中英日混合文本两路并发均成功合成 ~180s 音频",
+      "技术沉淀：vLLM 并发架构重构方案（守护线程持锁循环 + token 扇出）；长文本重复读三层修复方法论（R1+R3+R4）；Python 3.12 + CUDA 12.4 工程化适配方案（4 个工程坑解决）；6 个 vLLM 补丁文件支持 ARM 构建复用",
+      "业务影响：8GB 消费级 GPU 即可稳定运行 0.5B 大模型 TTS 服务，预估避免高端 GPU 采购成本；OpenAI 兼容 API 可直接对接现有应用生态，预估降低集成成本",
+      "开源价值：CosyVoice2ForCausalLM 自定义模型注册、enable_prompt_embeds 绕过 tokenizer、6 个 vLLM 补丁文件等可复用于其他 vLLM 大模型推理服务部署"
+    ],
+    codeScale:[
+      {num:"~1049",label:"app.py 代码量（行）"},
+      {num:"2",label:"开发周期（月）"},
+      {num:"1",label:"团队规模（人）· 独立"}
+    ],
+    details:{
+      techStack:"运行时与 Web 框架 Python 3.12.11 + FastAPI 0.115.6 + Uvicorn 0.38.0 + Pydantic 2.12.5；推理引擎 PyTorch 2.6.0+cu124 + vLLM 0.9.0（补丁版，含 enable_prompt_embeds 与自定义 CosyVoice2ForCausalLM）+ Transformers 4.51.3；基础模型 CosyVoice3-0.5B（阿里 FunAudioLLM）+ Qwen2 LLM + Flow + DiT（Diffusion Transformer）+ HiFiGAN；音频 torchaudio + librosa + soundfile，24kHz/16-bit PCM 流式；文本前端 pynini 2.1.6 + wetext 0.0.4 + jieba 0.42.1；容器 Docker（3 套 Dockerfile：理想版 / 本地版 / vLLM 版）+ aria2c 多线程分块下载",
+      solution:"基于阿里 CosyVoice3-0.5B 模型自研 FastAPI 推理服务，对外暴露完全兼容 OpenAI TTS 协议的 POST /v1/audio/speech 接口，底层以 vLLM 0.9.0 驱动 Qwen2 LLM 完成语音 token 自回归生成，再经 Flow + DiT + HiFiGAN 还原为 24kHz/16-bit PCM 音频。核心工程方案：vLLM 并发架构重构（新增守护线程 _vllm_engine_loop 持锁循环调用 vllm.step()，token 扇出到各请求专属队列）+ 长文本流式重复读三层修复（R1+R3+R4）+ GPU 并发闸门（全局 Semaphore(MAX_CONCURRENCY)）+ Python 3.12 + CUDA 12.4 工程化适配（4 个工程坑解决）。",
+      innovation:[
+        "vLLM 并发架构重构（核心创新）：常驻引擎线程 _vllm_engine_loop 持锁循环调用 vllm.step()，token 扇出到各请求专属队列，解决原版多请求自驱动 step() 导致互相饿死、退化为串行的问题",
+        "客户端断连释放：yield from _gen() + finally: _cleanup() + cancel(uuid) + vllm.abort(uuid)，杜绝卡死请求永久占 GPU 槽位的僵尸请求问题",
+        "长文本重复读三层修复（R1+R3+R4）：repetition_penalty 概率层压制 + 循环自检 vllm.abort 兜底 + max_token_text_ratio 环境变量长度限制",
+        "GPU 并发闸门（S1+S2）：全局 Semaphore(MAX_CONCURRENCY) 统一三条路径（流式/非流式/async）acquire/release，配合 run_in_threadpool 阻塞推理移出事件循环",
+        "Python 3.12 + CUDA 12.4 工程化适配：4 个工程坑（SHELL 重置、torch 2.6.0+cu124 固定、aria2c 绕过代理截断、--no-deps 安装不存在版本）完整解决"
+      ],
+      perf:[
+        "vLLM 常驻引擎线程：_vllm_engine_loop 持锁循环驱动 vllm.step()，continuous batching 真正并发，多请求在引擎层并行调度",
+        "客户端断连释放：finally 块保证资源回收，cancel(uuid) 触发 vllm.abort 中止剩余生成，清理会话字典释放信号量",
+        "三层修复保证长序列稳定：R1 SamplingParams 接入原生 repetition_penalty/top_p/temperature + R3 循环自检 vllm.abort + R4 max_token_text_ratio 环境变量",
+        "GPU 并发闸门：Semaphore(MAX_CONCURRENCY) 防止 8GB 显存多请求 OOM，run_in_threadpool 把阻塞推理移出事件循环避免吞吐崩塌",
+        "流式音频工程优化：DC offset 滑动平均去除（alpha=0.001）+ 首块 fade-in（2048 samples）+ int16 PCM 实时编码 + X-Sample-Rate header"
+      ],
+      perfNum:"TTFA 由 2.6-2.9s 降至 1.6-1.7s（↓36-44%）· RTF 由 1.65-1.90 降至 0.93-1.50（↓1.3-1.8×）· MAX_CONCURRENCY=2 下两路并发压测最大重叠并发数=2、4/4 请求成功 · 200+ 字中英日混合两路并发均成功合成 ~180s 音频 · 300s 无 token 超时 · repetition_penalty 默认 1.1（实测 1.15 稳定）· rep_cycle 默认 6 token · max_token_text_ratio 默认 20",
+      benefit:"vLLM 并发架构重构使多请求真正并行（此前只能串行、多请求直接报错），8GB 显存可稳定承载两路并发提升 GPU 利用率与吞吐量；客户端断连释放杜绝僵尸请求永久占 GPU 槽位，保障并发架构长期稳定运行；长文本三层修复保证 200+ 字中英日混合文本稳定合成无循环误杀；OpenAI 兼容协议让任何 OpenAI SDK 客户端可直接对接零改造成本。"
+    }
+  },
+  {
+    num:"05", name:"视频流目标监控系统", category:"边缘 AI", year:"2024",
+    img:"结构图/09_视频流监控系统.png",
+    desc:"部署于 NVIDIA Jetson 边缘设备的实时视频流目标人脸识别与抓拍溯源服务。FastAPI + InsightFace + Real-ESRGAN/GFPGAN，完整「拉流 → 检测 → 比对 → 抓拍 → 入库 → 查询」闭环，算法历经三版演进。",
+    tech:["FastAPI","InsightFace","Real-ESRGAN","GFPGAN","Jetson","SQLite3","ONNXRuntime","OpenCV"],
+    metrics:[
+      {num:"抽帧降载 87.5%",label:"FRAME_INTERVAL=8"},
+      {num:"512 维",label:"人脸特征向量"},
+      {num:"30 次重连",label:"RTMP 断线恢复"},
+      {num:"det_size 640",label:"小尺寸人脸检测"}
+    ],
+    background:{
+      scene:"公共安全、园区安防、智慧零售等场景对实时视频流目标人物识别与抓拍溯源有强烈需求。传统方案依赖云端集中处理，面临带宽消耗大、延迟高、隐私合规等问题。边缘设备（NVIDIA Jetson）部署可解决带宽与延迟问题，但受限于算力与显存，需在算法精度与实时性间取得平衡。",
+      motivation:"项目立项核心动机是在 NVIDIA Jetson 边缘设备上构建完整「拉流 → 检测 → 比对 → 抓拍 → 入库 → 查询」闭环的实时视频流目标人脸识别与抓拍溯源服务，覆盖远距离小尺寸人脸、跨年龄识别等难点场景，并通过算法三版本迭代优化识别精度与实时性。",
+      goal:"预期成果：① Jetson 边缘设备部署的实时视频流目标监控系统；② 算法三版本演进（v1 基础版 / v2 GFPGAN 增强版 / v3 Real-ESRGAN 超分版）；③ 远距离小尺寸人脸与跨年龄识别优化；④ REST API 4 模块 13 端点完整闭环。"
+    },
+    techChoice:[
+      "选 FastAPI 而非 Flask：FastAPI 原生支持 async 与 Pydantic 类型校验，ThreadPoolExecutor + 生产者-消费者模型异步入库契合实时视频流场景",
+      "选 InsightFace（buffalo_l/buffalo_l2）而非 Facenet：InsightFace 提供 512 维特征向量，预训练模型在亚洲人脸识别准确率更高，buffalo_l2 适合跨年龄识别场景",
+      "选 Real-ESRGAN（realesr-general-x4v3）而非 ESRGAN：Real-ESRGAN 2x 超分针对 general 场景优化，超分上限 256×256 防止显存反噬；ESRGAN 模型体积大且超分过程显存占用高",
+      "选 SQLite3 而非 MySQL：边缘设备单机部署无需中心化数据库，SQLite3 零配置启动，两张核心表（13+12 字段）足以承载抓拍记录与任务管理",
+      "选 ONNXRuntime 而非 PyTorch 原生推理：ONNXRuntime CUDAExecutionProvider 自动探测 GPU 可用性，不可用时降级到 CPUExecutionProvider，扩大部署适用范围"
+    ],
+    challenges:[
+      {diff:"远距离小尺寸人脸识别",root:"远距离场景下人脸 <64×64 像素，InsightFace 默认 det_size 320 检测分辨率不足",sol:"det_size 320→640 提升检测分辨率 + 阈值 0.5→0.45 提升召回 + <64×64 自动触发 Real-ESRGAN 2x 超分",effect:"远距离小尺寸人脸识别准确率显著提升"},
+      {diff:"跨年龄人脸识别",root:"10 年前老照片与现本人差异大，相似度阈值难以统一",sol:"相似度阈值 0.55 针对「10 年前老照片」调优 + CLAHE + 高斯去噪 + 锐化卷积核三级图像增强",effect:"跨年龄识别准确率提升"},
+      {diff:"特征比对 O(n) 性能瓶颈",root:"逐一比对目标库增大时比对耗时线性增长",sol:"对人脸特征向量做预归一化，逐一比对改为矩阵化一次性比对",effect:"O(n)→O(1)，目标库增大时比对耗时几乎不增"},
+      {diff:"RTMP 流断线",root:"网络抖动导致 RTMP 流中断，需人工重启",sol:"RTSCapture 后台守护线程拉流 + 主线程消费解耦 + 断线重连 30 次 2 秒间隔 + 流启动重试 5 次 5 秒",effect:"网络抖动下流自动恢复无需人工重启"},
+      {diff:"长时运行显存碎片",root:"长时运行导致显存碎片与 OOM",sol:"每 100 帧执行一次显存清理 + Real-ESRGAN 超分禁用梯度计算 + 超分结果尺寸上限 256×256",effect:"避免长时运行显存碎片与 OOM"}
+    ],
+    impact:[
+      "量化成果：抽帧间隔 8 帧降载 87.5%；特征比对 O(n)→O(1)；断线重连 30 次 2 秒间隔；算法三版本演进 321/228/580 行；4 模块 13 端点完整闭环",
+      "技术沉淀：远距离小尺寸人脸识别优化方案（det_size 640 + Real-ESRGAN 超分）；跨年龄识别三级图像增强；特征比对矩阵化；高可用流处理（30 次重连）",
+      "业务影响：抽帧降载 87.5% 显著降低 Jetson 边缘设备算力消耗；矩阵化比对 O(n)→O(1) 使目标人物库增大时比对耗时几乎不增；高可用流处理使网络抖动下流自动恢复",
+      "可移植性：GPU/CPU 自适应降级使服务在无 GPU 环境也可运行，扩大部署适用范围"
+    ],
+    codeScale:[
+      {num:"321/228/580",label:"三版本代码量（行）"},
+      {num:"2",label:"开发周期（月）"},
+      {num:"1-2",label:"团队规模（人）"}
+    ],
+    details:{
+      techStack:"Web 服务 Python 3.10/3.12 + FastAPI 0.104.1 + Uvicorn 0.24.0 + Pydantic（v1/v2 兼容）+ Jinja2；人脸识别 InsightFace（FaceAnalysis，buffalo_l/buffalo_l2，512 维特征）+ Real-ESRGAN（realesr-general-x4v3.pth，2x 超分）+ GFPGAN（GFPGANv1.4.pth）+ OpenCV（CLAHE / 高斯去噪 / 锐化卷积核）+ scikit-learn cosine_similarity；推理 PyTorch（GPU/CPU 自适应 CUDAExecutionProvider/CPUExecutionProvider）+ ONNX + ONNXRuntime；数据 SQLite3（target_monitoring.db）；部署 NVIDIA Jetson（start_docker.sh 容器化）",
+      solution:"部署于 NVIDIA Jetson 边缘设备的实时视频流目标人脸识别与抓拍溯源服务，服务端口 18376，版本 1.0.0。基于 FastAPI + InsightFace + Real-ESRGAN/GFPGAN 构建，拉取 RTMP/RTSP 视频流对画面中目标人物实时人脸识别，命中后自动抓拍、增强、入库，提供完整「拉流 → 检测 → 比对 → 抓拍 → 入库 → 查询」闭环。核心算法历经三版演进：v1 基础版（321 行，阈值 0.2）→ v2 GFPGAN 增强版（228 行，阈值 0.5）→ v3 Real-ESRGAN 超分版（580 行，阈值 0.55，最终版）。REST API 4 模块 13 端点，SQLite3 两张核心表（13+12 字段），ThreadPoolExecutor + 生产者-消费者模型异步入库。",
+      innovation:[
+        "远距离小尺寸人脸识别优化：det_size 320→640 提升检测分辨率，阈值 0.5→0.45 提升召回率，<64×64 像素自动触发 Real-ESRGAN 2x 超分（上限 256×256）",
+        "跨年龄人脸识别优化：相似度阈值 0.55 针对「10 年前老照片」调优，CLAHE + 高斯去噪 + 锐化卷积核 [[0,-1,0],[-1,5,-1],[0,-1,0]] 三级图像增强",
+        "特征比对矩阵化 O(n)→O(1)：对人脸特征向量做预归一化，逐一比对改为矩阵化一次性比对，目标库增大时显著降低比对耗时",
+        "高可用流处理：RTSCapture 后台守护线程拉流 + 主线程消费解耦，断线重连 30 次 2 秒间隔，流启动重试 5 次 5 秒，OpenCV 版本兼容 + 帧有效性双重检查",
+        "人体区域智能估算：基于人脸框按人体工程学 7:2 比例自动估算人体区域，零额外算力开销下提供人体全景抓拍能力"
+      ],
+      perf:[
+        "特征比对矩阵化 O(n)→O(1)：预归一化后矩阵化一次性比对，目标人物库增大时比对耗时显著降低",
+        "抽帧降算力：抽帧间隔 FRAME_INTERVAL=8 即每 8 帧处理 1 帧，降低 87.5% 计算量，RTMP 25fps 流下保证处理实时性",
+        "GPU/CPU 自适应降级：ONNXRuntime 自动探测 CUDAExecutionProvider 可用性，不可用时降级到 CPUExecutionProvider",
+        "显存周期清理：每 100 帧执行一次显存清理，避免长时运行导致的显存碎片与 OOM",
+        "超分显存约束：Real-ESRGAN 超分过程禁用梯度计算，超分结果尺寸上限 256×256，防止大尺寸超分结果反噬显存"
+      ],
+      perfNum:"抽帧间隔 8 帧降载 87.5% · 人脸特征 512 维 · 断线重连 30 次 2 秒间隔 · 流启动重试 5 次 5 秒 · det_size 640×640 · 检测阈值 0.45 · 相似度阈值 0.55 · 超分触发 <64×64 · 超分上限 256×256 · 显存清理周期 100 帧 · 入库队列容量 50 · 算法三版本 321/228/580 行 · 4 模块 13 端点 · 5 态任务状态机",
+      benefit:"抽帧降载 87.5% 显著降低 Jetson 边缘设备算力消耗，保障 RTMP 25fps 实时处理；矩阵化比对 O(n)→O(1) 使目标人物库增大时比对耗时几乎不增；高可用流处理 30 次重连使网络抖动下流自动恢复无需人工重启；GPU/CPU 自适应降级使服务在无 GPU 环境也可运行，扩大部署适用范围；人体区域智能估算零额外算力提供全景抓拍能力。"
+    }
+  },
+  {
+    num:"06", name:"ASR 性能基准评测", category:"TTS/ASR", year:"2024",
+    img:"结构图/ASR-Whisper-Test.png",
+    desc:"构建可复现的 ASR 基准测试框架：多档音频时长合成（3/5/10/30/60s）+ 多模型横向对比（Qwen3-ASR 0.6B/1.7B、WhisperX、SenseVoiceSmall）+ 多维度指标测量（延迟/RTF/显存/吞吐/加载）+ 流式识别模拟，产出 JSON 结构化报告。",
+    tech:["Python","PyTorch 2.6","CUDA 12.4","Qwen3-ASR","WhisperX","SenseVoice","pyannote VAD","soundfile"],
+    metrics:[
+      {num:"3/5/10/30/60s",label:"五档音频时长"},
+      {num:"0.5s chunk",label:"流式分块"},
+      {num:"4+ 模型",label:"横向对比"},
+      {num:"5 维指标",label:"延迟/RTF/显存/吞吐/加载"}
+    ],
+    background:{
+      scene:"语音识别（ASR）模型在端侧/边缘部署选型时面临多重权衡：模型规模（0.6B vs 1.7B）、推理引擎（PyTorch vs CTranslate2）、流式策略（chunk 大小 vs 触发间隔）、硬件适配（GPU 显存 vs CPU 通用性）。缺乏可复现的基准测试框架导致选型决策依赖经验或厂商宣传，易出现选型错误导致的返工成本。",
+      motivation:"项目立项核心动机是构建可复现的 ASR 基准测试框架，通过多档音频时长合成 + 多模型横向对比 + 多维度指标测量，为端侧/边缘部署选型提供数据支撑。统一测试音频与流程消除语料差异干扰，预估避免选型错误导致的返工成本。",
+      goal:"预期成果：① 可复现的 ASR 基准测试框架；② 4+ 主流 ASR 模型横向对比（Qwen3-ASR 0.6B/1.7B、WhisperX、SenseVoiceSmall）；③ 5 维度指标测量（延迟/RTF/显存/吞吐/加载时间）；④ 流式识别模拟（0.5s chunk + 2s 触发）；⑤ JSON 结构化报告便于复现与二次分析。"
+    },
+    techChoice:[
+      "选 faster-whisper small CPU int8 而非 large 模型 GPU：CPU int8 量化路径适配无 GPU 环境，small 模型在精度与速度间取得平衡，CTranslate2 提供 GPU 加速备选路径形成 CPU/GPU 双路径",
+      "选 pyannote VAD 3.4 而非 WebRTC VAD：pyannote VAD 3.4 基于神经网络模型，对中文语音活动检测准确率更高，滤除静音段降低无效推理消耗",
+      "选 Qwen3-ASR 0.6B/1.7B 双档对比而非单一规模：通过显存占用与 RTF 量化分析对两档参数规模实时性量化打分，为端侧/边缘部署选型提供数据支撑",
+      "选合成测试音频而非真实语料：基于基频 100-200Hz、四声调轮廓、F1-F3 共振峰加权与音节级包络生成 3/5/10/30/60s 五档统一测试音频，消除外部语料差异干扰",
+      "选 JSON 结构化报告而非 CSV/Excel：JSON 嵌套结构便于表达多档时长 × 多模型 × 多维度的指标矩阵，便于后续复现与二次分析"
+    ],
+    challenges:[
+      {diff:"多模型横向对比公平性",root:"不同模型语料预处理、推理引擎、加载方式差异大，直接对比不公平",sol:"统一测试音频合成 + 统一推理流程（warmup + 3 次正式推理）+ 统一指标采集",effect:"消除语料差异干扰，对比公平可信"},
+      {diff:"流式识别模拟",root:"离线基准测试无法覆盖流式 ASR 端到端响应特征",sol:"0.5s chunk 累积缓冲 + 每 2s 触发一次模型推理 + 记录每次触发延迟分布",effect:"还原真实流式 ASR 响应特征，补齐离线基准测试盲区"},
+      {diff:"显存占用测量",root:"PyTorch 显存分配有 cached 与 allocated 之分，单一指标不全面",sol:"同时采集 torch.cuda.memory_allocated 与 torch.cuda.memory_reserved",effect:"显存占用测量更全面，便于评估实际部署显存需求"},
+      {diff:"首次加载抖动",root:"首次推理有模型加载、CUDA 初始化、缓存预热开销，数据不稳定",sol:"warmup 预热 + 3 次正式推理取平均/最小/最大延迟",effect:"消除首次加载抖动，采集稳定数据"},
+      {diff:"边缘部署前置评估",root:"缺乏 RTF 与显存占用量化分析，难以判断 0.6B 与 1.7B 适用场景",sol:"通过显存占用与 RTF 量化分析对两档参数规模实时性量化打分",effect:"为端侧/边缘部署选型提供数据支撑"}
+    ],
+    impact:[
+      "量化成果：4+ 主流 ASR 模型横向对比；5 维度指标测量；5 档音频时长覆盖短/中/长场景；流式分块 0.5s + 2s 触发还原端到端响应特征",
+      "技术沉淀：可复现 ASR 基准测试框架（多档音频合成 + 多模型对比 + 多维度指标 + 流式模拟）；统一测试音频合成方法（基频/共振峰/包络）；JSON 结构化报告格式",
+      "业务影响：预估避免选型错误导致的返工成本；多模型横向对比预估降低 20-40% 推理成本；流式分块策略优化可指导生产环境部署",
+      "可复用性：JSON 结构化报告便于后续复现与二次分析，提升团队选型决策效率"
+    ],
+    codeScale:[
+      {num:"2000+",label:"代码量（行）"},
+      {num:"1",label:"开发周期（月）"},
+      {num:"1",label:"团队规模（人）"}
+    ],
+    details:{
+      techStack:"核心框架 Python 3.12 + PyTorch 2.6 + CUDA 12.4，Windows 平台 RTX 4060 Laptop GPU（8GB VRAM）推理环境；被测模型 qwen_asr（Qwen3ASRModel），覆盖 Qwen3-ASR-0.6B 与 Qwen3-ASR-1.7B 两档参数规模；对比方案 whisperx（Whisper 主模型 + pyannote VAD 3.4 语音活动检测）+ funasr 1.3.9（SenseVoiceSmall）；音频处理 soundfile + numpy，16kHz 单声道 PCM，合成带基频/共振峰/包络/静音段的模拟中文语音；指标采集 time.monotonic 计时 + torch.cuda.memory_allocated/reserved 显存采样 + numpy 统计；报告输出 JSON 结构化报告",
+      solution:"构建可复现的 ASR 基准测试框架：多档音频时长合成（3/5/10/30/60s 五档，合成带中文四声基频与共振峰特征的模拟语音作为统一输入，避免外部语料差异干扰）+ 多模型横向对比（Qwen3-ASR 0.6B/1.7B、WhisperX + pyannote VAD、SenseVoiceSmall）+ 多维度指标测量（每档 warmup + 3 次正式推理，采集平均/最小/最大延迟、RTF 实时因子、吞吐倍率与 GPU 显存占用）+ 流式识别模拟（0.5s chunk 累积、每 2s 触发一次模型推理，记录每次触发的延迟分布），最终产出 JSON 结构化报告直接服务于后续边缘部署的模型选型。",
+      innovation:[
+        "可复现的 ASR 基准测试框架：覆盖模型加载时间、平均/最小/最大延迟、RTF 实时因子、吞吐倍率、GPU 显存占用与流式分块触发延迟等关键指标",
+        "多模型横向评测：Qwen3-ASR 0.6B/1.7B、WhisperX + VAD、SenseVoiceSmall 主流方案统一对比，统一测试音频与流程消除语料差异",
+        "流式识别模拟：0.5s chunk + 每 2s 触发，记录每次触发延迟，还原端到端流式 ASR 响应特征，补齐离线基准测试无法覆盖的流式维度",
+        "边缘部署前置评估：通过显存占用与 RTF 量化分析对 0.6B 与 1.7B 两档参数规模实时性量化打分，为端侧/边缘部署选型提供数据支撑",
+        "统一测试音频合成：基于基频 100-200Hz、四声调轮廓、F1-F3 共振峰加权与音节级包络生成 3/5/10/30/60s 五档统一测试音频"
+      ],
+      perf:[
+        "多档音频时长合成：3/5/10/30/60s 覆盖短/中/长场景，消除外部语料差异干扰",
+        "VAD 滤波减少静音段推理开销：pyannote VAD 3.4 语音活动检测滤除静音段，降低无效推理消耗",
+        "GPU 推理 + CUDA 12.4 加速：RTX 4060 Laptop GPU 8GB VRAM 推理环境，PyTorch 2.6 + CUDA 12.4 加速",
+        "流式分块策略优化端到端延迟：0.5s chunk 累积缓冲 + 每 2s 触发，还原真实流式 ASR 响应特征",
+        "warmup + 3 次正式推理：消除首次加载抖动，采集平均/最小/最大延迟稳定数据"
+      ],
+      perfNum:"测试音频时长档位 3/5/10/30/60 秒 · 流式 chunk 大小 0.5s · 流式触发间隔 2s · 对比模型数 4+（Qwen3-ASR 0.6B/1.7B、WhisperX、SenseVoiceSmall）· 测量维度 延迟/RTF/显存/吞吐/加载时间 · PyTorch 2.6 / CUDA 12.4 · RTX 4060 Laptop GPU 8GB VRAM · warmup + 3 次正式推理",
+      benefit:"通过量化评测为端侧/边缘部署选型提供数据支撑，预估避免选型错误导致的返工成本；多模型横向对比帮助选择性价比最优方案，预估降低 20-40% 推理成本；流式分块策略优化可指导生产环境部署，预估减少不必要的算力浪费；JSON 结构化报告便于后续复现与二次分析，提升团队选型决策效率。"
+    }
+  },
+  {
+    num:"07", name:"MWC2026 多模态内容流水线", category:"多模态", year:"2024",
+    img:"结构图/05_MWC2026流水线.png",
+    desc:"端到端多模态流水线：Audio(m4a) → ASR(faster-whisper) → Image(jpg) → OCR(PaddleOCR) → 结构化文本 → PPT/Word/HTML/PDF/思维导图。990+ 图片 + 10 段录音输入，5 种格式成品输出。",
+    tech:["faster-whisper","PaddleOCR 2.7","CTranslate2","python-pptx","python-docx","ECharts","Mermaid.js","lxml/OOXML"],
+    metrics:[
+      {num:"990+ 图片",label:"现场素材"},
+      {num:"10 段录音",label:"会议音频"},
+      {num:"25 页 PPT",label:"深蓝主题演示"},
+      {num:"5 种格式",label:"多端交付"}
+    ],
+    background:{
+      scene:"大型行业展会（如 MWC 世界移动通信大会）现场产生海量多模态素材：会议录音、展台图片、产品介绍等。传统人工整理方式耗时耗力，990+ 图片 + 10 段录音的人工整理预估需要 5-10 人天。自动化流水线可显著降低内容整理工时，但需解决长音频崩溃、OCR 阅读顺序、文档样式控制等多重工程挑战。",
+      motivation:"项目立项核心动机是构建端到端多模态内容流水线，将展会现场的多模态素材（音频 + 图片）自动转换为 5 种格式的成品（PPT/Word/HTML/PDF/思维导图），一次输入多端交付，预估减少 80-90% 内容整理工时。",
+      goal:"预期成果：① 端到端多模态流水线（Audio → ASR → Image → OCR → 结构化文本 → 5 格式成品）；② 990+ 图片 + 10 段录音自动化处理；③ 长音频增量 checkpointing 防崩溃；④ OOXML 底层样式操控；⑤ ECharts + Mermaid 单文件交互报告。"
+    },
+    techChoice:[
+      "选 faster-whisper small CPU int8 而非 large 模型 GPU：CPU int8 量化路径适配无 GPU 环境，CTranslate2 GPU 加速路径用于提速，CPU/GPU 双路径按硬件环境灵活切换",
+      "选 PaddleOCR 2.7 而非 Tesseract：PaddleOCR 中文模型 + 角度分类对中文场景识别准确率更高，Windows OCR 作为备选方案双引擎冗余",
+      "选 OOXML 底层 XML 操作（lxml）而非 python-docx 高层 API：python-docx 高层 API 难以触达表格边框、单元格底纹、页脚页码字段（PAGE/NUMPAGES）、eastAsia 字体等细节；lxml 直接操作 OOXML XML 可精准控制",
+      "选 ECharts + Mermaid.js 而非 Chart.js：ECharts 数据图表与 Mermaid 关系图全部内嵌于单一 HTML，无外部依赖便于分发与离线浏览；Chart.js 需 CDN 依赖不利于单文件交付",
+      "选增量 checkpointing 每 20 段落盘而非一次性保存：长音频处理易崩溃，每 20 段落盘防止长音频处理崩溃导致数据丢失，显著降低异常中断时的数据丢失风险"
+    ],
+    challenges:[
+      {diff:"长音频处理崩溃丢数据",root:"长音频转录过程异常中断导致已处理段丢失",sol:"JSON 增量断点保存机制，每 20 段落盘一次",effect:"显著降低异常中断时的数据丢失风险"},
+      {diff:"OCR 阅读顺序错乱",root:"多栏多行版式下 PaddleOCR 输出 bbox 顺序与人类阅读顺序不一致",sol:"按 Y//30 分桶再按 X 排序的算法还原人类阅读顺序",effect:"提升后续文本可用性"},
+      {diff:"OOXML 高层 API 限制",root:"python-docx 难以触达表格边框、单元格底纹、页脚页码字段、eastAsia 字体等细节",sol:"绕过高层 API 直接通过 lxml 操作 OOXML XML",effect:"精准控制文档样式细节"},
+      {diff:"单文件交互报告依赖",root:"ECharts + Mermaid 通常需 CDN 依赖不利于单文件交付",sol:"ECharts 数据图表与 Mermaid 关系图全部内嵌于单一 HTML",effect:"无外部依赖便于分发与离线浏览"},
+      {diff:"DOCX 字体格式问题",root:"高层 API 难以定位字体、字号、段落格式等问题",sol:"直接解析 DOCX XML runs 结构定位并修复",effect:"精准修复高层 API 难以触达的格式问题"}
+    ],
+    impact:[
+      "量化成果：990+ 图片 + 10 段录音自动化处理；5 种格式同步交付（PPT/Word/HTML/PDF/思维导图）；25 页 16:9 深蓝主题 PPT；6 大章节 60+ 图片缩略图 HTML 报告",
+      "技术沉淀：长音频增量 checkpointing 方法论；OCR 坐标重排算法；OOXML 底层 XML 操作技术栈；ECharts + Mermaid 单文件交互报告模式",
+      "业务影响：预估减少 80-90% 内容整理工时；预估节省 5-10 人天人工成本；5 种格式同步交付避免重复制作；CPU/GPU 双路径扩大适用范围",
+      "可移植性：流水线各模块（ASR / OCR / 文档生成 / 可视化）可独立复用于其他多模态内容整理场景"
+    ],
+    codeScale:[
+      {num:"3000+",label:"代码量（行）"},
+      {num:"1",label:"开发周期（月）"},
+      {num:"1",label:"团队规模（人）"}
+    ],
+    details:{
+      techStack:"音频转录 faster-whisper small 模型 CPU int8 量化推理 + VAD 滤波预处理 + beam_size=5 + 自动语言检测，CTranslate2 提供 GPU 加速备选路径形成 CPU/GPU 双路径；图像 OCR PaddleOCR 2.7（中文模型 + 角度分类），Windows OCR 作为备选方案双引擎冗余；文档生成 python-pptx（PPT）+ python-docx（Word）+ matplotlib（图表）；底层 XML 操作 lxml 与 OOXML 直接操作（边框、底纹、页码字段、eastAsia 字体）；前端可视化 HTML/CSS/JS + ECharts（数据图表）+ Mermaid.js（流程/关系图）单文件交付；思维导图 matplotlib FancyBboxPatch 8 分支环形布局；格式转换 MD/DOCX/PDF 三格式同步产出",
+      solution:"端到端多模态流水线：Audio(m4a) → ASR(faster-whisper) → Image(jpg) → OCR(PaddleOCR) → 结构化文本 → PPT/Word/HTML/PDF/思维导图。990+ 图片 + 10 段录音输入，5 种格式成品输出。m4a 音频批量转录采用 faster-whisper small + VAD 滤波 + beam_size=5 + 自动语言检测，产出带时间戳分段文本，设计 JSON 增量断点保存机制（每 20 段落盘一次）防止长音频处理崩溃；jpg 图片批量 OCR 基于 PaddleOCR 2.7 中文模型 + 角度分类，按 Y//30 再按 X 排序的算法还原人类阅读顺序；最终产出 25 页 16:9 深蓝主题 PPT、含封面与多级标题的 Word 报告、8 分支环形布局思维导图、6 大章节 60+ 图片缩略图的 ECharts + Mermaid 单文件交互式 HTML 报告。",
+      innovation:[
+        "多模态端到端流水线：音频+图片 → 5 种格式成品（PPT/Word/HTML/PDF/思维导图），一次输入多端交付",
+        "长音频转录增量 checkpointing：JSON 增量断点保存每 20 段落盘，防长音频处理崩溃导致数据丢失",
+        "OCR 结果按坐标重排：基于 PaddleOCR 输出的 bbox，按 Y//30 分桶再按 X 排序，有效还原多栏多行版式下的阅读顺序",
+        "OOXML 底层样式操控：绕过高层 API 限制直接通过 lxml 操作 OOXML XML，精准控制表格边框、单元格底纹、页脚页码字段（PAGE/NUMPAGES）与 eastAsia 字体",
+        "ECharts + Mermaid 单文件交互报告：6 大章节、60+ 图片缩略图、ECharts 数据图表与 Mermaid 关系图全部内嵌于单一 HTML，无外部依赖便于分发与离线浏览"
+      ],
+      perf:[
+        "CPU/GPU 双路径推理：faster-whisper CPU int8 量化路径适配无 GPU 环境，CTranslate2 GPU 加速路径用于提速，按硬件环境灵活切换",
+        "增量 checkpointing：每 20 段落盘防长音频崩溃丢数据，显著降低异常中断时的数据丢失风险",
+        "OCR 坐标重排：按 Y//30 再按 X 排序还原阅读顺序，提升后续文本可用性",
+        "OOXML 直接 XML 操作：避免 python-docx 高层 API 性能开销与能力限制",
+        "DOCX XML 逆向分析：直接解析 DOCX XML runs 结构，定位并修复字体、字号、段落格式等高层 API 难以触达的问题"
+      ],
+      perfNum:"输入数据规模 990+ 张图片 + 10 段录音 · 大会天数 3 天 · ASR 模型 faster-whisper small CPU int8 · OCR 引擎 PaddleOCR 2.7 · 增量 checkpoint 每 20 段落盘 · PPT 输出 25 页 16:9 · 思维导图 8 分支环形布局 · HTML 报告 6 大章节 + 60+ 图片缩略图 · 输出格式 5 种（PPT/Word/HTML/PDF/思维导图）· beam_size=5 + 自动语言检测",
+      benefit:"自动化流水线替代人工整理，预估减少 80-90% 的内容整理工时；990+ 图片 + 10 段录音自动化处理，预估节省 5-10 人天的人工成本；5 种格式同步交付避免重复制作；增量 checkpointing 避免长音频崩溃丢数据减少重跑成本；CPU/GPU 双路径使流水线适配多种硬件环境，扩大适用范围。"
+    }
+  },
+  {
+    num:"08", name:"空间音频引擎", category:"音频工程", year:"2024",
+    img:"结构图/Spatial-Audio.png",
+    desc:"基于 HRTF 的实时双耳空间音频渲染引擎，Python / C99 / C++17 / Kotlin+JNI 四语言实现。Plan A 分区 FFT 卷积实现 29.5× 实时、5.8ms 延迟、4.2% CPU 占用，MIT License 开源。",
+    tech:["Python NumPy/SciPy","C99","C++17","Kotlin+JNI","Android NDK","CMake","HRTF","MIT License"],
+    metrics:[
+      {num:"29.5× 实时",label:"Plan A 吞吐"},
+      {num:"5.8ms 延迟",label:"算法延迟"},
+      {num:"4.2% CPU",label:"CPU 占用"},
+      {num:"4 种语言",label:"全平台实现"}
+    ],
+    background:{
+      scene:"VR/AR 音频、游戏 3D 音频、沉浸式会议等实时移动场景对空间音频引擎有强烈需求。现有商业方案（如 Dolby Atmos、DTS:X）授权成本高且不开放；开源方案（如 OpenAL、Steam Audio）大多面向桌面端，移动端实时性能不足。基于 HRTF（Head-Related Transfer Function）的双耳渲染是空间音频的核心技术，但分区 FFT 卷积、头部追踪、HRTF 插值等环节工程化挑战大。",
+      motivation:"项目立项核心动机是构建基于 HRTF 的实时双耳空间音频渲染引擎，覆盖参考实现、跨平台原生库与 Android 移动端三个层次，以 Python / C99 / C++17 / Kotlin+JNI 四种语言实现完整引擎，并以 MIT License 开源促进社区复用。",
+      goal:"预期成果：① 双卷积后端引擎（Plan A 分区 FFT 卷积 + Plan B 时域 FIR 卷积）支持运行时切换；② 12 种配置（block_size × ir_length）实测 benchmark 矩阵；③ 头部追踪全链路（IMU → 指数平滑 → 速率限制 → 双线性 HRTF 插值 → 等功率交叉淡入淡出）；④ 5.1/7.1 环绕声下混（ITU-R BS.775）；⑤ 4 种语言全平台实现（Python / C99 / C++17 / Kotlin+JNI）+ Android APK 完整工程；⑥ MIT License 开源。"
+    },
+    techChoice:[
+      "选 Plan A 分区 FFT 卷积（O(N log N)）而非 Plan B 时域 FIR（O(N×M)）：FFT 分块 + overlap-add 复杂度低，IR 越长优势越显著（IR=512 时 649×，IR=2048 时预计 >1000×），实测 29.5× 实时、5.8ms 延迟、4.2% CPU",
+      "选自研 radix-2 FFT 而非 FFTW 第三方库：无第三方依赖，可在 MSVC / GCC / Clang / Android NDK 全平台编译运行，避免授权成本，后续以 ARM NEON intrinsics 替换预期 3-5× 吞吐提升",
+      "选 4 种语言分层实现而非单一语言：Python 参考实现（算法验证）→ C99 原生库（跨平台）→ C++17 库（CMake 构建）→ Kotlin+JNI（Android 移动端），形成「参考 → 原生 → 移动」完整闭环",
+      "选 MIT KEMAR + CIPIC + LISTEN + Synthetic 四种 HRTF 数据集而非单一数据集：MIT KEMAR 实测真实耳廓效应，CIPIC 45 受试者支持个性化，LISTEN IRCAM 测量，Synthetic Woodworth 球头模型合成作为基线对比",
+      "选 ITU-R BS.775 标准布局而非自定义扬声器方位：5.1（L±30°/Rs±110°/C 0°/LFE 无方向）+ 7.1（增加 Lrs/Rrs±135°）符合国际标准，LFE 以 -10dB 等量混合到双耳",
+      "选 TYPE_GAME_ROTATION_VECTOR 传感器而非 TYPE_ROTATION_VECTOR：无磁偏差，四元数 → 欧拉角转换获取 (yaw, pitch, roll)，配合指数平滑 α=0.95 抑制抖动"
+    ],
+    challenges:[
+      {diff:"实时移动部署性能",root:"时域 FIR 卷积 O(N×M) 复杂度高，IR>128 时即无法实时（CPU 占用 >1000%）",sol:"Plan A 分区 FFT 卷积（FFT 分块 + overlap-add）将复杂度降至 O(N log N)，block_size=256 平衡延迟与吞吐",effect:"29.5× 实时、5.8ms 延迟、4.2% CPU，IR=2048 仍可实时"},
+      {diff:"HRTF 切换咔嗒声",root:"头部转动导致 HRTF 方向变化时，直接切换 IR 会在边界产生咔嗒声",sol:"等功率交叉淡入淡出，crossfade_len=128 样本内线性混合 output = α·output_prev + (1−α)·output_new，α 从 1 线性递减到 0",effect:"约 10 次/秒 HRTF 切换无咔嗒声，平滑过渡"},
+      {diff:"头部追踪抖动",root:"IMU 传感器数据抖动导致 HRTF 频繁切换",sol:"指数平滑 α=0.95 抑制抖动 + 速率限制 max=720°/s 防突变 + 相对方向变化超过 0.5° 阈值才触发切换",effect:"消除传感器抖动导致的频繁切换，头部追踪场景下 29.4× 实时"},
+      {diff:"HRTF 方向离散化",root:"HRTF 数据集按方位角/仰角网格离散存储，方向落在网格点之间需插值",sol:"双线性 HRTF 插值，在网格上找 4 个最近点加权 h = w00·h00 + w01·h01 + w10·h10 + w11·h11",effect:"方向过渡平滑，无量化台阶"},
+      {diff:"跨平台编译兼容性",root:"4 种语言 + MSVC / GCC / Clang / Android NDK 多编译器路径，构建链路复杂",sol:"C99 统一 C API（sa_engine_create 等接口）+ CMake 构建 + AGP 8.1.4 + NDK 26 三架构（arm64-v8a / armeabi-v7a / x86_64）交叉编译",effect:"4 种语言全平台编译通过，Android APK 完整工程可分发"}
+    ],
+    impact:[
+      "量化成果：29.5× 实时吞吐、5.8ms 算法延迟、4.2% CPU 占用；12 种配置 benchmark 矩阵；4 种语言全平台实现；Android APK 三架构分发",
+      "技术沉淀：分区 FFT 卷积 + overlap-add 工程化；头部追踪全链路（IMU → 指数平滑 → 速率限制 → 双线性插值 → 等功率交叉淡入淡出）；自研 radix-2 FFT；ITU-R BS.775 环绕声下混",
+      "业务影响：29.5× 实时 + 5.8ms 延迟使空间音频可在移动端低功耗实时运行，预估无需专用 DSP 硬件；4 种语言覆盖从原型到 Android APK 完整工程，预估降低跨平台移植成本",
+      "可移植性：MIT License 开源促进社区复用；自研 radix-2 FFT 无第三方依赖；后续 ARM NEON intrinsics 优化方向明确（预期 3-5× 吞吐提升）"
+    ],
+    codeScale:[
+      {num:"4 种语言",label:"Python/C99/C++17/Kotlin"},
+      {num:"3",label:"开发周期（月）"},
+      {num:"1",label:"团队规模（人）"}
+    ],
+    details:{
+      techStack:"参考实现层 Python 3.8+ + NumPy 1.20+ + SciPy 1.7+（HRTF 加载/卷积/头部追踪/环绕声下混/基准测试/评估报告）；C 语言实现层 C99（MSVC / GCC / Clang 三编译器兼容，Android NDK 交叉编译）；C++ 实现层 C++17（CMake 构建，SpatialAudioEngine / HrtfDataset / PartitionedConvolver / TimeDomainConvolver / SurroundDownmixer 类层次）；移动端 Kotlin + JNI + Android NDK 25+ + CMake 3.22 + AGP 8.1.4；Android 原生音频 AudioTrack / AudioRecord 实时 I/O + TYPE_GAME_ROTATION_VECTOR 传感器头部追踪（四元数 → 欧拉角 → 互补滤波）；HRTF 数据集 MIT KEMAR（实测）+ CIPIC（45 受试者）+ LISTEN（IRCAM）+ Synthetic（Woodworth 球头模型合成）；核心算法自研 radix-2 FFT + 分区 FFT 卷积 + overlap-add + 双线性 HRTF 插值 + 等功率交叉淡入淡出 + ITU-R BS.775 扬声器布局；License MIT License",
+      solution:"基于 HRTF 的实时双耳空间音频渲染引擎，将单声道或环绕声多声道信号转换为带三维空间定位的双耳输出。核心能力包括双耳渲染、5.1/7.1 环绕声下混、头部追踪、HRTF 双线性插值、距离衰减与等功率交叉淡入淡出。两种卷积后端可运行时切换：Plan A 分区 FFT 卷积（FFT 分块 + overlap-add，复杂度 O(N log N)，29.5× 实时、5.8ms 延迟、4.2% CPU）与 Plan B 时域 FIR 卷积（逐样本 FIR + 循环缓冲区，零算法延迟但 IR>128 即不可实时）。12 种配置（block_size 128/256/512 × ir_length 128/256/512/2048）实测 benchmark 矩阵表明 Plan A 在所有配置中均优于 Plan B。头部追踪全链路：IMU 数据采集 → 指数平滑（α=0.95）→ 速率限制（720°/s）→ 相对方向计算 → 双线性 HRTF 插值 → 等功率交叉淡入淡出（crossfade_len=128）。4 种语言全平台实现：Python 参考实现（8 模块）+ C99 原生库（4 源文件，三编译器兼容）+ C++17 库（CMake 构建，5 核心类）+ Kotlin+JNI Android 层（AudioTrack 实时 I/O + 传感器头部追踪）。",
+      innovation:[
+        "双卷积后端设计：Plan A 分区 FFT 卷积（高性能 O(N log N)）vs Plan B 时域 FIR 卷积（低延迟 O(N×M)），12 种配置实测 benchmark，Plan A 在 IR=512 时 649× 优于 Plan B",
+        "头部追踪全链路：IMU → 指数平滑（α=0.95）→ 速率限制（720°/s）→ 双线性 HRTF 插值 → 等功率交叉淡入淡出（crossfade_len=128），消除 HRTF 切换咔嗒声",
+        "4 种语言全平台实现：Python 参考实现（8 模块）+ C99 原生库（4 源文件）+ C++17 库（CMake 构建）+ Kotlin+JNI Android 层，形成「参考 → 原生 → 移动」完整闭环",
+        "自研 radix-2 FFT：无第三方依赖，MSVC / GCC / Clang / Android NDK 全平台编译运行，后续 ARM NEON intrinsics 替换预期 3-5× 吞吐提升",
+        "5.1/7.1 环绕声下混（ITU-R BS.775）：5.1（L±30°/Rs±110°/C 0°/LFE 无方向）+ 7.1（增加 Lrs/Rrs±135°），LFE -10dB 等量混合，Plan A + 7.1 实现 18.5× 实时"
+      ],
+      perf:[
+        "Plan A 分区 FFT 卷积：44100Hz / IR=512 / block_size=256 下 29.5× 实时、5.8ms 延迟、4.2% CPU，每块耗时 30μs，吞吐量 8.53 Msmp/s",
+        "Plan B 时域 FIR 卷积：同配置下 CPU 占用 1302.8%（>1000% 即无法实时），吞吐量仅 0.16× 实时，IR>128 即不可实时",
+        "头部追踪场景：约 10 次/秒 HRTF 切换下 Plan A 仍达 29.4× 实时，Plan B 仅 0.38× 实时",
+        "环绕声下混性能：Plan A + 5.1 实现 24.7× 实时，Plan A + 7.1 实现 18.5× 实时，均可实时",
+        "音频质量保证：Plan A 与 Plan B 均与 numpy.convolve 参考实现 SNR 160dB 一致（远超人耳 96dB 感知阈值），频谱距离≈0，交叉淡入淡出无切换噪声"
+      ],
+      perfNum:"采样率 44100Hz · IR 长度 512 · block_size 256 · Plan A 实时倍率 29.5× · 算法延迟 5.8ms · CPU 占用 4.2% · 每块耗时 30μs · 吞吐量 8.53 Msmp/s · 头部追踪指数平滑 α=0.95 · 速率限制 720°/s · HRTF 切换阈值 0.5° · 交叉淡入淡出 crossfade_len=128 · 环绕声 5.1/7.1（ITU-R BS.775）· Plan A + 7.1 = 18.5× 实时 · SNR 160dB · 4 种语言（Python/C99/C++17/Kotlin）· Android NDK 三架构（arm64-v8a / armeabi-v7a / x86_64）· AGP 8.1.4 + NDK 26 + CMake 3.22 · 12 种配置 benchmark 矩阵 · MIT License",
+      benefit:"29.5× 实时 + 5.8ms 延迟 + 4.2% CPU 使空间音频可在移动端低功耗实时运行，预估无需专用 DSP 硬件；4 种语言覆盖从原型到 Android APK 完整工程，预估降低跨平台移植成本；自研 radix-2 FFT 无第三方依赖，预估减少授权成本；MIT License 开源促进社区复用；后续 ARM NEON intrinsics 优化方向明确，预期再获 3-5× 吞吐提升。"
+    }
+  },
+  {
+    num:"09", name:"医学影像组学与临床建模", category:"医学影像", year:"2023",
+    img:"结构图/SPECT-Radiomics.png",
+    desc:"SPECT 心肌灌注显像 IBSI 合规影像组学特征提取（106 例 × 1130 特征）+ CRT 心脏再同步化治疗反应预测建模（7 大类 30+ 算法系统比较）。多模态融合 AUC 0.736 → 0.905，5 折分层 CV + Bootstrap 95% CI + 过拟合 Gap 检测三层严谨性评估。",
+    tech:["PyRadiomics 3.0.1","scikit-learn","XGBoost/LightGBM/CatBoost","SimpleITK","IBSI 标准","fpdf2","Python 3.12"],
+    metrics:[
+      {num:"106 例",label:"SPECT 样本"},
+      {num:"1130 特征",label:"单患者特征数"},
+      {num:"30+ 算法",label:"系统比较"},
+      {num:"0.905",label:"多模态融合 AUC"}
+    ],
+    background:{
+      scene:"心脏再同步化治疗（CRT）反应预测与心肌灌注显像影像组学是心血管精准医学的重要方向。医学影像组学特征提取面临 IBSI 标准合规性、跨中心可复现性、自动分割几何正确性三大挑战；临床预测建模在小样本高维（n<200, p>>n）场景下固有过拟合风险，需严谨的评估方法论。",
+      motivation:"项目立项核心动机是构建「SPECT 影像组学特征工程 → CRT 临床反应预测建模」的医学影像 AI 研究闭环：子项目 A 基于 PyRadiomics v3.0.1 完成 106 例 SPECT 心肌灌注显像 IBSI 合规特征提取；子项目 B 整合 3 个临床数据集通过 7 大类 30+ 算法系统比较，量化多模态数据融合对临床预测的增益。",
+      goal:"预期成果：① 106 例 SPECT IBSI 合规影像组学特征矩阵（1130 特征/患者）；② IBSI 1 数字体模 + PhysioNet MPS 双重校准验证；③ 7 大类 30+ 算法系统比较框架（411 行 crt_full_analysis.py）；④ 5 折分层 CV + Bootstrap 95% CI + 过拟合 Gap 检测三层严谨性评估；⑤ 多模态融合 AUC 0.736 → 0.905 量化增益。"
+    },
+    techChoice:[
+      "选 PyRadiomics v3.0.1 而非自研特征提取：IBSI-compliant 含 C 加速后端 _cmatrices / _cshape，覆盖 7 大类标准纹理特征，避免重复造轮子且保证国际标准合规",
+      "选 IBSI 1 数字体模 + PhysioNet MPS 双重校准而非单点验证：数字体模（brain1/breast1/lung1/lung2）+ PhysioNet MPS（DICOM + NIfTI + demographics.csv）双重一致性校准，覆盖 9 项 IBSI 报告项",
+      "选 7 大类 30+ 算法系统比较而非单一算法：覆盖传统 GLM / 经典 ML / 梯度提升三剑客 / PCA / 特征选择 / 神经网络 / 集成学习，避免单一算法选择性偏倚",
+      "选 5 折分层 CV + Bootstrap 95% CI + 过拟合 Gap 检测三层评估而非单次划分：StratifiedKFold 保持类别分布 + Bootstrap 量化不确定性 + Gap = Train AUC − CV AUC 检测过拟合（阈值 0.15）",
+      "选固定 bin 宽度 100 而非自适应离散化：在 0–32767 counts 范围内约 328 bins，保留 SPECT counts 的半定量物理含义，符合 IBSI 推荐"
+    ],
+    challenges:[
+      {diff:"IBSI 标准合规性",root:"影像组学特征跨中心可比性依赖 IBSI 标准合规，需覆盖 9 项报告项",sol:"PyRadiomics v3.0.1 IBSI-compliant 参数配置（mask sitkNearestNeighbor / 图像 B-spline / 不重采样 / 固定 bin 100）+ IBSI 1 数字体模 + PhysioNet MPS 双重校准",effect:"产出 IBSI_compliance_report.md 合规报告，9 项 IBSI 报告项全覆盖"},
+      {diff:"心肌 ROI 自动分割几何正确性",root:"手动分割耗时且不可复现，自动分割需验证几何正确性",sol:"混合阈值 + 形态学分割（全局阈值 50% gmax → 椭圆形态学开运算 → 最大连通分量 → 膨胀 + 孔洞填充）+ Dice/Jaccard 几何回测",effect:"seg_validation_report.csv 验证自动分割几何正确性，11 例样本 overlay 可视化"},
+      {diff:"小样本高维过拟合",root:"n<200, p>>n 场景下深度学习与高维模型易过拟合",sol:"L1/EN 正则化逻辑回归（自动特征选择）+ PCA 降维到 n/5~n/10 + Gap 阈值 0.15 监控 + 避免深度学习（除非数据量 >500）",effect:"texture 数据集 PCA5+LR AUC=0.736 Gap=0.026 最稳定，lbbp 数据集 PCA10+RF AUC=0.905 Gap=0.085"},
+      {diff:"多模态数据异构性",root:"3 个临床数据集（data/texture/lbbp）特征空间异构，直接融合困难",sol:"统一数据接口独立建模 + 跨数据集比较量化多模态融合增益",effect:"最优 AUC 从 data(0.810) → texture(0.736) → lbbp(0.905)，量化多模态融合增益"},
+      {diff:"大规模特征提取稳定性",root:"106 例批量提取过程中可能因内存或异常中断",sol:"subprocess 隔离批量处理 + 日志 + 进度文件（batch_ibsi_progress.log / batch_ibsi_resume.log）支持中断续跑",effect:"106 例大规模特征稳定提取，中断可续跑不丢进度"}
+    ],
+    impact:[
+      "量化成果：106 例 SPECT × 1130 特征 IBSI 合规特征矩阵；7 大类 30+ 算法系统比较；多模态融合 AUC 0.736 → 0.905；3 个临床数据集完整建模结果",
+      "技术沉淀：IBSI 标准合规影像组学特征提取链路；混合阈值 + 形态学心肌 ROI 自动分割算法；7 大类 30+ 算法系统比较框架；小样本高维场景方法论建议",
+      "业务影响：多模态融合 AUC 0.736 → 0.905 量化证实影像组学 + 临床特征联合对 CRT 反应预测的增益价值；IBSI 合规保障跨中心可比性；方法论建议降低小样本高维场景的过拟合风险",
+      "可移植性：crt_full_analysis.py 411 行单文件可复用于其他临床预测建模任务；PyRadiomics 参数文件 pyradiomics_params.yaml 可复现；PDF 技术文档自动生成链路可复用"
+    ],
+    codeScale:[
+      {num:"411 行",label:"crt_full_analysis.py"},
+      {num:"4",label:"开发周期（月）"},
+      {num:"1",label:"团队规模（人）"}
+    ],
+    details:{
+      techStack:"影像组学引擎 PyRadiomics v3.0.1（IBSI-compliant，含 C 加速后端 _cmatrices / _cshape）；医学影像栈 SimpleITK（图像 I/O 与几何操作）+ pydicom（DICOM 元数据解析）+ nibabel（NIfTI 读写）+ pynrrd（NRRD 读写）；分割与形态学 scikit-image + scipy.ndimage（阈值分割、形态学开运算、连通分量、孔洞填充）；图像滤波 LoG（σ=5/10/15 mm）+ Wavelet（Coiflet，1 level，8 方向）；机器学习 scikit-learn（传统 GLM / 经典 ML / PCA / 特征选择 / 神经网络 / 集成学习）+ XGBoost + LightGBM + CatBoost；评估严谨性 5 折 StratifiedKFold + Bootstrap 95% CI + 过拟合 Gap 检测；IBSI 校准 IBSI 1 数字体模 + PhysioNet MPS；工程化交付 fpdf2 + SimHei 中文字体 PDF 自动生成 + subprocess 隔离批量处理；运行环境 Python 3.12",
+      solution:"构建「SPECT 影像组学特征工程 → CRT 临床反应预测建模」的医学影像 AI 研究闭环。子项目 A：面向 106 例 SPECT 心肌灌注显像（Tc-99m sestamibi 静息显像 / DSPECT CZT 相机 / 4.92mm 各向同性体素），基于 PyRadiomics v3.0.1 搭建 IBSI 合规批量特征提取流水线，启用 7 大类纹理特征（FirstOrder/Shape/GLCM/GLRLM/GLSZM/GLDM/NGTDM）× 3 种图像类型（Original/LoG/Wavelet），单患者产出 1130 个特征；设计混合阈值 + 形态学的心肌 ROI 自动分割算法（全局阈值 50% gmax → 椭圆形态学开运算 → 最大连通分量 → 膨胀 + 孔洞填充）并通过 Dice/Jaccard 几何回测；通过 IBSI 1 数字体模 + PhysioNet MPS 双重校准完成合规验证。子项目 B：整合 3 个临床数据集（data/texture/lbbp），通过 411 行 crt_full_analysis.py 实现 7 大类 30+ 算法系统比较框架，统一采用 5 折分层 CV + Bootstrap 95% CI + 过拟合 Gap 检测三层严谨性评估，针对小样本高维（n<200, p>>n）场景输出方法论建议。",
+      innovation:[
+        "IBSI 标准合规性验证：IBSI 1 数字体模（brain1/breast1/lung1/lung2）+ PhysioNet MPS 双重校准，覆盖 9 项 IBSI 报告项，保证特征提取跨中心可比性",
+        "7 大类 30+ 算法系统比较框架：411 行 crt_full_analysis.py 覆盖传统 GLM / 经典 ML / 梯度提升三剑客 / PCA / 特征选择 / 神经网络 / 集成学习，避免单一算法选择性偏倚",
+        "小样本高维场景方法论：针对 n<200、p>>n 场景给出 L1/EN 正则化 + PCA 降维到 n/5~n/10 + Gap 阈值 0.15 监控 + 避免深度学习的方法论建议",
+        "多模态数据融合量化增益：整合临床特征（data AUC=0.810）+ 影像纹理特征（texture AUC=0.736）+ SPECT-CMR 联合特征（lbbp AUC=0.905），量化多模态融合增益",
+        "工程化交付一体化：批量处理（subprocess 隔离 + 中断续跑）+ 分割回测（Dice/Jaccard + overlay 可视化）+ PDF 技术文档自动生成（fpdf2 + SimHei）形成完整结果包"
+      ],
+      perf:[
+        "IBSI 合规特征矩阵：106 例 × 1130 特征（107 Original + 279 LoG + 744 Wavelet），7 大类纹理特征全覆盖",
+        "算法系统比较结果：data 综合最优 LR-EN AUC=0.810 Gap=0.092；texture 综合最优 PCA5+LR AUC=0.736 Gap=0.026；lbbp 综合最优 PCA10+RF AUC=0.905 Gap=0.085",
+        "多模态融合增益：最优 AUC 从 0.736（单一纹理特征）提升至 0.905（多模态联合特征），量化证实融合价值",
+        "严谨性评估：5 折分层 CV（StratifiedKFold）+ Bootstrap 95% CI + 过拟合 Gap 检测（阈值 0.15）三层机制，Gap 全部 <0.10 为低风险",
+        "分割回测：Dice/Jaccard 几何指标 + 11 例样本 overlay 可视化验证心肌 ROI 自动分割几何正确性"
+      ],
+      perfNum:"SPECT 样本 106 例 · 单患者特征 1130 个（107 Original + 279 LoG + 744 Wavelet）· 7 大类纹理特征 · 3 种图像类型 · IBSI 校准 IBSI 1 数字体模 + PhysioNet MPS · 算法 7 大类 30+ 种 · 评估 5 折分层 CV + Bootstrap 95% CI + Gap 检测 · data AUC=0.810 · texture AUC=0.736 · lbbp AUC=0.905 · 多模态融合增益 0.736 → 0.905 · crt_full_analysis.py 411 行 · 固定 bin 宽度 100 · LoG σ=5/10/15mm · Wavelet Coiflet 1 level 8 方向 · Gap 阈值 0.15",
+      benefit:"多模态融合 AUC 0.736 → 0.905 量化证实影像组学 + 临床特征联合对 CRT 反应预测的增益价值，预估提升临床决策准确率；IBSI 标准合规保障特征跨中心可比性，预估降低多中心研究协作成本；7 大类 30+ 算法系统比较框架避免单一算法选择性偏倚，预估提升建模结论可信度；小样本高维场景方法论建议（L1/EN 正则化 + PCA 降维 + Gap 监控）预估降低过拟合风险；工程化交付链路（批量处理 + 分割回测 + PDF 文档）预估降低研究复现与归档成本。"
+    }
+  }
+];
 
-<div class="back-top" id="backTop">↑</div>
+/* ============ Skills Data（技能矩阵） ============ */
+const skills = [
+  {cat:"编程语言",items:[
+    {name:"Python",stars:5,note:"FastAPI / PyTorch / vLLM / NumPy / SciPy 全栈"},
+    {name:"C / C99 / C++17",stars:5,note:"Android NDK 交叉编译 / CMake 构建 / 自研 radix-2 FFT"},
+    {name:"Kotlin",stars:4,note:"Android 原生开发 + JNI 桥接"},
+    {name:"Java",stars:4,note:"Spring Boot Service 层 / 多智能体平台后端"},
+    {name:"JavaScript",stars:4,note:"前端可视化 / ECharts / Mermaid.js / 单文件交互报告"}
+  ]},
+  {cat:"AI 框架",items:[
+    {name:"PyTorch",stars:5,note:"模型训练 / 导出 / torch.onnx.export / torch.jit.trace"},
+    {name:"vLLM",stars:5,note:"并发架构重构 / 守护线程持锁循环驱动 step() / continuous batching"},
+    {name:"ONNX / ONNXRuntime",stars:5,note:"CPU/CUDA/QNN 多 EP 兼容 / 静态化 / 模型导出"},
+    {name:"Transformers",stars:4,note:"Qwen2 LLM / CosyVoice3 / Qwen3-Omni 大模型加载与推理"},
+    {name:"Claude Agent SDK",stars:4,note:"多智能体协作 / Coordinator Mode / AG-UI 协议"},
+    {name:"TensorFlow",stars:4,note:"SER 模型训练 / tf2onnx 转换链路"}
+  ]},
+  {cat:"边缘 AI / NPU",items:[
+    {name:"Qualcomm QNN SDK",stars:5,note:"INT8 量化 / context binary 编译 / Hexagon HTP v73 推理"},
+    {name:"Qualcomm AI Hub",stars:4,note:"Workbench 2026.02.26.0 / QAIRT 2.46 / precompiled context binary"},
+    {name:"Android NDK",stars:5,note:"交叉编译 / JNI 桥接 / arm64-v8a / armeabi-v7a / x86_64 三架构"},
+    {name:"NVIDIA Jetson",stars:4,note:"边缘设备部署 / CUDAExecutionProvider / GPU/CPU 自适应降级"},
+    {name:"AWQ 量化",stars:4,note:"Qwen3-Omni-30B AWQ-8bit 量化大模型边缘部署"}
+  ]},
+  {cat:"Web / 服务",items:[
+    {name:"FastAPI",stars:5,note:"async / Pydantic / ThreadPoolExecutor / 流式响应"},
+    {name:"Docker / K8s",stars:4,note:"多版本 Dockerfile / 容器化部署 / K8s 编排"},
+    {name:"Spring Boot",stars:4,note:"Java Service 层 / 多智能体平台双层架构"},
+    {name:"SSE 流式协议",stars:5,note:"AG-UI 协议 SSE 事件流 / 协程背压 / 1383 事件合规验证"},
+    {name:"MySQL / SQLite",stars:4,note:":memory: / SQLite3 边缘部署 / 关系建模"}
+  ]},
+  {cat:"音频 / 多模态",items:[
+    {name:"HRTF 空间音频",stars:5,note:"双耳渲染 / 分区 FFT 卷积 / 头部追踪 / 5.1/7.1 下混"},
+    {name:"TTS / ASR",stars:5,note:"CosyVoice3 / MeloTTS / faster-whisper / Qwen3-ASR / SenseVoice"},
+    {name:"语音情感识别",stars:5,note:"TIM-Net / LIGHT-SERNET / SER 模型训练与边缘部署"},
+    {name:"PaddleOCR / OCR",stars:4,note:"中文模型 + 角度分类 / 坐标重排 / 990+ 图片批量识别"},
+    {name:"多模态大模型",stars:4,note:"Qwen3-Omni-30B / QA 语音问答 / ST 同声传译"}
+  ]},
+  {cat:"工程 / 工具",items:[
+    {name:"Git / GitHub",stars:5,note:"13+ 公开仓库 / MIT License / 开源协作"},
+    {name:"CMake",stars:5,note:"跨平台构建 / NDK 交叉编译 / 多编译器兼容"},
+    {name:"Linux / Shell",stars:4,note:"aria2c 多线程下载 / 容器运维 / 性能分析"},
+    {name:"OOXML / lxml",stars:4,note:"直接操作 DOCX/PPTX XML / 边框底纹 / eastAsia 字体"},
+    {name:"医学影像组学",stars:4,note:"PyRadiomics / IBSI 合规 / 5 折分层 CV / Bootstrap 95% CI"}
+  ]}
+];
 
-<footer>
-  <div>© 2026 姚越 · Built with <span class="heart">♥</span> in Trae IDE</div>
-  <div style="margin-top:6px;opacity:0.6;">22 Projects · 6 Research Directions · Powered by Claude</div>
-</footer>
+/* ============ 渲染函数 ============ */
 
-<script src="projects.js"></script>
+/* 生成星级 HTML（5 星制，与 .skills-matrix td.stars .empty 配合） */
+function makeStars(n){
+  let s="";
+  for(let i=0;i<5;i++){
+    s += i<n ? "★" : `<span class="empty">☆</span>`;
+  }
+  return s;
+}
+
+/* 转义 HTML 防注入 */
+function esc(str){
+  if(str==null) return "";
+  return String(str).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+  });
+}
+
+/* 渲染单个项目的展开按钮区 */
+function renderExpandBtns(){
+  return `
+    <div class="expand-btns">
+      <button class="expand-btn" onclick="toggleProjectSection(this,'background')">项目背景与动机 <span class="arrow">▼</span></button>
+      <button class="expand-btn" onclick="toggleProjectSection(this,'techChoice')">技术选型理由 <span class="arrow">▼</span></button>
+      <button class="expand-btn" onclick="toggleProjectSection(this,'challenges')">核心难点与解决方案 <span class="arrow">▼</span></button>
+      <button class="expand-btn" onclick="toggleProjectSection(this,'impact')">项目成果与影响 <span class="arrow">▼</span></button>
+      <button class="expand-btn" onclick="toggleProjectSection(this,'codeScale')">代码规模与工期 <span class="arrow">▼</span></button>
+      <button class="expand-btn" onclick="toggleProjectSection(this,'details')">技术栈与创新点 <span class="arrow">▼</span></button>
+    </div>
+    <div class="project-details"><div class="details-inner" id="project-details-inner"></div></div>
+  `;
+}
+
+/* 渲染指定 section 的内容 */
+function renderSectionContent(p, section){
+  let html="";
+  if(section==="background" && p.background){
+    html += `<div class="detail-block"><h4>场景与背景</h4><p>${esc(p.background.scene)}</p></div>`;
+    html += `<div class="detail-block"><h4>立项动机</h4><p>${esc(p.background.motivation)}</p></div>`;
+    html += `<div class="detail-block"><h4>预期成果</h4><p>${esc(p.background.goal)}</p></div>`;
+  }
+  else if(section==="techChoice" && p.techChoice){
+    html += `<div class="detail-block"><h4>技术选型理由</h4><ul>`;
+    p.techChoice.forEach(function(t){ html += `<li>${esc(t)}</li>`; });
+    html += `</ul></div>`;
+  }
+  else if(section==="challenges" && p.challenges){
+    html += `<div class="detail-block"><h4>核心难点与解决方案</h4><table>`;
+    html += `<tr><th>难点</th><th>根因</th><th>解决方案</th><th>效果</th></tr>`;
+    p.challenges.forEach(function(c){
+      html += `<tr><td>${esc(c.diff)}</td><td>${esc(c.root)}</td><td>${esc(c.sol)}</td><td>${esc(c.effect)}</td></tr>`;
+    });
+    html += `</table></div>`;
+  }
+  else if(section==="impact" && p.impact){
+    html += `<div class="detail-block"><h4>项目成果与影响</h4><ul>`;
+    p.impact.forEach(function(i){ html += `<li>${esc(i)}</li>`; });
+    html += `</ul></div>`;
+  }
+  else if(section==="codeScale" && p.codeScale){
+    html += `<div class="detail-block"><h4>代码规模与工期</h4><div class="code-scale">`;
+    p.codeScale.forEach(function(c){
+      html += `<span class="cs-item"><span class="cs-num">${esc(c.num)}</span><span class="cs-label">${esc(c.label)}</span></span>`;
+    });
+    html += `</div></div>`;
+  }
+  else if(section==="details" && p.details){
+    const d = p.details;
+    html += `<div class="detail-block"><h4>技术栈</h4><p>${esc(d.techStack)}</p></div>`;
+    html += `<div class="detail-block"><h4>技术方案</h4><p>${esc(d.solution)}</p></div>`;
+    if(d.innovation){
+      html += `<div class="detail-block"><h4>创新点</h4><ul>`;
+      d.innovation.forEach(function(i){ html += `<li>${esc(i)}</li>`; });
+      html += `</ul></div>`;
+    }
+    if(d.perf){
+      html += `<div class="detail-block"><h4>性能优化</h4><ul>`;
+      d.perf.forEach(function(i){ html += `<li>${esc(i)}</li>`; });
+      html += `</ul></div>`;
+    }
+    if(d.perfNum){
+      html += `<div class="detail-block"><h4>关键性能数值</h4><p>${esc(d.perfNum)}</p></div>`;
+    }
+    if(d.benefit){
+      html += `<div class="detail-block"><h4>经济收益</h4><p>${esc(d.benefit)}</p></div>`;
+    }
+  }
+  return html || `<div class="detail-block"><p style="color:var(--text-muted);font-style:italic;">（该维度暂无数据 · 待补充）</p></div>`;
+}
+
+/* 折叠/展开某个 section */
+function toggleProjectSection(btn, section){
+  const item = btn.closest(".project-item");
+  const inner = item.querySelector("#project-details-inner");
+  const wasActive = btn.classList.contains("active");
+
+  /* 关闭所有兄弟按钮 */
+  item.querySelectorAll(".expand-btn").forEach(function(b){
+    b.classList.remove("active");
+  });
+
+  if(wasActive){
+    /* 当前按钮已激活 → 收起 */
+    item.classList.remove("expanded");
+  } else {
+    /* 切换内容并展开 */
+    btn.classList.add("active");
+    const num = item.getAttribute("data-num");
+    const p = projects.find(function(x){ return x.num===num; });
+    inner.innerHTML = renderSectionContent(p, section);
+    item.classList.add("expanded");
+  }
+}
+
+/* 渲染所有项目 */
+function renderProjects(){
+  const list = document.getElementById("project-list");
+  if(!list) return;
+  list.innerHTML = projects.map(function(p){
+    const techHtml = (p.tech||[]).map(function(t){
+      return `<span class="tech-tag">${esc(t)}</span>`;
+    }).join("");
+    const metricsHtml = (p.metrics||[]).map(function(m){
+      return `<span class="metric-inline"><span class="m-num">${esc(m.num)}</span><span class="m-label">${esc(m.label)}</span></span>`;
+    }).join("");
+    const thumbHtml = p.img ? `
+      <div class="project-thumb" onclick="openModal('${esc(p.img)}','${esc(p.name)}')">
+        <img src="${esc(p.img)}" alt="${esc(p.name)} 结构图" loading="lazy" onerror="this.parentNode.style.display='none'">
+        <div class="thumb-hint">点击查看大图</div>
+      </div>` : "";
+    return `
+      <li class="project-item" data-num="${esc(p.num)}">
+        <div class="project-head">
+          <span class="project-num">[${esc(p.num)}]</span>
+          <span class="project-title">${esc(p.name)}</span>
+          <span class="project-category">${esc(p.category)}</span>
+          <span class="project-year">${esc(p.year)}</span>
+        </div>
+        <p class="project-desc">${esc(p.desc)}</p>
+        <div class="project-tech">${techHtml}</div>
+        ${metricsHtml ? `<div class="project-metrics">${metricsHtml}</div>` : ""}
+        ${thumbHtml}
+        ${renderExpandBtns()}
+      </li>
+    `;
+  }).join("");
+}
+
+/* 渲染技能矩阵（与 CSS .skills-matrix td.cat / td.skill / td.stars 对齐） */
+function renderSkills(){
+  const tbody = document.getElementById("skills-tbody");
+  if(!tbody) return;
+  let html = "";
+  skills.forEach(function(group, gi){
+    group.items.forEach(function(item, ii){
+      const isFirst = ii===0;
+      const rowSpan = isFirst ? ` rowspan="${group.items.length}"` : "";
+      const catCell = isFirst ? `<td${rowSpan} class="cat">${esc(group.cat)}</td>` : "";
+      const noteHtml = item.note ? `<div style="font-size:11.5px;color:var(--text-muted);font-weight:400;margin-top:2px;letter-spacing:0.1px;">${esc(item.note)}</div>` : "";
+      html += `
+        <tr>
+          ${catCell}
+          <td class="skill">${esc(item.name)}${noteHtml}</td>
+          <td class="stars">${makeStars(item.stars)}</td>
+        </tr>
+      `;
+    });
+  });
+  tbody.innerHTML = html;
+}
+
+/* 模态框（与 CSS .modal.active{display:flex} 配合） */
+function openModal(src, caption){
+  const modal = document.getElementById("modal");
+  const img = document.getElementById("modal-img");
+  const cap = document.getElementById("modal-caption");
+  img.src = src;
+  cap.textContent = caption || "";
+  modal.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+function closeModal(event){
+  const modal = document.getElementById("modal");
+  modal.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+/* 移动端导航 */
+function closeMobileNav(){
+  const sidebar = document.querySelector(".sidebar");
+  if(sidebar) sidebar.classList.remove("open");
+}
+
+/* 初始化 */
+document.addEventListener("DOMContentLoaded", function(){
+  renderProjects();
+  renderSkills();
+});
+</script>
 </body>
 </html>
