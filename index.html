@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -159,9 +159,13 @@
   .main{
     margin-left:300px;
     flex:1;
-    padding:48px 60px 60px;
-    max-width:920px;
+    padding:48px 72px 60px;
     width:calc(100% - 300px);
+    min-height:100vh;
+  }
+  .main-inner{
+    max-width:1100px;
+    margin:0 auto;
   }
   .section{margin-bottom:60px}
   .section-title{
@@ -1140,6 +1144,7 @@
 
 <!-- ===== Main Content ===== -->
 <main class="main">
+ <div class="main-inner">
 
   <!-- ===== About Me ===== -->
   <section id="about" class="section">
@@ -1425,6 +1430,7 @@
   </section>
 
   <footer>© 2026 姚越 · AI 工程师个人主页 · Yao Yue · Last updated: 2026</footer>
+ </div>
 </main>
 
 <!-- ===== Modal ===== -->
@@ -1441,7 +1447,7 @@
 const projects = [
   {
     num:"01", name:"SuperAgent 多智能体协作平台", category:"智能体开发", year:"2024",
-    img:"结构图/01_SuperAgent.png",
+    img:"结构图/SuperAgent.png",
     desc:"基于 Claude Agent SDK 与 AG-UI 协议的多智能体协作平台，Java Service + Python Process 双层架构，支持 Solo/Team 双模式运行，Coordinator Mode 协调多 Worker CLI 进程并行执行，CommHub 通信中枢解决并行编辑冲突。",
     tech:["Python 3.11","FastAPI","Claude Agent SDK","Java Spring","K8s","MySQL","Docker","AG-UI 协议"],
     metrics:[
@@ -1502,7 +1508,7 @@ const projects = [
   },
   {
     num:"02", name:"AI 眼镜边缘多模态客户端", category:"边缘 AI", year:"2024",
-    img:"结构图/02_AI眼镜.png",
+    img:"结构图/AI-Glasses.png",
     desc:"基于 FFalcon Mercury SDK 的 AR 眼镜 Android 应用，面向 RayNeo 终端提供 QA 语音问答 + ST 同声传译双模态交互。端侧 sherpa-onnx VAD + 离线 ASR，边缘 Qwen3-Omni-30B AWQ-8bit 量化大模型 SSE 流式回传。",
     tech:["Android Kotlin","Compose","sherpa-onnx","Qwen3-Omni-30B AWQ-8bit","SSE","OkHttp","Coroutines"],
     metrics:[
@@ -1564,7 +1570,7 @@ const projects = [
   },
   {
     num:"03", name:"QNN 模型部署与量化", category:"边缘 AI", year:"2024",
-    img:"结构图/03_QNN部署.png",
+    img:"结构图/QNN-Deploy.png",
     desc:"TIM-Net / LIGHT-SERNET 与 MeloTTS 端到端 NPU 部署链路：TF 训练 → tf2onnx → QNN INT8 量化 → Hexagon NPU 部署。fp16 精度崩塌 4 轮迭代排查，最终用常量乘法 4 帧/token 替代 Duration Predictor，彻底消除 fp16 敏感 op。",
     tech:["QNN SDK","tf2onnx","PyTorch 2.8","ONNX opset 16","QCS8550 HTP v73","ONNXRuntime 1.23.2","QAIRT 2.46"],
     metrics:[
@@ -1626,7 +1632,7 @@ const projects = [
   },
   {
     num:"04", name:"CosyVoice3 大模型 TTS 服务", category:"TTS/ASR", year:"2024",
-    img:"结构图/08_CosyVoice3.png",
+    img:"结构图/MeloTTS-ONNX.png",
     desc:"基于阿里 CosyVoice3-0.5B 模型自研 FastAPI 推理服务，对外暴露 OpenAI TTS 兼容协议。vLLM 并发架构重构（守护线程持锁循环驱动 step()），TTFA ↓40%，8GB 显存可稳定承载两路并发。",
     tech:["Python 3.12","FastAPI","vLLM 0.9","PyTorch 2.6+cu124","CosyVoice3-0.5B","Docker","Flow+DiT+HiFiGAN"],
     metrics:[
@@ -1750,7 +1756,7 @@ const projects = [
   },
   {
     num:"06", name:"ASR 性能基准评测", category:"TTS/ASR", year:"2024",
-    img:"结构图/04_ASR基准评测.png",
+    img:"结构图/ASR-Whisper-Test.png",
     desc:"构建可复现的 ASR 基准测试框架：多档音频时长合成（3/5/10/30/60s）+ 多模型横向对比（Qwen3-ASR 0.6B/1.7B、WhisperX、SenseVoiceSmall）+ 多维度指标测量（延迟/RTF/显存/吞吐/加载）+ 流式识别模拟，产出 JSON 结构化报告。",
     tech:["Python","PyTorch 2.6","CUDA 12.4","Qwen3-ASR","WhisperX","SenseVoice","pyannote VAD","soundfile"],
     metrics:[
@@ -1874,7 +1880,7 @@ const projects = [
   },
   {
     num:"08", name:"空间音频引擎", category:"音频工程", year:"2024",
-    img:"结构图/06_空间音频引擎.png",
+    img:"结构图/Spatial-Audio.png",
     desc:"基于 HRTF 的实时双耳空间音频渲染引擎，Python / C99 / C++17 / Kotlin+JNI 四语言实现。Plan A 分区 FFT 卷积实现 29.5× 实时、5.8ms 延迟、4.2% CPU 占用，MIT License 开源。",
     tech:["Python NumPy/SciPy","C99","C++17","Kotlin+JNI","Android NDK","CMake","HRTF","MIT License"],
     metrics:[
@@ -1937,7 +1943,7 @@ const projects = [
   },
   {
     num:"09", name:"医学影像组学与临床建模", category:"医学影像", year:"2023",
-    img:"结构图/07_医学影像建模.png",
+    img:"结构图/SPECT-Radiomics.png",
     desc:"SPECT 心肌灌注显像 IBSI 合规影像组学特征提取（106 例 × 1130 特征）+ CRT 心脏再同步化治疗反应预测建模（7 大类 30+ 算法系统比较）。多模态融合 AUC 0.736 → 0.905，5 折分层 CV + Bootstrap 95% CI + 过拟合 Gap 检测三层严谨性评估。",
     tech:["PyRadiomics 3.0.1","scikit-learn","XGBoost/LightGBM/CatBoost","SimpleITK","IBSI 标准","fpdf2","Python 3.12"],
     metrics:[
