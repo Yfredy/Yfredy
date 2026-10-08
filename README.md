@@ -12,7 +12,7 @@
 [![Email](https://img.shields.io/badge/Email-yue.yao%40smail.nju.edu.cn-2c5282?style=for-the-badge&logo=gmail&logoColor=white)](mailto:yue.yao@smail.nju.edu.cn)
 [![GitHub](https://img.shields.io/badge/GitHub-Yfredy-2c5282?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Yfredy)
 
-**Tel** `18951656687` · **WeChat** `19852128929`
+**Tel** `19852128929` · **WeChat** `19852128929`
 
 </div>
 
@@ -140,14 +140,6 @@ TTS ONNX 推理 + QNN HTP 端侧部署（开源）
 
 - [**MeloTTS-ONNX**](https://github.com/201831771214/MeloTTS-ONNX) — TTS ONNX 推理 + Qualcomm QNN HTP 端侧部署
 - [**SER**](https://github.com/201831771214/SER) — 语音情感识别 LIGHT-SERNET / TIM-Net 双架构
-
----
-
-## Education
-
-- **2022.07 - 2025.07** · **南京大学** · 电子信息（音频声学方向）· 硕士
-- **2018.09 - 2022.07** · **中国矿业大学** · 电子信息工程（辅修会计）· 本科
-  - 英语六级 592 分 · 英语四级 597 分
 
 ---
 
